@@ -1,24 +1,72 @@
-# Vivid Brand Identity
+# Stradmont Solutions
 
-I want to build something like simialr like website but the core the colors and the theme should be of mine. Can you please make it. I have attached the PDF too. Please look into there and handle all such thankss..... make sure the the hero feels so clean and create the line too that we have those in the bakcground as this is important too.Hope you look the image deeply and figure out. this is for my company website so hope you understand thnks
+> **Systems over chaos.**
+> Stradmont Solutions finds the chaos inside technology and finance operations and replaces it with systems that hold.
 
-This project was built with [Lovable](https://lovable.dev).
+Stradmont Solutions is a parent research laboratory engineering specialised platforms and operational architectures for technology and financial institutions.
 
-## Build with Lovable
+---
 
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/8000c381-2e86-4c3d-a5a9-3739615f3786).
+## Brand Architecture & Products
 
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
+- **Stradmont Order**: Commerce and operations management system engineered for high-traceability transaction workflows.
+- **Builders Base**: Architectural resource layer and foundational data scaffolding for internal tools.
+- **Stradmont Letters**: Research notes, studies, and operational monographs published from the laboratory.
 
-## Development
+---
 
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
+## Tech Stack
+
+- **Framework**: [TanStack Start](https://tanstack.com/start) with [TanStack Router](https://tanstack.com/router)
+- **Runtime & Bundler**: Vite 8, Nitro, Node.js / Cloudflare Pages / Workers
+- **Styling**: Tailwind CSS v4 with custom design tokens (Deep Violet Night `#1e1b4b`, Electric Violet `#7c3aed`, Soft Tint `#faf5ff`)
+- **Typography**: Sora (Display), Manrope (Sans), JetBrains Mono (Monospace)
+- **Validation**: Zod & React Hook Form
+- **Data & State**: TanStack React Query
+
+---
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js >= 18
+- npm or bun
+
+### Local Development
 
 ```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
+# Clone repository
+git clone git@github.com:Stradmont/stradmontsolutions.com.git
+cd stradmontsolutions.com
+
+# Install dependencies
+npm install
+
+# Start local development server
 npm run dev
 ```
+
+### Production Build
+
+```sh
+# Build SSR and client bundles
+npm run build
+
+# Preview build locally
+npm run preview
+```
+
+### Quality & Standards
+
+```sh
+# Run code linting
+npm run lint
+
+# Format code with Prettier
+npm run format
+```
+
+---
+
+© 2026 Stradmont Solutions. All rights reserved.

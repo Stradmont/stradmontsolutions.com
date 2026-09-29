@@ -38,7 +38,6 @@ export function SiteFooter() {
       <div className="mx-auto max-w-6xl px-6 py-14">
         {/* Main grid */}
         <div className="grid gap-12 md:grid-cols-[1.4fr_1fr_1.2fr]">
-
           {/* Col 1 — Brand */}
           <div>
             <Link to="/" className="inline-flex items-baseline gap-1.5">
@@ -47,8 +46,8 @@ export function SiteFooter() {
               </span>
               <span className="h-1.5 w-1.5 rounded-full bg-primary" />
             </Link>
-            <p className="mt-3 max-w-[22ch] text-sm leading-relaxed text-muted-foreground">
-              Systems over chaos, in technology and finance operations.
+            <p className="mt-3 max-w-[28ch] text-sm leading-relaxed text-muted-foreground">
+              Systems over chaos. Built for technology and finance.
             </p>
 
             {/* Social icons with native brand colours */}
@@ -96,8 +95,12 @@ export function SiteFooter() {
                 >
                   <svg
                     className="mt-0.5 shrink-0"
-                    width="14" height="14" viewBox="0 0 16 16"
-                    fill="none" stroke="currentColor" strokeWidth="1.6"
+                    width="14"
+                    height="14"
+                    viewBox="0 0 16 16"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.6"
                   >
                     <rect x="1" y="3" width="14" height="10" rx="1.5" />
                     <path d="M1 5l7 5 7-5" />
@@ -112,8 +115,12 @@ export function SiteFooter() {
                 >
                   <svg
                     className="shrink-0"
-                    width="14" height="14" viewBox="0 0 16 16"
-                    fill="none" stroke="currentColor" strokeWidth="1.6"
+                    width="14"
+                    height="14"
+                    viewBox="0 0 16 16"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.6"
                   >
                     <path d="M2 2.5A1.5 1.5 0 0 1 3.5 1h1a1.5 1.5 0 0 1 1.5 1.5v.5c0 .6-.3 1.1-.8 1.4L4.5 5a9 9 0 0 0 6.5 6.5l.6-.7c.3-.5.8-.8 1.4-.8h.5A1.5 1.5 0 0 1 15 11.5v1A1.5 1.5 0 0 1 13.5 14C7.1 14 2 8.9 2 2.5z" />
                   </svg>
@@ -123,8 +130,12 @@ export function SiteFooter() {
               <li className="flex items-center gap-2.5 text-muted-foreground">
                 <svg
                   className="shrink-0"
-                  width="14" height="14" viewBox="0 0 16 16"
-                  fill="none" stroke="currentColor" strokeWidth="1.6"
+                  width="14"
+                  height="14"
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.6"
                 >
                   <path d="M8 1.5A4.5 4.5 0 0 0 3.5 6c0 3 4.5 8.5 4.5 8.5S12.5 9 12.5 6A4.5 4.5 0 0 0 8 1.5z" />
                   <circle cx="8" cy="6" r="1.5" />
@@ -138,7 +149,7 @@ export function SiteFooter() {
         {/* Bottom bar */}
         <div className="mt-12 flex flex-col items-center justify-between gap-3 border-t border-border pt-6 text-xs text-muted-foreground sm:flex-row">
           <p>© {new Date().getFullYear()} Stradmont Solutions. All rights reserved.</p>
-          <p className="italic">Systems over chaos.</p>
+          <p>Systems over chaos.</p>
         </div>
       </div>
     </footer>
