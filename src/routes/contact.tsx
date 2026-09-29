@@ -170,9 +170,7 @@ function ContactPage() {
                       {d.icon}
                     </span>
                     <div>
-                      <p className="text-xs font-medium text-muted-foreground">
-                        {d.label}
-                      </p>
+                      <p className="text-xs font-medium text-muted-foreground">{d.label}</p>
                       {d.href ? (
                         <a
                           href={d.href}
@@ -192,9 +190,7 @@ function ContactPage() {
 
               {/* Social */}
               <div className="mt-8 border-t border-border pt-8">
-                <p className="text-xs font-medium text-muted-foreground">
-                  Follow us
-                </p>
+                <p className="text-xs font-medium text-muted-foreground">Follow us</p>
                 <div className="mt-4 flex items-center gap-2.5">
                   {socials.map((s) => (
                     <a

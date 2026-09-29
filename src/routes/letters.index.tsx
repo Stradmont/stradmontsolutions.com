@@ -84,7 +84,8 @@ function LettersIndexPage() {
               we solve.
             </h1>
             <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-muted-foreground">
-              Letters, notes and studies released from the laboratory. On systems, technology and finance operations.
+              Letters, notes and studies released from the laboratory. On systems, technology and
+              finance operations.
             </p>
           </div>
         </section>

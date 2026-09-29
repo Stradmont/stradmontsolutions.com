@@ -367,9 +367,7 @@ function Index() {
                 key={m.step}
                 className="bg-background p-6 text-left transition-colors hover:bg-secondary/40"
               >
-                <span className="text-xs font-semibold text-primary">
-                  {m.step}
-                </span>
+                <span className="text-xs font-semibold text-primary">{m.step}</span>
                 <div className="mt-2 text-lg font-bold text-foreground">{m.title}</div>
                 <div className="mt-2 text-xs leading-relaxed text-muted-foreground">
                   {m.description}
@@ -495,7 +493,9 @@ function Index() {
                     <span className="text-xs opacity-60">· {featuredLetters[0].readTime}</span>
                   </div>
                   <h3 className="text-xl font-semibold leading-snug">{featuredLetters[0].title}</h3>
-                  <p className="mt-3 text-sm opacity-70 leading-relaxed">{featuredLetters[0].body}</p>
+                  <p className="mt-3 text-sm opacity-70 leading-relaxed">
+                    {featuredLetters[0].body}
+                  </p>
                   <div className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-primary transition-transform duration-300 group-hover:translate-x-1">
                     Read full
                     <svg

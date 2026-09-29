@@ -89,7 +89,8 @@ function ProductsPage() {
               Built inside the lab.
             </h1>
             <p className="mx-auto mt-5 max-w-lg text-base leading-relaxed text-muted-foreground">
-              Every platform begins as research. The ones that hold up become tools institutions rely on.
+              Every platform begins as research. The ones that hold up become tools institutions
+              rely on.
             </p>
           </div>
         </section>

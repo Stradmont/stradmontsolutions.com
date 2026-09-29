@@ -80,17 +80,21 @@ function LetterNotFound() {
   return (
     <div className="min-h-screen bg-background">
       <SiteNav />
-      <main id="main-content" className="flex min-h-[70vh] flex-col items-center justify-center px-6 text-center">
+      <main
+        id="main-content"
+        className="flex min-h-[70vh] flex-col items-center justify-center px-6 text-center"
+      >
         <span className="text-xs font-semibold text-primary">404</span>
         <h1 className="mt-3 font-display text-3xl font-extrabold text-foreground sm:text-4xl">
           Letter not found
         </h1>
         <p className="mt-3 max-w-md text-sm leading-relaxed text-muted-foreground">
-          The requested essay or technical note does not exist or may have been consolidated into our archive.
+          The requested essay or technical note does not exist or may have been consolidated into
+          our archive.
         </p>
         <Link
           to="/letters"
-          className="mt-7 inline-flex items-center gap-2 rounded-full border border-border bg-background px-5 py-2 text-xs font-medium text-foreground transition-all hover:bg-secondary hover:border-primary/40"
+          className="mt-7 inline-flex items-center gap-2 rounded-full border border-border bg-background px-5 py-2 text-xs font-medium text-foreground transition-all hover:border-primary/40 hover:bg-secondary"
         >
           <ArrowLeft className="h-3.5 w-3.5" />
           Return to letters index
@@ -121,7 +125,7 @@ function LetterDetailPage() {
 
       <main id="main-content">
         {/* Editorial Header */}
-        <header className="border-b border-border/70 bg-gradient-to-b from-secondary/40 via-background to-background pt-36 pb-16 sm:pt-44 sm:pb-20">
+        <header className="border-b border-border/70 bg-gradient-to-b from-secondary/40 via-background to-background pb-16 pt-36 sm:pb-20 sm:pt-44">
           <div className="mx-auto max-w-[740px] px-6">
             {/* Top breadcrumb & series tag */}
             <div className="flex items-center justify-between text-xs text-muted-foreground">
@@ -132,12 +136,10 @@ function LetterDetailPage() {
                 <ArrowLeft className="h-3.5 w-3.5 transition-transform duration-200 group-hover:-translate-x-1" />
                 <span>Letters</span>
                 <span className="text-border">/</span>
-                <span className="text-foreground font-medium">Letter {letter.number}</span>
+                <span className="font-medium text-foreground">Letter {letter.number}</span>
               </Link>
 
-              <span className="text-xs text-muted-foreground font-medium">
-                {letter.kind}
-              </span>
+              <span className="text-xs font-medium text-muted-foreground">{letter.kind}</span>
             </div>
 
             {/* Title */}
@@ -146,14 +148,14 @@ function LetterDetailPage() {
             </h1>
 
             {/* Standfirst / Lead Description (Natural case, natural font) */}
-            <p className="mt-6 text-lg sm:text-[1.2rem] font-normal leading-[1.65] text-foreground/75">
+            <p className="mt-6 text-lg font-normal leading-[1.65] text-foreground/75 sm:text-[1.2rem]">
               {letter.body}
             </p>
 
             {/* Publishing Metadata & Share */}
             <div className="mt-10 flex flex-wrap items-center justify-between gap-4 border-t border-border/70 pt-6 text-xs text-muted-foreground">
               <div className="flex items-center gap-3">
-                <div className="h-7 w-7 rounded-full bg-primary/10 flex items-center justify-center font-display font-bold text-xs text-primary border border-primary/20">
+                <div className="flex h-7 w-7 items-center justify-center rounded-full border border-primary/20 bg-primary/10 font-display text-xs font-bold text-primary">
                   S
                 </div>
                 <div>
@@ -193,7 +195,7 @@ function LetterDetailPage() {
             {letter.content.map((section, idx) => (
               <section key={idx} className={idx > 0 ? "pt-6" : ""}>
                 {section.heading && (
-                  <h2 className="font-display text-2xl font-bold tracking-tight text-foreground sm:text-[1.65rem] mb-6">
+                  <h2 className="mb-6 font-display text-2xl font-bold tracking-tight text-foreground sm:text-[1.65rem]">
                     {section.heading}
                   </h2>
                 )}
@@ -201,7 +203,7 @@ function LetterDetailPage() {
                   {section.paragraphs.map((p, pIdx) => (
                     <p
                       key={pIdx}
-                      className="font-serif text-[18px] sm:text-[19.5px] leading-[1.85] text-foreground/85 tracking-[-0.003em]"
+                      className="font-serif text-[18px] leading-[1.85] tracking-[-0.003em] text-foreground/85 sm:text-[19.5px]"
                     >
                       {p}
                     </p>
@@ -214,12 +216,11 @@ function LetterDetailPage() {
           {/* Editorial Signoff Box */}
           <footer className="mt-20 border-t border-border/80 pt-10">
             <div className="rounded-2xl border border-border bg-secondary/30 p-8">
-              <p className="text-sm font-semibold text-foreground">
-                Stradmont Systems Laboratory
-              </p>
+              <p className="text-sm font-semibold text-foreground">Stradmont Systems Laboratory</p>
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                We study and architect operating foundations for institutions where technical and financial workflows intersect.
-                If you are re-evaluating core operational systems, our team welcomes technical dialogue.
+                We study and architect operating foundations for institutions where technical and
+                financial workflows intersect. If you are re-evaluating core operational systems,
+                our team welcomes technical dialogue.
               </p>
               <div className="mt-6">
                 <Link
@@ -237,17 +238,14 @@ function LetterDetailPage() {
         {otherLetters.length > 0 && (
           <aside className="border-t border-border bg-secondary/20 py-20">
             <div className="mx-auto max-w-5xl px-6">
-              <div className="flex items-center justify-between mb-8">
+              <div className="mb-8 flex items-center justify-between">
                 <div>
                   <span className="text-xs font-semibold text-primary">Archive</span>
                   <h3 className="mt-2 font-display text-2xl font-bold text-foreground">
                     Further reading from the laboratory
                   </h3>
                 </div>
-                <Link
-                  to="/letters"
-                  className="text-xs font-medium text-primary hover:underline"
-                >
+                <Link to="/letters" className="text-xs font-medium text-primary hover:underline">
                   All letters &rarr;
                 </Link>
               </div>
@@ -270,14 +268,16 @@ function LetterDetailPage() {
                       <h4 className="mt-4 font-display text-lg font-bold leading-snug text-foreground transition-colors group-hover:text-primary">
                         {item.title}
                       </h4>
-                      <p className="mt-3 text-sm leading-relaxed text-muted-foreground line-clamp-3">
+                      <p className="mt-3 line-clamp-3 text-sm leading-relaxed text-muted-foreground">
                         {item.body}
                       </p>
                     </div>
 
                     <div className="mt-6 flex items-center gap-1.5 text-xs font-semibold text-primary">
                       <span>Read note</span>
-                      <span className="transition-transform duration-200 group-hover:translate-x-1">&rarr;</span>
+                      <span className="transition-transform duration-200 group-hover:translate-x-1">
+                        &rarr;
+                      </span>
                     </div>
                   </Link>
                 ))}
