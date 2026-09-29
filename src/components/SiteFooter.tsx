@@ -35,9 +35,9 @@ const navLinks = [
 export function SiteFooter() {
   return (
     <footer className="border-t border-border bg-background">
-      <div className="mx-auto max-w-6xl px-6 py-14">
-        {/* Main grid */}
-        <div className="grid gap-12 md:grid-cols-[1.4fr_1fr_1.2fr]">
+      <div className="mx-auto max-w-6xl px-5 py-10 sm:px-6 sm:py-14">
+        {/* Main grid — brand full-width on mobile, 3 columns on md+ */}
+        <div className="grid gap-8 sm:grid-cols-2 md:gap-12 md:grid-cols-[1.4fr_1fr_1.2fr]">
           {/* Col 1 — Brand */}
           <div>
             <Link to="/" className="inline-flex items-baseline gap-1.5">
@@ -147,7 +147,7 @@ export function SiteFooter() {
         </div>
 
         {/* Bottom bar */}
-        <div className="mt-12 flex flex-col items-center justify-between gap-3 border-t border-border pt-6 text-xs text-muted-foreground sm:flex-row">
+        <div className="mt-8 flex flex-col items-center justify-between gap-2 border-t border-border pt-6 text-xs text-muted-foreground sm:mt-12 sm:flex-row sm:gap-3">
           <p>© {new Date().getFullYear()} Stradmont Solutions. All rights reserved.</p>
           <p>Systems over chaos.</p>
         </div>

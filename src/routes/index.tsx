@@ -268,11 +268,11 @@ function Index() {
             ))}
           </div>
 
-          <div className="relative mx-auto flex min-h-[92vh] max-w-5xl flex-col items-center justify-center px-6 pb-24 pt-40 text-center">
+          <div className="relative mx-auto flex min-h-[85vh] max-w-5xl flex-col items-center justify-center px-5 pb-16 pt-32 text-center sm:min-h-[92vh] sm:px-6 sm:pb-24 sm:pt-40">
             <span className="eyebrow animate-rise">Systems over chaos</span>
 
             <h1
-              className="animate-rise mt-6 font-display text-[clamp(2.4rem,6.4vw,4.8rem)] font-extrabold leading-[0.98] text-foreground"
+              className="animate-rise mt-5 font-display text-[clamp(2rem,8vw,4.8rem)] font-extrabold leading-[1.02] text-foreground sm:mt-6 sm:leading-[0.98]"
               style={{ animationDelay: "60ms" }}
             >
               Where there is chaos,
@@ -281,7 +281,7 @@ function Index() {
             </h1>
 
             <p
-              className="animate-rise mt-7 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg"
+              className="animate-rise mt-5 max-w-xl text-[0.9375rem] leading-relaxed text-muted-foreground sm:mt-7 sm:text-lg"
               style={{ animationDelay: "140ms" }}
             >
               Scattered data, manual work, tools that don't talk to each other. We go where the
@@ -289,7 +289,7 @@ function Index() {
             </p>
 
             <div
-              className="animate-rise mt-10 flex flex-col items-center gap-3 sm:flex-row"
+              className="animate-rise mt-8 flex flex-col items-center gap-3 sm:mt-10 sm:flex-row"
               style={{ animationDelay: "220ms" }}
             >
               <Link
@@ -322,7 +322,7 @@ function Index() {
 
         {/* ---------------- Overview ---------------- */}
         <section id="overview" className="scroll-mt-28 border-y border-border bg-background">
-          <div className="mx-auto grid max-w-6xl gap-10 px-6 py-20 md:grid-cols-[1.1fr_1fr] md:items-start">
+          <div className="mx-auto grid max-w-6xl gap-8 px-5 py-14 sm:px-6 sm:py-20 md:grid-cols-[1.1fr_1fr] md:items-start">
             <div>
               <span className="eyebrow">Our philosophy</span>
               <h2 className="mt-4 text-3xl font-bold leading-tight text-foreground sm:text-4xl">
@@ -343,7 +343,7 @@ function Index() {
             </div>
           </div>
 
-          <div className="mx-auto grid max-w-6xl grid-cols-1 gap-px border-t border-border bg-border sm:grid-cols-2 md:grid-cols-4">
+          <div className="mx-auto grid max-w-6xl grid-cols-2 gap-px border-t border-border bg-border md:grid-cols-4">
             {processSteps.map((m) => (
               <div
                 key={m.step}
@@ -361,7 +361,7 @@ function Index() {
 
         {/* ---------------- FAQ ---------------- */}
         <section id="faq" className="scroll-mt-28 border-y border-border bg-secondary/40">
-          <div className="mx-auto max-w-3xl px-6 py-24">
+          <div className="mx-auto max-w-3xl px-5 py-14 sm:px-6 sm:py-24">
             {/* Heading */}
             <div className="mb-12 text-center">
               <span className="eyebrow">FAQ</span>
@@ -371,7 +371,7 @@ function Index() {
             </div>
 
             {/* Tab switcher with sliding pill indicator */}
-            <div className="relative mb-8 grid grid-cols-3 rounded-full border border-border bg-background p-1 shadow-xs">
+            <div className="relative mb-8 grid grid-cols-3 rounded-2xl border border-border bg-background p-1 shadow-xs sm:rounded-full">
               {/* Fluid sliding pill */}
               <div
                 className="absolute top-1 bottom-1 left-1 rounded-full bg-primary shadow-[var(--shadow-lift)] transition-transform duration-300 ease-out"
@@ -387,7 +387,7 @@ function Index() {
                   type="button"
                   id={`faq-tab-${cat.id}`}
                   onClick={() => setActiveTab(idx)}
-                  className={`relative z-10 rounded-full py-2.5 px-2 text-center text-xs sm:text-sm font-medium transition-colors duration-200 ${
+                  className={`relative z-10 rounded-xl py-2.5 px-1.5 text-center text-[11px] font-medium leading-tight transition-colors duration-200 sm:rounded-full sm:px-2 sm:text-sm ${
                     activeTab === idx
                       ? "text-primary-foreground font-semibold"
                       : "text-muted-foreground hover:text-foreground"
@@ -422,9 +422,9 @@ function Index() {
 
         {/* ---------------- Stradmont Letters ---------------- */}
         <section id="letters" className="scroll-mt-28 border-y border-border bg-background">
-          <div className="mx-auto max-w-6xl px-6 py-24">
+          <div className="mx-auto max-w-6xl px-5 py-14 sm:px-6 sm:py-24">
             {/* Heading */}
-            <div className="mb-12 flex flex-wrap items-end justify-between gap-4">
+            <div className="mb-8 flex flex-wrap items-end justify-between gap-4 sm:mb-12">
               <div>
                 <span className="eyebrow">Stradmont Letters</span>
                 <h2 className="mt-4 text-3xl font-bold leading-tight text-foreground sm:text-4xl">
@@ -451,12 +451,12 @@ function Index() {
 
             {/* Card grid — mirrors Circle1 Letters layout */}
             {featuredLetter && secondLetter && (
-              <div className="grid gap-4 lg:grid-cols-[1fr_1fr]">
+              <div className="grid gap-4 md:grid-cols-[1fr_1fr]">
                 {/* Featured large card (left column) */}
                 <Link
                   to="/letters/$slug"
                   params={{ slug: featuredLetter.slug }}
-                  className="card-lab group relative flex flex-col justify-end overflow-hidden rounded-3xl p-8 text-background min-h-[380px] no-underline"
+                  className="card-lab group relative flex flex-col justify-end overflow-hidden rounded-3xl p-6 text-background min-h-[280px] no-underline sm:p-8 sm:min-h-[380px]"
                 >
                   {/* Background cover image */}
                   <img
@@ -550,7 +550,7 @@ function Index() {
                   {/* "Everything we've written" CTA card */}
                   <Link
                     to="/letters"
-                    className="card-lab group flex items-center justify-between rounded-3xl bg-foreground p-8 text-background min-h-[160px] no-underline"
+                    className="card-lab group flex items-center justify-between rounded-3xl bg-foreground p-6 text-background min-h-[130px] no-underline sm:p-8 sm:min-h-[160px]"
                   >
                     <div>
                       <p className="text-lg font-semibold leading-snug">
@@ -594,7 +594,7 @@ function Index() {
           <div className="pointer-events-none absolute inset-0 opacity-60">
             <FlowLines className="scale-x-[-1]" />
           </div>
-          <div className="relative mx-auto grid max-w-6xl gap-12 px-6 py-24 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+          <div className="relative mx-auto grid max-w-6xl gap-10 px-5 py-14 sm:px-6 sm:py-24 sm:gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
             <div>
               <span className="eyebrow">Contact us</span>
               <h2 className="mt-5 text-3xl font-bold leading-tight text-foreground sm:text-4xl">

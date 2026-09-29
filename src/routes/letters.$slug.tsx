@@ -125,10 +125,10 @@ function LetterDetailPage() {
 
       <main id="main-content" key={letter.slug} className="animate-page-transition">
         {/* Editorial Header */}
-        <header className="border-b border-border/70 bg-gradient-to-b from-secondary/40 via-background to-background pb-16 pt-36 sm:pb-20 sm:pt-44">
-          <div className="mx-auto max-w-[740px] px-6">
+        <header className="border-b border-border/70 bg-gradient-to-b from-secondary/40 via-background to-background pb-12 pt-28 sm:pb-20 sm:pt-44">
+          <div className="mx-auto max-w-[740px] px-5 sm:px-6">
             {/* Top breadcrumb & series tag */}
-            <div className="flex items-center justify-between text-xs text-muted-foreground">
+            <div className="flex flex-wrap items-center justify-between gap-2 text-xs text-muted-foreground">
               <Link
                 to="/letters"
                 className="group inline-flex items-center gap-2 text-xs text-muted-foreground transition-colors duration-200 ease-out hover:text-foreground"
@@ -143,17 +143,17 @@ function LetterDetailPage() {
             </div>
 
             {/* Title */}
-            <h1 className="mt-8 font-display text-[clamp(2.1rem,4.4vw,3.25rem)] font-extrabold leading-[1.12] tracking-tight text-foreground">
+            <h1 className="mt-6 font-display text-[clamp(1.85rem,5.5vw,3.25rem)] font-extrabold leading-[1.12] tracking-tight text-foreground sm:mt-8">
               {letter.title}
             </h1>
 
             {/* Standfirst / Lead Description (Natural case, natural font) */}
-            <p className="mt-6 text-lg font-normal leading-[1.65] text-foreground/75 sm:text-[1.2rem]">
+            <p className="mt-4 text-base font-normal leading-[1.65] text-foreground/75 sm:mt-6 sm:text-[1.2rem]">
               {letter.body}
             </p>
 
             {/* Publishing Metadata & Share */}
-            <div className="mt-10 flex flex-wrap items-center justify-between gap-4 border-t border-border/70 pt-6 text-xs text-muted-foreground">
+            <div className="mt-8 flex flex-col gap-4 border-t border-border/70 pt-5 text-xs text-muted-foreground sm:mt-10 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between sm:gap-4 sm:pt-6">
               <div className="flex items-center gap-3">
                 <div className="flex h-7 w-7 items-center justify-center rounded-full border border-primary/20 bg-primary/10 font-display text-xs font-bold text-primary">
                   S
@@ -190,7 +190,7 @@ function LetterDetailPage() {
         </header>
 
         {/* Editorial Feature Image */}
-        <div className="mx-auto max-w-[800px] px-6 pt-10 sm:pt-14">
+        <div className="mx-auto max-w-[800px] px-5 pt-8 sm:px-6 sm:pt-14">
           <figure className="overflow-hidden rounded-3xl border border-border bg-secondary/30 shadow-[var(--shadow-soft)]">
             <img
               src={letter.image}
@@ -204,7 +204,7 @@ function LetterDetailPage() {
         </div>
 
         {/* Editorial Body */}
-        <article className="mx-auto max-w-[740px] px-6 py-12 sm:py-16">
+        <article className="mx-auto max-w-[740px] px-5 py-10 sm:px-6 sm:py-16">
           <div className="space-y-12">
             {letter.content.map((section, idx) => (
               <section key={idx} className={idx > 0 ? "pt-6" : ""}>
@@ -217,7 +217,7 @@ function LetterDetailPage() {
                   {section.paragraphs.map((p, pIdx) => (
                     <p
                       key={pIdx}
-                      className="font-serif text-[18px] leading-[1.85] tracking-[-0.003em] text-foreground/85 sm:text-[19.5px]"
+                      className="font-serif text-[16.5px] leading-[1.85] tracking-[-0.003em] text-foreground/85 sm:text-[18px] md:text-[19.5px]"
                     >
                       {p}
                     </p>
@@ -250,8 +250,8 @@ function LetterDetailPage() {
 
         {/* Read Next Section */}
         {otherLetters.length > 0 && (
-          <aside className="border-t border-border bg-secondary/20 py-20">
-            <div className="mx-auto max-w-5xl px-6">
+          <aside className="border-t border-border bg-secondary/20 py-14 sm:py-20">
+            <div className="mx-auto max-w-5xl px-5 sm:px-6">
               <div className="mb-8 flex items-center justify-between">
                 <div>
                   <span className="text-xs font-semibold text-primary">Archive</span>

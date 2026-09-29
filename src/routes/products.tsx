@@ -83,7 +83,7 @@ function ProductsPage() {
       <main id="main-content" className="animate-page-transition">
         {/* ── Header ── */}
         <section className="surface-ambient border-b border-border">
-          <div className="mx-auto max-w-3xl px-6 pb-20 pt-40 text-center sm:pt-48">
+          <div className="mx-auto max-w-3xl px-5 pb-14 pt-32 text-center sm:px-6 sm:pb-20 sm:pt-48">
             <span className="eyebrow">Our Products</span>
             <h1 className="mt-5 font-display text-[clamp(2.2rem,5.5vw,3.8rem)] font-extrabold leading-[1.02] text-foreground">
               Built for institutions.
@@ -96,12 +96,12 @@ function ProductsPage() {
         </section>
 
         {/* ── Product showcase ── */}
-        <section className="mx-auto max-w-4xl px-6 py-20">
+        <section className="mx-auto max-w-4xl px-5 py-14 sm:px-6 sm:py-20">
           <article className="card-lab group overflow-hidden rounded-3xl">
             {/* Coloured top bar */}
             <div className="h-1.5 w-full" style={{ background: "var(--gradient-electric)" }} />
 
-            <div className="p-8 sm:p-12">
+            <div className="p-6 sm:p-10 md:p-12">
               <div className="flex items-center gap-4">
                 <a
                   href={product.url}
@@ -180,7 +180,7 @@ function ProductsPage() {
           </article>
 
           {/* Bottom CTA strip */}
-          <div className="mt-10 flex flex-col items-center justify-between gap-4 rounded-3xl border border-border bg-secondary/40 px-8 py-7 sm:flex-row">
+          <div className="mt-8 flex flex-col gap-5 rounded-3xl border border-border bg-secondary/40 px-6 py-6 sm:mt-10 sm:flex-row sm:items-center sm:justify-between sm:px-8 sm:py-7">
             <div>
               <p className="font-semibold text-foreground">Interested in early access?</p>
               <p className="mt-1 text-sm text-muted-foreground">

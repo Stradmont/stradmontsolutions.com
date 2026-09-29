@@ -151,7 +151,7 @@ function ContactPage() {
 
       <main id="main-content" className="animate-page-transition">
         <section className="surface-ambient border-b border-border">
-          <div className="mx-auto grid max-w-6xl gap-16 px-6 pb-24 pt-40 sm:pt-48 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
+          <div className="mx-auto grid max-w-6xl gap-10 px-5 pb-14 pt-32 sm:gap-16 sm:px-6 sm:pb-24 sm:pt-48 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
             {/* ── Left: contact info ── */}
             <div>
               <span className="eyebrow">Contact us</span>

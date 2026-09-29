@@ -75,7 +75,7 @@ function LettersIndexPage() {
 
       <main id="main-content" className="animate-page-transition">
         {/* Header */}
-        <section className="surface-ambient border-b border-border pt-40 pb-20">
+        <section className="surface-ambient border-b border-border pt-32 pb-14 sm:pt-40 sm:pb-20">
           <div className="mx-auto max-w-5xl px-6 text-center">
             <span className="eyebrow">Stradmont Letters</span>
             <h1 className="mt-5 font-display text-[clamp(2.2rem,5vw,3.8rem)] font-extrabold leading-[0.98] text-foreground">
@@ -90,8 +90,8 @@ function LettersIndexPage() {
         </section>
 
         {/* Letters Grid */}
-        <section className="mx-auto max-w-6xl px-6 py-20">
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <section className="mx-auto max-w-6xl px-5 py-14 sm:px-6 sm:py-20">
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {letters.map((letter) => (
               <Link
                 key={letter.slug}
@@ -114,7 +114,7 @@ function LettersIndexPage() {
                   </div>
                 </div>
 
-                <div className="flex flex-1 flex-col justify-between p-6 sm:p-7">
+                <div className="flex flex-1 flex-col justify-between p-5 sm:p-7">
                   <div>
                     <div className="flex items-center justify-between text-xs text-muted-foreground">
                       <span>{letter.date}</span>
