@@ -390,17 +390,26 @@ function Index() {
               </h2>
             </div>
 
-            {/* Tab switcher */}
-            <div className="mb-8 flex gap-1 rounded-full border border-border bg-background p-1">
+            {/* Tab switcher with sliding pill indicator */}
+            <div className="relative mb-8 grid grid-cols-3 rounded-full border border-border bg-background p-1 shadow-xs">
+              {/* Fluid sliding pill */}
+              <div
+                className="absolute top-1 bottom-1 left-1 rounded-full bg-primary shadow-[var(--shadow-lift)] transition-transform duration-300 ease-out"
+                style={{
+                  width: "calc((100% - 8px) / 3)",
+                  transform: `translateX(calc(${activeTab} * 100%))`,
+                }}
+              />
+
               {faqCategories.map((cat, idx) => (
                 <button
                   key={cat.id}
                   type="button"
                   id={`faq-tab-${cat.id}`}
                   onClick={() => setActiveTab(idx)}
-                  className={`flex-1 rounded-full py-2.5 text-sm font-medium transition-all duration-200 ${
+                  className={`relative z-10 rounded-full py-2.5 px-2 text-center text-xs sm:text-sm font-medium transition-colors duration-200 ${
                     activeTab === idx
-                      ? "bg-primary text-primary-foreground shadow-[var(--shadow-lift)]"
+                      ? "text-primary-foreground font-semibold"
                       : "text-muted-foreground hover:text-foreground"
                   }`}
                 >
@@ -409,8 +418,15 @@ function Index() {
               ))}
             </div>
 
-            {/* Accordion */}
-            <FaqAccordion key={activeTab} items={faqCategories[activeTab].items} />
+            {/* Accordion with smooth entrance */}
+            <div
+              key={activeTab}
+              style={{
+                animation: "stradmont-rise 280ms cubic-bezier(0.22, 1, 0.36, 1) both",
+              }}
+            >
+              <FaqAccordion items={faqCategories[activeTab].items} />
+            </div>
 
             <p className="mt-8 text-center text-sm text-muted-foreground">
               Still have a question?{" "}
