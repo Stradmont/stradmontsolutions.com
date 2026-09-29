@@ -1,0 +1,466 @@
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { useState } from "react";
+import { FlowLines } from "@/components/FlowLines";
+import { SiteNav } from "@/components/SiteNav";
+import { SiteFooter } from "@/components/SiteFooter";
+import { ContactForm } from "@/components/ContactForm";
+
+export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "Stradmont Solutions | Systems over chaos" },
+      {
+        name: "description",
+        content:
+          "Systems over chaos. Stradmont Solutions finds the chaos inside technology and finance operations and replaces it with systems that hold.",
+      },
+      {
+        property: "og:title",
+        content: "Stradmont Solutions | Systems over chaos",
+      },
+      {
+        property: "og:description",
+        content:
+          "We find the chaos in technology and finance operations, and build the systems that end it.",
+      },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
+  component: Index,
+});
+
+const pills = [
+  { label: "Research", style: "left-[8%] top-[12%]", delay: "0s" },
+  { label: "Architect", style: "left-[20%] top-[19%]", delay: "0.8s" },
+  { label: "Engineer", style: "left-[12%] top-[28%]", delay: "1.6s" },
+];
+
+const rightPills = [
+  { label: "Systems", style: "right-[6%] top-[58%]", delay: "0.4s" },
+  { label: "Capital", style: "right-[2%] top-[73%]", delay: "1.2s" },
+];
+
+const metrics = [
+  { value: "01", label: "Find the chaos" },
+  { value: "02", label: "Study the cause" },
+  { value: "03", label: "Design the system" },
+  { value: "04", label: "Keep it running" },
+];
+
+const faqCategories = [
+  {
+    id: "general",
+    label: "General",
+    items: [
+      {
+        q: "What does Stradmont Solutions do?",
+        a: "We find the chaos inside technology and finance operations. Scattered data, manual work, tools that don't talk to each other. We replace it with clear systems that hold. We research, architect, and engineer those systems, then stay to make sure they keep running.",
+      },
+      {
+        q: "Who do you typically work with?",
+        a: "Growth-stage companies in financial services and technology that have outgrown their initial processes. Our clients typically have smart teams but inherited systems that create invisible friction every day.",
+      },
+      {
+        q: "Where are you based?",
+        a: "Stradmont Solutions operates remotely, with a core team present across multiple time zones to serve clients wherever they are.",
+      },
+      {
+        q: "How do I get started?",
+        a: "Fill in the contact form on our site or write to us directly. We'll schedule a short call to understand your situation before proposing anything.",
+      },
+    ],
+  },
+  {
+    id: "products",
+    label: "Our Products",
+    items: [
+      {
+        q: "What is Stradmont Order?",
+        a: "Stradmont Order is our operations management product, built to bring structure to the workflows that finance and operations teams run every day. It started as an internal system we built to solve chaos we saw repeatedly.",
+      },
+      {
+        q: "What is Builders Base?",
+        a: "Builders Base is a resource layer for teams building internal tools. It gives you a structured starting point so you stop rebuilding the same foundations and start building the parts that actually matter.",
+      },
+      {
+        q: "Are your products available to the public?",
+        a: "Both products are currently in active development. Early access is available for select teams. Get in touch to discuss whether you qualify.",
+      },
+    ],
+  },
+];
+
+const featuredLetters = [
+  {
+    kind: "Letter",
+    date: "Sep 2026",
+    readTime: "5 min read",
+    title: "Why operating software should be written down before it is written",
+    body: "On design documents as an instrument of institutional memory.",
+    featured: true,
+  },
+  {
+    kind: "Note",
+    date: "Aug 2026",
+    readTime: "4 min read",
+    title: "Latency is a governance problem",
+    body: "How response-time budgets quietly become policy decisions inside finance teams.",
+    featured: false,
+  },
+];
+
+function FaqAccordion({
+  items,
+}: {
+  items: { q: string; a: string }[];
+}) {
+  const [open, setOpen] = useState<number | null>(null);
+  return (
+    <div className="divide-y divide-border border-y border-border">
+      {items.map((item, i) => (
+        <div key={item.q}>
+          <button
+            type="button"
+            id={`faq-btn-${i}`}
+            aria-expanded={open === i}
+            aria-controls={`faq-panel-${i}`}
+            onClick={() => setOpen(open === i ? null : i)}
+            className="flex w-full items-center justify-between gap-6 py-5 text-left text-base font-medium text-foreground transition-colors hover:text-primary"
+          >
+            <span>{item.q}</span>
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 18 18"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.6"
+              className={`shrink-0 text-muted-foreground transition-transform duration-300 ${open === i ? "rotate-180" : ""}`}
+            >
+              <path d="M3 6l6 6 6-6" />
+            </svg>
+          </button>
+          {open === i && (
+            <div
+              id={`faq-panel-${i}`}
+              role="region"
+              aria-labelledby={`faq-btn-${i}`}
+              className="pb-5 text-sm leading-relaxed text-muted-foreground"
+            >
+              {item.a}
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function Index() {
+  const [activeTab, setActiveTab] = useState(0);
+
+  return (
+    <div className="min-h-screen bg-background">
+      <SiteNav />
+
+      {/* ---------------- Hero ---------------- */}
+      <section className="relative isolate overflow-hidden surface-ambient">
+        <FlowLines />
+
+        {/* Floating capability pills */}
+        <div className="pointer-events-none absolute inset-0 hidden lg:block">
+          {pills.map((p, i) => (
+            <span
+              key={`pos-${p.label}`}
+              className={`animate-float absolute ${p.style} rounded-full bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground shadow-[var(--shadow-lift)]`}
+              style={{ animationDelay: p.delay, rotate: `${-8 + i * 5}deg` }}
+            >
+              {p.label}
+            </span>
+          ))}
+          {rightPills.map((p, i) => (
+            <span
+              key={p.label}
+              className={`animate-float absolute ${p.style} rounded-full bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground shadow-[var(--shadow-lift)]`}
+              style={{ animationDelay: p.delay, rotate: `${10 + i * 6}deg` }}
+            >
+              {p.label}
+            </span>
+          ))}
+        </div>
+
+        <div className="relative mx-auto flex min-h-[92vh] max-w-5xl flex-col items-center justify-center px-6 pb-24 pt-40 text-center">
+          <span className="eyebrow animate-rise">Systems over chaos</span>
+
+          <h1
+            className="animate-rise mt-6 font-display text-[clamp(2.4rem,6.4vw,4.8rem)] font-extrabold leading-[0.98] text-foreground"
+            style={{ animationDelay: "60ms" }}
+          >
+            Where there is chaos,
+            <br />
+            we build systems.
+          </h1>
+
+          <p
+            className="animate-rise mt-7 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg"
+            style={{ animationDelay: "140ms" }}
+          >
+            Scattered data, manual work, tools that don't talk to each other. We go where
+            the chaos is in technology and finance, and replace it with clear systems that
+            hold.
+          </p>
+
+          <div
+            className="animate-rise mt-10 flex flex-col items-center gap-3 sm:flex-row"
+            style={{ animationDelay: "220ms" }}
+          >
+            <a
+              href="/products"
+              className="group inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold text-primary-foreground shadow-[var(--shadow-lift)] transition-transform duration-300 hover:-translate-y-0.5"
+              style={{ background: "var(--gradient-electric)" }}
+            >
+              Our products
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 16 16"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.8"
+                className="transition-transform duration-300 group-hover:translate-x-1"
+              >
+                <path d="M3 8h10M9 4l4 4-4 4" />
+              </svg>
+            </a>
+            <a
+              href="#letters"
+              className="inline-flex items-center rounded-full border border-border bg-background px-7 py-3.5 text-sm font-semibold text-foreground transition-colors hover:bg-secondary"
+            >
+              Read our letters
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* ---------------- Overview ---------------- */}
+      <section id="overview" className="scroll-mt-28 border-y border-border bg-background">
+        <div className="mx-auto grid max-w-6xl gap-10 px-6 py-20 md:grid-cols-[1.1fr_1fr] md:items-start">
+          <div>
+            <span className="eyebrow">Our philosophy</span>
+            <h2 className="mt-4 text-3xl font-bold leading-tight text-foreground sm:text-4xl">
+              Systems over chaos.
+            </h2>
+          </div>
+          <div className="space-y-5 text-base leading-relaxed text-muted-foreground">
+            <p>
+              Every business has chaos somewhere: a process nobody owns, numbers that never
+              match, work done twice. That is where we start. We find it, study it, and
+              replace it with a system that runs the same way every time.
+            </p>
+            <p>
+              The products we build, including{" "}
+              <span className="font-semibold text-foreground">Stradmont Order</span> and{" "}
+              <span className="font-semibold text-foreground">Builders Base</span>, began as
+              chaos we found and solved.
+            </p>
+          </div>
+        </div>
+
+        <div className="mx-auto grid max-w-6xl grid-cols-2 gap-px border-t border-border bg-border md:grid-cols-4">
+          {metrics.map((m) => (
+            <div key={m.label} className="bg-background px-6 py-8 text-center">
+              <div className="font-display text-2xl font-extrabold text-primary sm:text-3xl">
+                {m.value}
+              </div>
+              <div className="mt-1.5 text-xs text-muted-foreground">{m.label}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ---------------- FAQ ---------------- */}
+      <section id="faq" className="scroll-mt-28 border-y border-border bg-secondary/40">
+        <div className="mx-auto max-w-3xl px-6 py-24">
+          {/* Heading */}
+          <div className="mb-12 text-center">
+            <span className="eyebrow">FAQ</span>
+            <h2 className="mt-4 text-3xl font-bold leading-tight text-foreground sm:text-4xl">
+              Frequently asked questions.
+            </h2>
+          </div>
+
+          {/* Tab switcher */}
+          <div className="mb-8 flex gap-1 rounded-full border border-border bg-background p-1">
+            {faqCategories.map((cat, idx) => (
+              <button
+                key={cat.id}
+                type="button"
+                id={`faq-tab-${cat.id}`}
+                onClick={() => setActiveTab(idx)}
+                className={`flex-1 rounded-full py-2.5 text-sm font-medium transition-all duration-200 ${
+                  activeTab === idx
+                    ? "bg-primary text-primary-foreground shadow-[var(--shadow-lift)]"
+                    : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                {cat.label}
+              </button>
+            ))}
+          </div>
+
+          {/* Accordion */}
+          <FaqAccordion key={activeTab} items={faqCategories[activeTab].items} />
+
+          <p className="mt-8 text-center text-sm text-muted-foreground">
+            Still have a question?{" "}
+            <a
+              href="/contact"
+              className="font-medium text-primary underline-offset-4 hover:underline"
+            >
+              Write to us
+            </a>
+          </p>
+        </div>
+      </section>
+
+      {/* ---------------- Stradmont Letters ---------------- */}
+      <section id="letters" className="scroll-mt-28 border-y border-border bg-background">
+        <div className="mx-auto max-w-6xl px-6 py-24">
+          {/* Heading */}
+          <div className="mb-12 flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <span className="eyebrow">Stradmont Letters</span>
+              <h2 className="mt-4 text-3xl font-bold leading-tight text-foreground sm:text-4xl">
+                Notes from the lab.
+              </h2>
+            </div>
+            <Link
+              to="/letters"
+              className="inline-flex items-center gap-1.5 rounded-full border border-border px-5 py-2.5 text-sm font-medium text-foreground transition-colors hover:bg-secondary"
+            >
+              Read all letters
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.8">
+                <path d="M3 8h10M9 4l4 4-4 4" />
+              </svg>
+            </Link>
+          </div>
+
+          {/* Card grid — mirrors Circle1 Letters layout */}
+          <div className="grid gap-4 lg:grid-cols-[1fr_1fr]">
+            {/* Featured large card (left column) */}
+            <article className="card-lab group relative flex flex-col justify-end overflow-hidden rounded-3xl bg-foreground p-8 text-background min-h-[340px]">
+              {/* Subtle pattern overlay */}
+              <div
+                className="pointer-events-none absolute inset-0 opacity-10"
+                style={{
+                  backgroundImage:
+                    "repeating-linear-gradient(45deg,currentColor 0,currentColor 1px,transparent 0,transparent 50%)",
+                  backgroundSize: "20px 20px",
+                }}
+              />
+              <div className="relative">
+                <div className="flex items-center gap-3 mb-4">
+                  <span className="font-sans text-[10px] font-semibold uppercase tracking-wider text-primary">
+                    {featuredLetters[0].kind}
+                  </span>
+                  <span className="text-xs opacity-60">{featuredLetters[0].date}</span>
+                  <span className="text-xs opacity-60">· {featuredLetters[0].readTime}</span>
+                </div>
+                <h3 className="text-xl font-semibold leading-snug">
+                  {featuredLetters[0].title}
+                </h3>
+                <div className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-primary transition-transform duration-300 group-hover:translate-x-1">
+                  Read full
+                  <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.8">
+                    <path d="M3 8h10M9 4l4 4-4 4" />
+                  </svg>
+                </div>
+              </div>
+            </article>
+
+            {/* Right column — top card + bottom "all letters" card */}
+            <div className="flex flex-col gap-4">
+              {/* Second featured letter */}
+              <article className="card-lab group flex flex-col justify-between rounded-3xl bg-secondary/80 p-8 min-h-[160px]">
+                <div>
+                  <div className="flex items-center gap-3 mb-3">
+                    <span className="font-sans text-[10px] font-semibold uppercase tracking-wider text-primary">
+                      {featuredLetters[1].kind}
+                    </span>
+                    <span className="text-xs text-muted-foreground">{featuredLetters[1].date}</span>
+                    <span className="text-xs text-muted-foreground">· {featuredLetters[1].readTime}</span>
+                  </div>
+                  <h3 className="text-lg font-semibold leading-snug text-foreground">
+                    {featuredLetters[1].title}
+                  </h3>
+                  <p className="mt-2 text-sm text-muted-foreground">{featuredLetters[1].body}</p>
+                </div>
+                <Link
+                  to="/letters"
+                  className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-primary transition-transform duration-300 group-hover:translate-x-1"
+                >
+                  Read full
+                  <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.8">
+                    <path d="M3 8h10M9 4l4 4-4 4" />
+                  </svg>
+                </Link>
+              </article>
+
+              {/* "Everything we've written" CTA card */}
+              <Link
+                to="/letters"
+                className="card-lab group flex items-center justify-between rounded-3xl bg-foreground p-8 text-background min-h-[160px] no-underline"
+              >
+                <div>
+                  <p className="text-lg font-semibold leading-snug">
+                    Everything we have written so far.
+                  </p>
+                  <span className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-primary transition-transform duration-300 group-hover:translate-x-1">
+                    Read the letters
+                    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.8">
+                      <path d="M3 8h10M9 4l4 4-4 4" />
+                    </svg>
+                  </span>
+                </div>
+                <svg
+                  width="48"
+                  height="48"
+                  viewBox="0 0 48 48"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.2"
+                  className="shrink-0 opacity-20"
+                >
+                  <rect x="8" y="10" width="32" height="28" rx="3" />
+                  <path d="M14 18h20M14 24h14M14 30h10" />
+                </svg>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ---------------- Contact ---------------- */}
+      <section className="relative isolate overflow-hidden bg-background">
+        <div className="pointer-events-none absolute inset-0 opacity-60">
+          <FlowLines className="scale-x-[-1]" />
+        </div>
+        <div className="relative mx-auto grid max-w-6xl gap-12 px-6 py-24 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+          <div>
+            <span className="eyebrow">Contact us</span>
+            <h2 className="mt-5 text-3xl font-bold leading-tight text-foreground sm:text-4xl">
+              Found chaos in your business?
+            </h2>
+            <p className="mt-5 max-w-md text-base leading-relaxed text-muted-foreground">
+              Tell us where things break down. We will help you turn it into a system.
+            </p>
+          </div>
+          <ContactForm />
+        </div>
+      </section>
+
+      <SiteFooter />
+    </div>
+  );
+}
