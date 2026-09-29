@@ -170,7 +170,7 @@ function ProductsPage() {
                 </a>
                 <Link
                   to="/contact"
-                  className="inline-flex items-center gap-1.5 rounded-full border border-border bg-background px-4 py-3 text-xs font-medium text-muted-foreground transition-colors hover:border-primary hover:text-foreground hover:bg-secondary/60"
+                  className="inline-flex items-center gap-1.5 rounded-full border border-border bg-background px-5 py-3 text-sm font-medium text-foreground transition-colors hover:border-primary hover:bg-secondary/60"
                 >
                   Get in touch
                 </Link>

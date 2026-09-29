@@ -206,11 +206,10 @@
 
 @utility eyebrow {
   font-family: var(--font-sans);
-  font-size: 0.6875rem;
+  font-size: 0.75rem;
   font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--color-muted-foreground);
+  letter-spacing: 0.03em;
+  color: var(--color-primary);
 }
 
 @utility card-lab {

@@ -367,7 +367,7 @@ function Index() {
                 key={m.step}
                 className="bg-background p-6 text-left transition-colors hover:bg-secondary/40"
               >
-                <span className="font-mono text-xs font-semibold tracking-wider text-primary uppercase">
+                <span className="text-xs font-semibold text-primary">
                   {m.step}
                 </span>
                 <div className="mt-2 text-lg font-bold text-foreground">{m.title}</div>
