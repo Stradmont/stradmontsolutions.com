@@ -191,7 +191,7 @@ const featuredLetters = [
     body: "Every cache expiration and scheduled batch is an unspoken statement about the allowable freshness of financial truth.",
     featured: false,
   },
-];
+] as const;
 
 function FaqAccordion({ items }: { items: { q: string; a: string }[] }) {
   const [open, setOpen] = useState<number | null>(null);
@@ -423,7 +423,7 @@ function Index() {
                 animation: "stradmont-rise 280ms cubic-bezier(0.22, 1, 0.36, 1) both",
               }}
             >
-              <FaqAccordion items={faqCategories[activeTab].items} />
+              <FaqAccordion items={faqCategories[activeTab]?.items ?? []} />
             </div>
 
             <p className="mt-8 text-center text-sm text-muted-foreground">
