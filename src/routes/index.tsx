@@ -456,7 +456,7 @@ function Index() {
                 />
                 <div className="relative">
                   <div className="flex items-center gap-3 mb-4">
-                    <span className="font-sans text-[10px] font-semibold uppercase tracking-wider text-primary">
+                    <span className="text-xs font-semibold text-primary">
                       {featuredLetters[0].kind}
                     </span>
                     <span className="text-xs opacity-60">{featuredLetters[0].date}</span>
@@ -486,7 +486,7 @@ function Index() {
                 <article className="card-lab group flex flex-col justify-between rounded-3xl bg-secondary/80 p-8 min-h-[160px]">
                   <div>
                     <div className="flex items-center gap-3 mb-3">
-                      <span className="font-sans text-[10px] font-semibold uppercase tracking-wider text-primary">
+                      <span className="text-xs font-semibold text-primary">
                         {featuredLetters[1].kind}
                       </span>
                       <span className="text-xs text-muted-foreground">

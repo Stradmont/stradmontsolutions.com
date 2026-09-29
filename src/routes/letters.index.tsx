@@ -101,8 +101,8 @@ function LettersIndexPage() {
               >
                 <div>
                   <div className="flex items-center gap-3">
-                    <span className="font-mono text-[10px] font-semibold uppercase tracking-wider text-primary">
-                      No. {letter.number} · {letter.kind}
+                    <span className="text-xs font-semibold text-primary">
+                      {letter.kind} {letter.number}
                     </span>
                     <span className="h-px flex-1 bg-border" />
                     <span className="text-xs text-muted-foreground">{letter.date}</span>

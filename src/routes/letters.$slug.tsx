@@ -81,16 +81,16 @@ function LetterNotFound() {
     <div className="min-h-screen bg-background">
       <SiteNav />
       <main id="main-content" className="flex min-h-[70vh] flex-col items-center justify-center px-6 text-center">
-        <span className="font-mono text-xs uppercase tracking-widest text-primary">Status 404</span>
-        <h1 className="mt-4 font-display text-3xl font-extrabold text-foreground sm:text-4xl">
+        <span className="text-xs font-semibold text-primary">404</span>
+        <h1 className="mt-3 font-display text-3xl font-extrabold text-foreground sm:text-4xl">
           Letter not found
         </h1>
-        <p className="mt-4 max-w-md text-sm leading-relaxed text-muted-foreground">
+        <p className="mt-3 max-w-md text-sm leading-relaxed text-muted-foreground">
           The requested essay or technical note does not exist or may have been consolidated into our archive.
         </p>
         <Link
           to="/letters"
-          className="mt-8 inline-flex items-center gap-2 rounded-full border border-border bg-background px-6 py-2.5 text-xs font-semibold uppercase tracking-wider text-foreground transition-all hover:bg-secondary hover:border-primary/40"
+          className="mt-7 inline-flex items-center gap-2 rounded-full border border-border bg-background px-5 py-2 text-xs font-medium text-foreground transition-all hover:bg-secondary hover:border-primary/40"
         >
           <ArrowLeft className="h-3.5 w-3.5" />
           Return to letters index
@@ -121,21 +121,21 @@ function LetterDetailPage() {
 
       <main id="main-content">
         {/* Editorial Header */}
-        <header className="border-b border-border/80 bg-gradient-to-b from-secondary/40 via-background to-background pt-36 pb-16 sm:pt-44 sm:pb-20">
+        <header className="border-b border-border/70 bg-gradient-to-b from-secondary/40 via-background to-background pt-36 pb-16 sm:pt-44 sm:pb-20">
           <div className="mx-auto max-w-[740px] px-6">
             {/* Top breadcrumb & series tag */}
             <div className="flex items-center justify-between text-xs text-muted-foreground">
               <Link
                 to="/letters"
-                className="group inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-wider text-muted-foreground transition-colors hover:text-foreground"
+                className="group inline-flex items-center gap-2 text-xs text-muted-foreground transition-colors hover:text-foreground"
               >
                 <ArrowLeft className="h-3.5 w-3.5 transition-transform duration-200 group-hover:-translate-x-1" />
                 <span>Letters</span>
                 <span className="text-border">/</span>
-                <span className="text-primary font-bold">No. {letter.number}</span>
+                <span className="text-foreground font-medium">Letter {letter.number}</span>
               </Link>
 
-              <span className="font-mono text-[11px] uppercase tracking-widest text-muted-foreground">
+              <span className="text-xs text-muted-foreground font-medium">
                 {letter.kind}
               </span>
             </div>
@@ -145,7 +145,7 @@ function LetterDetailPage() {
               {letter.title}
             </h1>
 
-            {/* Standfirst / Lead Description (Human, natural, confident) */}
+            {/* Standfirst / Lead Description (Natural case, natural font) */}
             <p className="mt-6 text-lg sm:text-[1.2rem] font-normal leading-[1.65] text-foreground/75">
               {letter.body}
             </p>
@@ -168,7 +168,7 @@ function LetterDetailPage() {
               <button
                 type="button"
                 onClick={handleCopyLink}
-                className="inline-flex items-center gap-1.5 rounded-full border border-border px-3.5 py-1.5 text-[11px] font-mono uppercase tracking-wider text-muted-foreground transition-all hover:bg-secondary hover:text-foreground"
+                className="inline-flex items-center gap-1.5 rounded-full border border-border px-3.5 py-1.5 text-xs text-muted-foreground transition-all hover:bg-secondary hover:text-foreground"
                 aria-label="Copy article link"
               >
                 {copied ? (
@@ -214,9 +214,9 @@ function LetterDetailPage() {
           {/* Editorial Signoff Box */}
           <footer className="mt-20 border-t border-border/80 pt-10">
             <div className="rounded-2xl border border-border bg-secondary/30 p-8">
-              <span className="font-mono text-[11px] uppercase tracking-wider text-primary font-semibold">
+              <p className="text-sm font-semibold text-foreground">
                 Stradmont Systems Laboratory
-              </span>
+              </p>
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                 We study and architect operating foundations for institutions where technical and financial workflows intersect.
                 If you are re-evaluating core operational systems, our team welcomes technical dialogue.
@@ -239,16 +239,16 @@ function LetterDetailPage() {
             <div className="mx-auto max-w-5xl px-6">
               <div className="flex items-center justify-between mb-8">
                 <div>
-                  <span className="eyebrow">Archival Index</span>
+                  <span className="text-xs font-semibold text-primary">Archive</span>
                   <h3 className="mt-2 font-display text-2xl font-bold text-foreground">
                     Further reading from the laboratory
                   </h3>
                 </div>
                 <Link
                   to="/letters"
-                  className="text-xs font-semibold uppercase tracking-wider text-primary hover:underline"
+                  className="text-xs font-medium text-primary hover:underline"
                 >
-                  Index &rarr;
+                  All letters &rarr;
                 </Link>
               </div>
 
@@ -262,8 +262,8 @@ function LetterDetailPage() {
                   >
                     <div>
                       <div className="flex items-center justify-between text-xs text-muted-foreground">
-                        <span className="font-mono text-[11px] uppercase tracking-wider text-primary font-semibold">
-                          No. {item.number} · {item.kind}
+                        <span className="text-xs font-semibold text-primary">
+                          {item.kind} {item.number}
                         </span>
                         <span>{item.readTime}</span>
                       </div>
