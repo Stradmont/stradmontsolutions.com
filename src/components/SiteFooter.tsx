@@ -76,7 +76,7 @@ export function SiteFooter() {
                 <Link
                   key={l.to}
                   to={l.to}
-                  className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                  className="text-sm text-muted-foreground transition-all duration-200 ease-out hover:text-foreground hover:translate-x-1"
                 >
                   {l.label}
                 </Link>

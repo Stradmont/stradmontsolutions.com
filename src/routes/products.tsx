@@ -80,17 +80,17 @@ function ProductsPage() {
     <div className="min-h-screen bg-background">
       <SiteNav />
 
-      <main id="main-content">
+      <main id="main-content" className="animate-page-transition">
         {/* ── Header ── */}
         <section className="surface-ambient border-b border-border">
           <div className="mx-auto max-w-3xl px-6 pb-20 pt-40 text-center sm:pt-48">
             <span className="eyebrow">Our Products</span>
             <h1 className="mt-5 font-display text-[clamp(2.2rem,5.5vw,3.8rem)] font-extrabold leading-[1.02] text-foreground">
-              Built inside the lab.
+              Built for institutions.
             </h1>
             <p className="mx-auto mt-5 max-w-lg text-base leading-relaxed text-muted-foreground">
-              Every platform begins as research. The ones that hold up become tools institutions
-              rely on.
+              Every platform begins as deep operational research. The ones that hold up become tools
+              institutions rely on.
             </p>
           </div>
         </section>
@@ -171,7 +171,7 @@ function ProductsPage() {
                 </a>
                 <Link
                   to="/contact"
-                  className="inline-flex items-center gap-1.5 rounded-full border border-border bg-background px-5 py-3 text-sm font-medium text-foreground transition-colors hover:border-primary hover:bg-secondary/60"
+                  className="inline-flex items-center gap-1.5 rounded-full border border-border bg-background px-5 py-3 text-sm font-medium text-foreground transition-all duration-300 ease-out hover:border-primary hover:bg-secondary/60 hover:-translate-y-0.5 active:scale-[0.98]"
                 >
                   Get in touch
                 </Link>
@@ -189,7 +189,7 @@ function ProductsPage() {
             </div>
             <Link
               to="/contact"
-              className="shrink-0 inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-primary-foreground shadow-[var(--shadow-lift)] transition-transform duration-300 hover:-translate-y-0.5"
+              className="shrink-0 inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-primary-foreground shadow-[var(--shadow-lift)] transition-all duration-300 ease-out hover:-translate-y-0.5 active:scale-[0.98]"
               style={{ background: "var(--gradient-electric)" }}
             >
               Get in touch

@@ -58,7 +58,7 @@ export function SiteNav() {
                 key={l.to}
                 to={l.to}
                 activeOptions={{ exact: l.to === "/" }}
-                className="group relative px-1 py-1.5 text-[15px] font-medium tracking-tight text-muted-foreground transition-colors hover:text-foreground"
+                className="group relative px-1 py-1.5 text-[15px] font-medium tracking-tight text-muted-foreground transition-colors duration-200 ease-out hover:text-foreground"
                 activeProps={{
                   className: "text-foreground font-semibold",
                 }}
@@ -67,7 +67,7 @@ export function SiteNav() {
                   <>
                     <span>{l.label}</span>
                     <span
-                      className={`absolute inset-x-0 -bottom-1 h-[2px] rounded-full transition-all duration-300 ease-out ${
+                      className={`absolute inset-x-0 -bottom-1 h-[2px] rounded-full transition-all duration-300 ease-out origin-center ${
                         isActive
                           ? "scale-x-100 bg-primary opacity-100"
                           : "scale-x-0 bg-primary/70 opacity-0 group-hover:scale-x-100 group-hover:opacity-100"
@@ -82,72 +82,85 @@ export function SiteNav() {
           <div className="flex items-center gap-2.5">
             <Link
               to="/contact"
-              className="hidden rounded-full bg-foreground px-5 py-2.5 text-sm font-semibold text-background transition-all duration-200 hover:opacity-90 hover:shadow-xs active:scale-[0.98] sm:inline-flex"
+              className="hidden rounded-full bg-foreground px-5 py-2.5 text-sm font-semibold text-background transition-all duration-300 ease-out hover:opacity-90 hover:shadow-xs hover:-translate-y-0.5 active:scale-[0.98] sm:inline-flex"
             >
               Get in touch
             </Link>
             <button
               type="button"
-              aria-label="Toggle menu"
+              aria-label={open ? "Close menu" : "Open menu"}
               aria-expanded={open}
               onClick={() => setOpen((v) => !v)}
-              className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-border text-foreground transition-colors hover:bg-secondary md:hidden"
+              className="relative inline-flex h-9 w-9 items-center justify-center rounded-full border border-border text-foreground transition-all duration-300 ease-out hover:bg-secondary active:scale-95 md:hidden"
             >
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 16 16"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.6"
-              >
-                {open ? <path d="M3 3l10 10M13 3L3 13" /> : <path d="M2 5h12M2 11h12" />}
-              </svg>
+              <div className="relative h-3.5 w-3.5 flex flex-col justify-center items-center">
+                <span
+                  className={`absolute block h-[1.5px] w-3.5 rounded-full bg-current transition-all duration-300 ease-out ${
+                    open ? "rotate-45 translate-y-0" : "-translate-y-1"
+                  }`}
+                />
+                <span
+                  className={`absolute block h-[1.5px] w-3.5 rounded-full bg-current transition-all duration-300 ease-out ${
+                    open ? "-rotate-45 translate-y-0" : "translate-y-1"
+                  }`}
+                />
+              </div>
             </button>
           </div>
         </nav>
 
-        {open && (
-          <>
-            <div
-              className="fixed inset-0 z-40 bg-foreground/15 backdrop-blur-xs md:hidden"
-              onClick={() => setOpen(false)}
-              aria-hidden="true"
-            />
-            <div className="relative z-50 mx-auto mt-2 max-w-5xl rounded-3xl border border-border bg-background/95 p-4 shadow-[var(--shadow-lift)] backdrop-blur-xl md:hidden">
-              <div className="flex flex-col gap-1">
-                {links.map((l) => (
-                  <Link
-                    key={l.to}
-                    to={l.to}
-                    activeOptions={{ exact: l.to === "/" }}
-                    onClick={() => setOpen(false)}
-                    className="flex items-center justify-between rounded-2xl px-4 py-3 text-base font-medium text-muted-foreground transition-all duration-200 hover:bg-secondary hover:text-foreground"
-                    activeProps={{
-                      className: "bg-secondary font-semibold text-primary",
-                    }}
-                  >
-                    {({ isActive }) => (
-                      <>
-                        <span>{l.label}</span>
-                        {isActive && <span className="h-1.5 w-1.5 rounded-full bg-primary" />}
-                      </>
-                    )}
-                  </Link>
-                ))}
-                <div className="mt-2 border-t border-border pt-2">
-                  <Link
-                    to="/contact"
-                    onClick={() => setOpen(false)}
-                    className="flex items-center justify-center rounded-2xl bg-foreground px-4 py-3 text-base font-semibold text-background transition-opacity hover:opacity-90"
-                  >
-                    Get in touch
-                  </Link>
-                </div>
-              </div>
+        {/* Mobile Backdrop with smooth fade */}
+        <div
+          className={`fixed inset-0 z-40 bg-foreground/15 backdrop-blur-xs transition-opacity duration-300 ease-out md:hidden ${
+            open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+          }`}
+          onClick={() => setOpen(false)}
+          aria-hidden="true"
+        />
+
+        {/* Mobile Drawer with smooth slide & fade */}
+        <div
+          className={`relative z-50 mx-auto mt-2 max-w-5xl rounded-3xl border border-border bg-background/95 p-4 shadow-[var(--shadow-lift)] backdrop-blur-xl transition-all duration-300 ease-out md:hidden ${
+            open
+              ? "opacity-100 translate-y-0 scale-100 pointer-events-auto"
+              : "opacity-0 -translate-y-3 scale-[0.98] pointer-events-none"
+          }`}
+        >
+          <div className="flex flex-col gap-1">
+            {links.map((l) => (
+              <Link
+                key={l.to}
+                to={l.to}
+                activeOptions={{ exact: l.to === "/" }}
+                onClick={() => setOpen(false)}
+                className="flex items-center justify-between rounded-2xl px-4 py-3 text-base font-medium text-muted-foreground transition-all duration-200 ease-out hover:bg-secondary hover:text-foreground active:scale-[0.99]"
+                activeProps={{
+                  className: "bg-secondary font-semibold text-primary",
+                }}
+              >
+                {({ isActive }) => (
+                  <>
+                    <span>{l.label}</span>
+                    <span
+                      className={`h-1.5 w-1.5 rounded-full bg-primary transition-all duration-300 ease-out ${
+                        isActive ? "opacity-100 scale-100" : "opacity-0 scale-50"
+                      }`}
+                    />
+                  </>
+                )}
+              </Link>
+            ))}
+            <div className="mt-2 border-t border-border pt-2">
+              <Link
+                to="/contact"
+                onClick={() => setOpen(false)}
+                className="flex items-center justify-center rounded-2xl bg-foreground px-4 py-3 text-base font-semibold text-background transition-all duration-200 ease-out hover:opacity-90 active:scale-[0.99]"
+              >
+                Get in touch
+              </Link>
             </div>
-          </>
-        )}
+          </div>
+        </div>
       </header>
     </>
   );

@@ -33,14 +33,14 @@ export const Route = createFileRoute("/letters/$slug")({
         },
         {
           property: "og:image",
-          content: "https://stradmontsolutions.com/og-image.png",
+          content: `https://stradmontsolutions.com${letter.image}`,
         },
         { name: "twitter:card", content: "summary_large_image" },
         { name: "twitter:title", content: `${letter.title} | Stradmont Letters` },
         { name: "twitter:description", content: letter.body },
         {
           name: "twitter:image",
-          content: "https://stradmontsolutions.com/og-image.png",
+          content: `https://stradmontsolutions.com${letter.image}`,
         },
       ],
       links: [
@@ -123,7 +123,7 @@ function LetterDetailPage() {
     <div className="min-h-screen bg-background text-foreground antialiased selection:bg-primary/20">
       <SiteNav />
 
-      <main id="main-content">
+      <main id="main-content" key={letter.slug} className="animate-page-transition">
         {/* Editorial Header */}
         <header className="border-b border-border/70 bg-gradient-to-b from-secondary/40 via-background to-background pb-16 pt-36 sm:pb-20 sm:pt-44">
           <div className="mx-auto max-w-[740px] px-6">
@@ -131,9 +131,9 @@ function LetterDetailPage() {
             <div className="flex items-center justify-between text-xs text-muted-foreground">
               <Link
                 to="/letters"
-                className="group inline-flex items-center gap-2 text-xs text-muted-foreground transition-colors hover:text-foreground"
+                className="group inline-flex items-center gap-2 text-xs text-muted-foreground transition-colors duration-200 ease-out hover:text-foreground"
               >
-                <ArrowLeft className="h-3.5 w-3.5 transition-transform duration-200 group-hover:-translate-x-1" />
+                <ArrowLeft className="h-3.5 w-3.5 transition-transform duration-300 ease-out group-hover:-translate-x-1" />
                 <span>Letters</span>
                 <span className="text-border">/</span>
                 <span className="font-medium text-foreground">Letter {letter.number}</span>
@@ -189,8 +189,22 @@ function LetterDetailPage() {
           </div>
         </header>
 
+        {/* Editorial Feature Image */}
+        <div className="mx-auto max-w-[800px] px-6 pt-10 sm:pt-14">
+          <figure className="overflow-hidden rounded-3xl border border-border bg-secondary/30 shadow-[var(--shadow-soft)]">
+            <img
+              src={letter.image}
+              alt={letter.title}
+              className="h-auto w-full object-cover transition-transform duration-700 ease-out hover:scale-[1.01]"
+              width="1376"
+              height="768"
+              loading="eager"
+            />
+          </figure>
+        </div>
+
         {/* Editorial Body */}
-        <article className="mx-auto max-w-[740px] px-6 py-16 sm:py-20">
+        <article className="mx-auto max-w-[740px] px-6 py-12 sm:py-16">
           <div className="space-y-12">
             {letter.content.map((section, idx) => (
               <section key={idx} className={idx > 0 ? "pt-6" : ""}>
@@ -216,16 +230,16 @@ function LetterDetailPage() {
           {/* Editorial Signoff Box */}
           <footer className="mt-20 border-t border-border/80 pt-10">
             <div className="rounded-2xl border border-border bg-secondary/30 p-8">
-              <p className="text-sm font-semibold text-foreground">Stradmont Systems Laboratory</p>
+              <p className="text-sm font-semibold text-foreground">Stradmont Systems</p>
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                We study and architect operating foundations for institutions where technical and
-                financial workflows intersect. If you are re-evaluating core operational systems,
+                We design and build specialised SaaS platforms for institutions where technical and
+                financial workflows intersect. If you are re-evaluating core software solutions,
                 our team welcomes technical dialogue.
               </p>
               <div className="mt-6">
                 <Link
                   to="/contact"
-                  className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2 text-xs font-semibold text-primary-foreground shadow-[var(--shadow-lift)] transition-all hover:-translate-y-0.5"
+                  className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2 text-xs font-semibold text-primary-foreground shadow-[var(--shadow-lift)] transition-all duration-300 ease-out hover:-translate-y-0.5 active:scale-[0.98]"
                 >
                   Write to the team
                 </Link>
@@ -242,10 +256,10 @@ function LetterDetailPage() {
                 <div>
                   <span className="text-xs font-semibold text-primary">Archive</span>
                   <h3 className="mt-2 font-display text-2xl font-bold text-foreground">
-                    Further reading from the laboratory
+                    Further reading & studies
                   </h3>
                 </div>
-                <Link to="/letters" className="text-xs font-medium text-primary hover:underline">
+                <Link to="/letters" className="text-xs font-medium text-primary hover:underline transition-all duration-200 ease-out">
                   All letters &rarr;
                 </Link>
               </div>
@@ -256,28 +270,41 @@ function LetterDetailPage() {
                     key={item.slug}
                     to="/letters/$slug"
                     params={{ slug: item.slug }}
-                    className="card-lab group flex flex-col justify-between p-7 no-underline transition-all"
+                    className="card-lab group flex flex-col justify-between overflow-hidden rounded-3xl p-0 no-underline transition-all duration-300 ease-out hover:-translate-y-1"
                   >
-                    <div>
-                      <div className="flex items-center justify-between text-xs text-muted-foreground">
-                        <span className="text-xs font-semibold text-primary">
+                    <div className="relative aspect-[16/9] w-full overflow-hidden border-b border-border bg-secondary/40">
+                      <img
+                        src={item.image}
+                        alt={item.title}
+                        className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+                        loading="lazy"
+                      />
+                      <div className="absolute top-3 left-3">
+                        <span className="inline-flex rounded-full bg-background/90 px-2.5 py-0.5 text-xs font-semibold text-primary backdrop-blur-xs">
                           {item.kind} {item.number}
                         </span>
-                        <span>{item.readTime}</span>
                       </div>
-                      <h4 className="mt-4 font-display text-lg font-bold leading-snug text-foreground transition-colors group-hover:text-primary">
-                        {item.title}
-                      </h4>
-                      <p className="mt-3 line-clamp-3 text-sm leading-relaxed text-muted-foreground">
-                        {item.body}
-                      </p>
                     </div>
 
-                    <div className="mt-6 flex items-center gap-1.5 text-xs font-semibold text-primary">
-                      <span>Read note</span>
-                      <span className="transition-transform duration-200 group-hover:translate-x-1">
-                        &rarr;
-                      </span>
+                    <div className="flex flex-1 flex-col justify-between p-6">
+                      <div>
+                        <div className="text-xs text-muted-foreground">
+                          <span>{item.readTime}</span>
+                        </div>
+                        <h4 className="mt-2.5 font-display text-base font-bold leading-snug text-foreground transition-colors duration-200 ease-out group-hover:text-primary sm:text-lg">
+                          {item.title}
+                        </h4>
+                        <p className="mt-2 line-clamp-2 text-xs leading-relaxed text-muted-foreground">
+                          {item.body}
+                        </p>
+                      </div>
+
+                      <div className="mt-5 flex items-center gap-1.5 text-xs font-semibold text-primary">
+                        <span>Read {item.kind.toLowerCase()}</span>
+                        <span className="transition-transform duration-200 group-hover:translate-x-1">
+                          &rarr;
+                        </span>
+                      </div>
                     </div>
                   </Link>
                 ))}

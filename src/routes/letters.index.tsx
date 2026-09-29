@@ -7,17 +7,17 @@ import { ArrowUpRight } from "lucide-react";
 export const Route = createFileRoute("/letters/")({
   head: () => ({
     meta: [
-      { title: "Stradmont Letters | Notes from the lab" },
+      { title: "Stradmont Letters | Notes & Studies" },
       {
         name: "description",
         content:
-          "Letters, notes and studies released from the Stradmont laboratory. On systems, technology and finance operations.",
+          "Letters, notes and studies from Stradmont Solutions. On systems, technology and finance operations.",
       },
-      { property: "og:title", content: "Stradmont Letters | Notes from the lab" },
+      { property: "og:title", content: "Stradmont Letters | Notes & Studies" },
       {
         property: "og:description",
         content:
-          "Letters, notes and studies released from the Stradmont laboratory. On systems, technology and finance operations.",
+          "Letters, notes and studies from Stradmont Solutions. On systems, technology and finance operations.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "https://stradmontsolutions.com/letters" },
@@ -28,12 +28,12 @@ export const Route = createFileRoute("/letters/")({
       { name: "twitter:card", content: "summary_large_image" },
       {
         name: "twitter:title",
-        content: "Stradmont Letters | Notes from the lab",
+        content: "Stradmont Letters | Notes & Studies",
       },
       {
         name: "twitter:description",
         content:
-          "Letters, notes and studies released from the Stradmont laboratory. On systems, technology and finance operations.",
+          "Letters, notes and studies from Stradmont Solutions. On systems, technology and finance operations.",
       },
       {
         name: "twitter:image",
@@ -73,7 +73,7 @@ function LettersIndexPage() {
     <div className="min-h-screen bg-background text-foreground">
       <SiteNav />
 
-      <main id="main-content">
+      <main id="main-content" className="animate-page-transition">
         {/* Header */}
         <section className="surface-ambient border-b border-border pt-40 pb-20">
           <div className="mx-auto max-w-5xl px-6 text-center">
@@ -84,8 +84,7 @@ function LettersIndexPage() {
               we solve.
             </h1>
             <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-muted-foreground">
-              Letters, notes and studies released from the laboratory. On systems, technology and
-              finance operations.
+              Letters, notes and studies from Stradmont. On systems, technology and finance operations.
             </p>
           </div>
         </section>
@@ -98,32 +97,45 @@ function LettersIndexPage() {
                 key={letter.slug}
                 to="/letters/$slug"
                 params={{ slug: letter.slug }}
-                className="card-lab group flex flex-col justify-between overflow-hidden p-8 no-underline transition-all duration-300 hover:-translate-y-1.5"
+                className="card-lab group flex flex-col justify-between overflow-hidden rounded-3xl p-0 no-underline transition-all duration-300 ease-out hover:-translate-y-1.5"
               >
-                <div>
-                  <div className="flex items-center gap-3">
-                    <span className="text-xs font-semibold text-primary">
+                {/* Editorial cover image */}
+                <div className="relative aspect-[16/9] w-full overflow-hidden border-b border-border bg-secondary/40">
+                  <img
+                    src={letter.image}
+                    alt={letter.title}
+                    className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+                    loading="lazy"
+                  />
+                  <div className="absolute top-3.5 left-3.5">
+                    <span className="inline-flex rounded-full bg-background/90 px-3 py-1 text-xs font-semibold text-primary backdrop-blur-xs shadow-xs">
                       {letter.kind} {letter.number}
                     </span>
-                    <span className="h-px flex-1 bg-border" />
-                    <span className="text-xs text-muted-foreground">{letter.date}</span>
                   </div>
-
-                  <h2 className="mt-5 font-display text-xl font-bold leading-snug text-foreground transition-colors duration-200 group-hover:text-primary">
-                    {letter.title}
-                  </h2>
-
-                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                    {letter.body}
-                  </p>
                 </div>
 
-                <div className="mt-8 flex items-center justify-between border-t border-border pt-5">
-                  <span className="text-xs text-muted-foreground">{letter.readTime}</span>
-                  <span className="inline-flex items-center gap-1 text-xs font-semibold text-primary group-hover:underline">
-                    Read letter
-                    <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                  </span>
+                <div className="flex flex-1 flex-col justify-between p-6 sm:p-7">
+                  <div>
+                    <div className="flex items-center justify-between text-xs text-muted-foreground">
+                      <span>{letter.date}</span>
+                      <span>{letter.readTime}</span>
+                    </div>
+
+                    <h2 className="mt-4 font-display text-lg font-bold leading-snug text-foreground transition-colors duration-200 group-hover:text-primary sm:text-xl">
+                      {letter.title}
+                    </h2>
+
+                    <p className="mt-2.5 text-sm leading-relaxed text-muted-foreground line-clamp-3">
+                      {letter.body}
+                    </p>
+                  </div>
+
+                  <div className="mt-6 flex items-center justify-end border-t border-border pt-4">
+                    <span className="inline-flex items-center gap-1 text-xs font-semibold text-primary group-hover:underline">
+                      Read letter
+                      <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-300 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                    </span>
+                  </div>
                 </div>
               </Link>
             ))}

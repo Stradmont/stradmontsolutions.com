@@ -6,6 +6,7 @@ export interface Letter {
   readTime: string;
   title: string;
   body: string; // The lead editorial abstract/description
+  image: string; // Editorial cover image
   content: Section[];
   author: string;
   authorTitle: string;
@@ -23,14 +24,15 @@ export const letters: Letter[] = [
     kind: "Letter",
     date: "September 2026",
     readTime: "5 min read",
-    title: "Why operating software should be written down before it is written",
+    title: "Why mission-critical software should be written down before it is written",
     body: "Technical debt rarely originates from poor syntax; it stems from unwritten architecture. How concise design briefs preserve institutional memory across engineering and finance teams.",
+    image: "/images/letters/design-docs.jpg",
     author: "Stradmont Engineering",
     authorTitle: "Systems Architecture",
     content: [
       {
         paragraphs: [
-          "As organizations grow beyond their initial product iteration, a subtle failure mode emerges: systems are constructed before their operating assumptions are articulated. A requirement is discussed in passing, an engineer opens a branch, and within weeks production hosts a critical pipeline whose edge cases exist solely in the recollection of whoever authored the commit.",
+          "As organizations grow beyond their initial product iteration, a subtle failure mode emerges: SaaS platforms and critical workflows are constructed before their architectural assumptions are articulated. A requirement is discussed in passing, an engineer opens a branch, and within weeks production hosts a critical pipeline whose edge cases exist solely in the recollection of whoever authored the commit.",
           "In financial institutions and regulated environments, this dynamic compounds quickly. When systems change hands or teams scale, what began as a pragmatic sprint to delivery hardens into architectural ambiguity that future engineers hesitate to touch.",
         ],
       },
@@ -66,6 +68,7 @@ export const letters: Letter[] = [
     readTime: "4 min read",
     title: "Latency is a governance problem",
     body: "Every cache expiration and scheduled batch is an unspoken statement about the allowable freshness of financial truth. Why data latency is fundamentally an executive governance decision.",
+    image: "/images/letters/latency.jpg",
     author: "Stradmont Research",
     authorTitle: "Finance & Infrastructure",
     content: [
@@ -105,7 +108,8 @@ export const letters: Letter[] = [
     readTime: "7 min read",
     title: "The finance data layer nobody owns",
     body: "A practical examination of the fragmented territory between core transaction engines and audited financial reporting—and what happens when an organization establishes explicit custody over it.",
-    author: "Stradmont Laboratory",
+    image: "/images/letters/data-layer.jpg",
+    author: "Stradmont Research",
     authorTitle: "Operational Systems",
     content: [
       {

@@ -4,6 +4,7 @@ import { FlowLines } from "@/components/FlowLines";
 import { SiteNav } from "@/components/SiteNav";
 import { SiteFooter } from "@/components/SiteFooter";
 import { ContactForm } from "@/components/ContactForm";
+import { letters } from "@/lib/letters-data";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -82,9 +83,7 @@ export const Route = createFileRoute("/")({
 });
 
 const pills = [
-  { label: "Research", style: "left-[8%] top-[12%]", delay: "0s" },
-  { label: "Architect", style: "left-[20%] top-[19%]", delay: "0.8s" },
-  { label: "Engineer", style: "left-[12%] top-[28%]", delay: "1.6s" },
+  { label: "Research", style: "left-[8%] top-[14%]", delay: "0s" },
 ];
 
 const rightPills = [
@@ -172,26 +171,7 @@ const faqCategories = [
   },
 ];
 
-const featuredLetters = [
-  {
-    slug: "why-operating-software-should-be-written-down-before-it-is-written",
-    kind: "Letter",
-    date: "Sep 2026",
-    readTime: "5 min read",
-    title: "Why operating software should be written down before it is written",
-    body: "Technical debt rarely originates from poor syntax; it stems from unwritten architecture. How concise design briefs preserve institutional memory.",
-    featured: true,
-  },
-  {
-    slug: "latency-is-a-governance-problem",
-    kind: "Note",
-    date: "Aug 2026",
-    readTime: "4 min read",
-    title: "Latency is a governance problem",
-    body: "Every cache expiration and scheduled batch is an unspoken statement about the allowable freshness of financial truth.",
-    featured: false,
-  },
-] as const;
+
 
 function FaqAccordion({ items }: { items: { q: string; a: string }[] }) {
   const [open, setOpen] = useState<number | null>(null);
@@ -254,12 +234,14 @@ function FaqAccordion({ items }: { items: { q: string; a: string }[] }) {
 
 function Index() {
   const [activeTab, setActiveTab] = useState(0);
+  const featuredLetter = letters[0];
+  const secondLetter = letters[2];
 
   return (
     <div className="min-h-screen bg-background">
       <SiteNav />
 
-      <main id="main-content">
+      <main id="main-content" className="animate-page-transition">
         {/* ---------------- Hero ---------------- */}
         <section className="relative isolate overflow-hidden surface-ambient">
           <FlowLines />
@@ -446,7 +428,7 @@ function Index() {
               <div>
                 <span className="eyebrow">Stradmont Letters</span>
                 <h2 className="mt-4 text-3xl font-bold leading-tight text-foreground sm:text-4xl">
-                  Notes from the lab.
+                  Notes and studies.
                 </h2>
               </div>
               <Link
@@ -468,101 +450,36 @@ function Index() {
             </div>
 
             {/* Card grid — mirrors Circle1 Letters layout */}
-            <div className="grid gap-4 lg:grid-cols-[1fr_1fr]">
-              {/* Featured large card (left column) */}
-              <Link
-                to="/letters/$slug"
-                params={{ slug: featuredLetters[0].slug }}
-                className="card-lab group relative flex flex-col justify-end overflow-hidden rounded-3xl bg-foreground p-8 text-background min-h-[340px] no-underline"
-              >
-                {/* Subtle pattern overlay */}
-                <div
-                  className="pointer-events-none absolute inset-0 opacity-10"
-                  style={{
-                    backgroundImage:
-                      "repeating-linear-gradient(45deg,currentColor 0,currentColor 1px,transparent 0,transparent 50%)",
-                    backgroundSize: "20px 20px",
-                  }}
-                />
-                <div className="relative">
-                  <div className="flex items-center gap-3 mb-4">
-                    <span className="text-xs font-semibold text-primary">
-                      {featuredLetters[0].kind}
-                    </span>
-                    <span className="text-xs opacity-60">{featuredLetters[0].date}</span>
-                    <span className="text-xs opacity-60">· {featuredLetters[0].readTime}</span>
-                  </div>
-                  <h3 className="text-xl font-semibold leading-snug">{featuredLetters[0].title}</h3>
-                  <p className="mt-3 text-sm opacity-70 leading-relaxed">
-                    {featuredLetters[0].body}
-                  </p>
-                  <div className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-primary transition-transform duration-300 group-hover:translate-x-1">
-                    Read full
-                    <svg
-                      width="14"
-                      height="14"
-                      viewBox="0 0 16 16"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="1.8"
-                    >
-                      <path d="M3 8h10M9 4l4 4-4 4" />
-                    </svg>
-                  </div>
-                </div>
-              </Link>
-
-              {/* Right column — top card + bottom "all letters" card */}
-              <div className="flex flex-col gap-4">
-                {/* Second featured letter */}
-                <article className="card-lab group flex flex-col justify-between rounded-3xl bg-secondary/80 p-8 min-h-[160px]">
-                  <div>
-                    <div className="flex items-center gap-3 mb-3">
-                      <span className="text-xs font-semibold text-primary">
-                        {featuredLetters[1].kind}
-                      </span>
-                      <span className="text-xs text-muted-foreground">
-                        {featuredLetters[1].date}
-                      </span>
-                      <span className="text-xs text-muted-foreground">
-                        · {featuredLetters[1].readTime}
-                      </span>
-                    </div>
-                    <h3 className="text-lg font-semibold leading-snug text-foreground">
-                      {featuredLetters[1].title}
-                    </h3>
-                    <p className="mt-2 text-sm text-muted-foreground">{featuredLetters[1].body}</p>
-                  </div>
-                  <Link
-                    to="/letters/$slug"
-                    params={{ slug: featuredLetters[1].slug }}
-                    className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-primary transition-transform duration-300 group-hover:translate-x-1"
-                  >
-                    Read full
-                    <svg
-                      width="14"
-                      height="14"
-                      viewBox="0 0 16 16"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="1.8"
-                    >
-                      <path d="M3 8h10M9 4l4 4-4 4" />
-                    </svg>
-                  </Link>
-                </article>
-
-                {/* "Everything we've written" CTA card */}
+            {featuredLetter && secondLetter && (
+              <div className="grid gap-4 lg:grid-cols-[1fr_1fr]">
+                {/* Featured large card (left column) */}
                 <Link
-                  to="/letters"
-                  className="card-lab group flex items-center justify-between rounded-3xl bg-foreground p-8 text-background min-h-[160px] no-underline"
+                  to="/letters/$slug"
+                  params={{ slug: featuredLetter.slug }}
+                  className="card-lab group relative flex flex-col justify-end overflow-hidden rounded-3xl p-8 text-background min-h-[380px] no-underline"
                 >
-                  <div>
-                    <p className="text-lg font-semibold leading-snug">
-                      Everything we have written so far.
+                  {/* Background cover image */}
+                  <img
+                    src={featuredLetter.image}
+                    alt={featuredLetter.title}
+                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/65 to-black/35" />
+
+                  <div className="relative z-10">
+                    <div className="flex items-center gap-3 mb-4">
+                      <span className="text-xs font-semibold text-primary">
+                        {featuredLetter.kind} {featuredLetter.number}
+                      </span>
+                      <span className="text-xs text-white/70">{featuredLetter.date}</span>
+                      <span className="text-xs text-white/70">· {featuredLetter.readTime}</span>
+                    </div>
+                    <h3 className="text-xl font-semibold leading-snug text-white">{featuredLetter.title}</h3>
+                    <p className="mt-3 text-sm text-white/80 leading-relaxed">
+                      {featuredLetter.body}
                     </p>
-                    <span className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-primary transition-transform duration-300 group-hover:translate-x-1">
-                      Read the letters
+                    <div className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-primary transition-transform duration-300 group-hover:translate-x-1">
+                      Read full
                       <svg
                         width="14"
                         height="14"
@@ -573,23 +490,102 @@ function Index() {
                       >
                         <path d="M3 8h10M9 4l4 4-4 4" />
                       </svg>
-                    </span>
+                    </div>
                   </div>
-                  <svg
-                    width="48"
-                    height="48"
-                    viewBox="0 0 48 48"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.2"
-                    className="shrink-0 opacity-20"
-                  >
-                    <rect x="8" y="10" width="32" height="28" rx="3" />
-                    <path d="M14 18h20M14 24h14M14 30h10" />
-                  </svg>
                 </Link>
+
+                {/* Right column — top card + bottom "all letters" card */}
+                <div className="flex flex-col gap-4">
+                  {/* Second featured letter with data-layer.jpg */}
+                  <article className="card-lab group flex flex-col overflow-hidden rounded-3xl bg-secondary/80 p-0">
+                    <div className="flex flex-col sm:flex-row">
+                      <div className="relative aspect-[16/10] sm:aspect-square sm:w-44 shrink-0 overflow-hidden border-b sm:border-b-0 sm:border-r border-border bg-secondary/50">
+                        <img
+                          src={secondLetter.image}
+                          alt={secondLetter.title}
+                          className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+                        />
+                      </div>
+                      <div className="flex flex-1 flex-col justify-between p-6">
+                        <div>
+                          <div className="flex items-center gap-3 mb-2">
+                            <span className="text-xs font-semibold text-primary">
+                              {secondLetter.kind} {secondLetter.number}
+                            </span>
+                            <span className="text-xs text-muted-foreground">
+                              {secondLetter.date}
+                            </span>
+                            <span className="text-xs text-muted-foreground">
+                              · {secondLetter.readTime}
+                            </span>
+                          </div>
+                          <h3 className="text-base font-semibold leading-snug text-foreground transition-colors group-hover:text-primary sm:text-lg">
+                            {secondLetter.title}
+                          </h3>
+                          <p className="mt-2 text-xs text-muted-foreground line-clamp-2">
+                            {secondLetter.body}
+                          </p>
+                        </div>
+                        <Link
+                          to="/letters/$slug"
+                          params={{ slug: secondLetter.slug }}
+                          className="mt-4 inline-flex items-center gap-1.5 text-xs font-semibold text-primary transition-transform duration-300 group-hover:translate-x-1"
+                        >
+                          Read study
+                          <svg
+                            width="12"
+                            height="12"
+                            viewBox="0 0 16 16"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="1.8"
+                          >
+                            <path d="M3 8h10M9 4l4 4-4 4" />
+                          </svg>
+                        </Link>
+                      </div>
+                    </div>
+                  </article>
+
+                  {/* "Everything we've written" CTA card */}
+                  <Link
+                    to="/letters"
+                    className="card-lab group flex items-center justify-between rounded-3xl bg-foreground p-8 text-background min-h-[160px] no-underline"
+                  >
+                    <div>
+                      <p className="text-lg font-semibold leading-snug">
+                        Everything we have written so far.
+                      </p>
+                      <span className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-primary transition-transform duration-300 group-hover:translate-x-1">
+                        Read the letters
+                        <svg
+                          width="14"
+                          height="14"
+                          viewBox="0 0 16 16"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="1.8"
+                        >
+                          <path d="M3 8h10M9 4l4 4-4 4" />
+                        </svg>
+                      </span>
+                    </div>
+                    <svg
+                      width="48"
+                      height="48"
+                      viewBox="0 0 48 48"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.2"
+                      className="shrink-0 opacity-20"
+                    >
+                      <rect x="8" y="10" width="32" height="28" rx="3" />
+                      <path d="M14 18h20M14 24h14M14 30h10" />
+                    </svg>
+                  </Link>
+                </div>
               </div>
-            </div>
+            )}
           </div>
         </section>
 

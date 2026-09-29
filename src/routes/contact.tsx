@@ -149,7 +149,7 @@ function ContactPage() {
     <div className="min-h-screen bg-background">
       <SiteNav />
 
-      <main id="main-content">
+      <main id="main-content" className="animate-page-transition">
         <section className="surface-ambient border-b border-border">
           <div className="mx-auto grid max-w-6xl gap-16 px-6 pb-24 pt-40 sm:pt-48 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
             {/* ── Left: contact info ── */}
@@ -174,7 +174,7 @@ function ContactPage() {
                       {d.href ? (
                         <a
                           href={d.href}
-                          className="mt-0.5 text-sm font-medium text-foreground transition-colors hover:text-primary"
+                          className="mt-0.5 text-sm font-medium text-foreground transition-colors duration-200 ease-out hover:text-primary"
                         >
                           {d.value}
                         </a>

@@ -6,6 +6,7 @@ import {
   useRouter,
   HeadContent,
   Scripts,
+  ScrollRestoration,
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
 
@@ -145,7 +146,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         name: "description",
         content:
-          "Stradmont Solutions: a parent research laboratory engineering specialised platforms for technology and finance institutions.",
+          "Stradmont Solutions: engineering specialised SaaS platforms and workflow software for technology and finance institutions.",
       },
       { name: "author", content: "Stradmont Solutions" },
       { name: "theme-color", content: "#1e1b4b" },
@@ -153,7 +154,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         property: "og:description",
         content:
-          "A parent research laboratory engineering specialised platforms for technology and finance institutions.",
+          "Engineering specialised SaaS platforms and workflow software for technology and finance institutions.",
       },
       { property: "og:type", content: "website" },
       {
@@ -203,6 +204,7 @@ function RootShell({ children }: { children: ReactNode }) {
       </head>
       <body>
         {children}
+        <ScrollRestoration />
         <Scripts />
       </body>
     </html>
