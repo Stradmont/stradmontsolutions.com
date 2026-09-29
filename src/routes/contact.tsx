@@ -183,10 +183,6 @@ function ContactPage() {
                       ) : (
                         <div>
                           <p className="mt-0.5 text-sm font-medium text-foreground">{d.value}</p>
-                          <div className="mt-1.5 inline-flex items-center gap-1.5 rounded-full border border-border bg-secondary/60 px-2.5 py-0.5 text-[11px] font-medium text-muted-foreground">
-                            <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-                            Eastern Time (UTC−5) · Remote Laboratory
-                          </div>
                         </div>
                       )}
                     </div>

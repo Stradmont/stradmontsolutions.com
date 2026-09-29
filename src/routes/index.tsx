@@ -143,16 +143,12 @@ const faqCategories = [
     label: "Our Products",
     items: [
       {
-        q: "What is Stradmont Order?",
-        a: "Stradmont Order is our operations management product, built to bring structure to the workflows that finance and operations teams run every day. It started as an internal system we built to solve chaos we saw repeatedly.",
-      },
-      {
         q: "What is Builders Base?",
-        a: "Builders Base is a resource layer for teams building internal tools. It gives you a structured starting point so you stop rebuilding the same foundations and start building the parts that actually matter.",
+        a: "Builders Base is software that helps insurance distribution organizations develop their people, support their leaders, and grow their organizations. Visit thebuildersbase.com to learn more.",
       },
       {
-        q: "Are your products available to the public?",
-        a: "Both products are currently in active development. Early access is available for select teams. Get in touch to discuss whether you qualify.",
+        q: "Is Builders Base available to the public?",
+        a: "Builders Base is currently in active development. Early access is available for select teams. Get in touch to discuss whether you qualify.",
       },
     ],
   },
@@ -340,8 +336,7 @@ function Index() {
                 system that runs the same way every time.
               </p>
               <p>
-                The products we build, including{" "}
-                <span className="font-semibold text-foreground">Stradmont Order</span> and{" "}
+                The platforms we build, including{" "}
                 <span className="font-semibold text-foreground">Builders Base</span>, began as chaos
                 we found and solved.
               </p>

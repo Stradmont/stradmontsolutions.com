@@ -9,13 +9,13 @@ export const Route = createFileRoute("/products")({
       {
         name: "description",
         content:
-          "Specialised platforms incubated inside the Stradmont research laboratory: Stradmont Order and Builders Base.",
+          "Builders Base is software that helps insurance distribution organizations develop their people, support their leaders, and grow their organizations.",
       },
       { property: "og:title", content: "Our Products | Stradmont Solutions" },
       {
         property: "og:description",
         content:
-          "Software products incubated inside the Stradmont research laboratory: Stradmont Order and Builders Base.",
+          "Builders Base is software that helps insurance distribution organizations develop their people, support their leaders, and grow their organizations.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "https://stradmontsolutions.com/products" },
@@ -31,7 +31,7 @@ export const Route = createFileRoute("/products")({
       {
         name: "twitter:description",
         content:
-          "Software products incubated inside the Stradmont research laboratory: Stradmont Order and Builders Base.",
+          "Builders Base is software that helps insurance distribution organizations develop their people, support their leaders, and grow their organizations.",
       },
       {
         name: "twitter:image",
@@ -66,22 +66,14 @@ export const Route = createFileRoute("/products")({
   component: ProductsPage,
 });
 
-const products = [
-  {
-    name: "Stradmont Order",
-    tag: "Commerce",
-    status: "In development",
-    body: "A clean, reliable ordering platform that keeps every transaction accurate and every record traceable. Built for teams that can no longer afford loose ends.",
-    points: ["Real-time order flow", "Accurate reconciliation", "Clear owner reporting"],
-  },
-  {
-    name: "Builders Base",
-    tag: "Platform",
-    status: "In development",
-    body: "A foundation for teams building financial and operational tools. It gives you structured data, sound permissions, and an architecture ready to scale.",
-    points: ["Structured data layer", "Role-based access control", "Built to be audited"],
-  },
-];
+const product = {
+  name: "Builders Base",
+  tag: "Platform",
+  status: "In development",
+  logo: "/buildersbase-logo.jpeg",
+  url: "https://thebuildersbase.com",
+  body: "Builders Base is software that helps insurance distribution organizations develop their people, support their leaders, and grow their organizations.",
+};
 
 function ProductsPage() {
   return (
@@ -97,94 +89,101 @@ function ProductsPage() {
               Built inside the lab.
             </h1>
             <p className="mx-auto mt-5 max-w-lg text-base leading-relaxed text-muted-foreground">
-              Every product begins as research. The ones that hold up become tools people rely on.
+              Every platform begins as research. The ones that hold up become tools institutions rely on.
             </p>
           </div>
         </section>
 
-        {/* ── Product cards ── */}
-        <section className="mx-auto max-w-5xl px-6 py-20">
-          <div className="grid gap-6 md:grid-cols-2">
-            {products.map((p) => (
-              <article
-                key={p.name}
-                className="card-lab group flex flex-col gap-0 overflow-hidden rounded-3xl"
-              >
-                {/* Coloured top bar */}
-                <div className="h-1.5 w-full" style={{ background: "var(--gradient-electric)" }} />
+        {/* ── Product showcase ── */}
+        <section className="mx-auto max-w-4xl px-6 py-20">
+          <article className="card-lab group overflow-hidden rounded-3xl">
+            {/* Coloured top bar */}
+            <div className="h-1.5 w-full" style={{ background: "var(--gradient-electric)" }} />
 
-                <div className="flex flex-1 flex-col p-8 sm:p-10">
-                  {/* Tags row */}
+            <div className="p-8 sm:p-12">
+              <div className="flex items-center gap-4">
+                <a
+                  href={product.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-2xl border border-border bg-white shadow-[var(--shadow-soft)] transition-transform duration-300 group-hover:scale-105 sm:h-20 sm:w-20"
+                  aria-label={`Visit ${product.name} website`}
+                >
+                  <img
+                    src={product.logo}
+                    alt={`${product.name} logo`}
+                    className="h-full w-full object-contain p-2"
+                    width="80"
+                    height="80"
+                  />
+                </a>
+                <div>
                   <div className="flex items-center gap-2">
                     <span className="inline-flex rounded-full bg-secondary px-3 py-1 text-xs font-semibold text-primary">
-                      {p.tag}
+                      {product.tag}
                     </span>
                     <span className="inline-flex items-center gap-1.5 rounded-full bg-secondary/80 px-3 py-1 text-xs font-medium text-muted-foreground">
                       <span className="h-1.5 w-1.5 rounded-full bg-amber-500 animate-pulse" />
-                      {p.status}
+                      {product.status}
                     </span>
                   </div>
-
-                  <h2 className="mt-5 text-2xl font-bold text-foreground">{p.name}</h2>
-                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{p.body}</p>
-
-                  <ul className="mt-7 space-y-3 border-t border-border pt-6">
-                    {p.points.map((pt) => (
-                      <li key={pt} className="flex items-center gap-3 text-sm text-foreground">
-                        <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary/10">
-                          <span className="h-1.5 w-1.5 rounded-full bg-primary" />
-                        </span>
-                        {pt}
-                      </li>
-                    ))}
-                  </ul>
-
-                  <div className="mt-8 flex flex-wrap items-center justify-between gap-3 pt-2">
-                    <Link
-                      to="/contact"
-                      className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary transition-transform duration-300 group-hover:translate-x-0.5"
+                  <h2 className="mt-2.5 font-display text-2xl font-bold text-foreground sm:text-3xl">
+                    <a
+                      href={product.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="transition-colors hover:text-primary"
                     >
-                      Ask about {p.name}
-                      <svg
-                        width="14"
-                        height="14"
-                        viewBox="0 0 16 16"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="1.8"
-                      >
-                        <path d="M3 8h10M9 4l4 4-4 4" />
-                      </svg>
-                    </Link>
-                    <Link
-                      to="/contact"
-                      className="inline-flex items-center gap-1.5 rounded-full border border-border bg-background px-3.5 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:border-primary hover:text-foreground hover:bg-secondary/60"
-                    >
-                      <svg
-                        width="12"
-                        height="12"
-                        viewBox="0 0 16 16"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="1.6"
-                      >
-                        <path d="M8 2a4 4 0 0 0-4 4v3l-1.5 2h11L12 9V6a4 4 0 0 0-4-4z" />
-                        <path d="M6.5 13a1.5 1.5 0 0 0 3 0" />
-                      </svg>
-                      Notify me
-                    </Link>
-                  </div>
+                      {product.name}
+                    </a>
+                  </h2>
                 </div>
-              </article>
-            ))}
-          </div>
+              </div>
+
+              <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground">
+                {product.body}
+              </p>
+
+              <div className="mt-8 flex flex-wrap items-center gap-4">
+                <a
+                  href={product.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-primary-foreground shadow-[var(--shadow-lift)] transition-transform duration-300 hover:-translate-y-0.5"
+                  style={{ background: "var(--gradient-electric)" }}
+                >
+                  Visit thebuildersbase.com
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                    <polyline points="15 3 21 3 21 9" />
+                    <line x1="10" y1="14" x2="21" y2="3" />
+                  </svg>
+                </a>
+                <Link
+                  to="/contact"
+                  className="inline-flex items-center gap-1.5 rounded-full border border-border bg-background px-4 py-3 text-xs font-medium text-muted-foreground transition-colors hover:border-primary hover:text-foreground hover:bg-secondary/60"
+                >
+                  Get in touch
+                </Link>
+              </div>
+            </div>
+          </article>
 
           {/* Bottom CTA strip */}
-          <div className="mt-8 flex flex-col items-center justify-between gap-4 rounded-3xl border border-border bg-secondary/40 px-8 py-7 sm:flex-row">
+          <div className="mt-10 flex flex-col items-center justify-between gap-4 rounded-3xl border border-border bg-secondary/40 px-8 py-7 sm:flex-row">
             <div>
               <p className="font-semibold text-foreground">Interested in early access?</p>
               <p className="mt-1 text-sm text-muted-foreground">
-                Both products are in active development. Select teams can apply now.
+                Builders Base is in active development. Select teams can apply now.
               </p>
             </div>
             <Link

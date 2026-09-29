@@ -9,8 +9,7 @@ Stradmont Solutions is a parent research laboratory engineering specialised plat
 
 ## Brand Architecture & Products
 
-- **Stradmont Order**: Commerce and operations management system engineered for high-traceability transaction workflows.
-- **Builders Base**: Architectural resource layer and foundational data scaffolding for internal tools.
+- **Builders Base**: Software that helps insurance distribution organizations develop their people, support their leaders, and grow their organizations ([thebuildersbase.com](https://thebuildersbase.com)).
 - **Stradmont Letters**: Research notes, studies, and operational monographs published from the laboratory.
 
 ---
