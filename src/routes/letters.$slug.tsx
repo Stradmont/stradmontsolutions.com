@@ -2,7 +2,7 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { SiteNav } from "@/components/SiteNav";
 import { SiteFooter } from "@/components/SiteFooter";
 import { getLetterBySlug, letters } from "@/lib/letters-data";
-import { ArrowLeft, Clock, Calendar, Share2, Check } from "lucide-react";
+import { ArrowLeft, Check, Copy } from "lucide-react";
 import { useState } from "react";
 
 export const Route = createFileRoute("/letters/$slug")({
@@ -81,19 +81,19 @@ function LetterNotFound() {
     <div className="min-h-screen bg-background">
       <SiteNav />
       <main id="main-content" className="flex min-h-[70vh] flex-col items-center justify-center px-6 text-center">
-        <span className="eyebrow text-primary">404</span>
+        <span className="font-mono text-xs uppercase tracking-widest text-primary">Status 404</span>
         <h1 className="mt-4 font-display text-3xl font-extrabold text-foreground sm:text-4xl">
           Letter not found
         </h1>
-        <p className="mt-4 max-w-md text-sm text-muted-foreground">
-          The letter or note you are looking for does not exist or may have been archived.
+        <p className="mt-4 max-w-md text-sm leading-relaxed text-muted-foreground">
+          The requested essay or technical note does not exist or may have been consolidated into our archive.
         </p>
         <Link
           to="/letters"
-          className="mt-8 inline-flex items-center gap-2 rounded-full border border-border bg-secondary/80 px-6 py-3 text-sm font-semibold text-foreground transition-all hover:bg-secondary hover:border-primary/40"
+          className="mt-8 inline-flex items-center gap-2 rounded-full border border-border bg-background px-6 py-2.5 text-xs font-semibold uppercase tracking-wider text-foreground transition-all hover:bg-secondary hover:border-primary/40"
         >
-          <ArrowLeft className="h-4 w-4" />
-          Back to all letters
+          <ArrowLeft className="h-3.5 w-3.5" />
+          Return to letters index
         </Link>
       </main>
       <SiteFooter />
@@ -113,138 +113,142 @@ function LetterDetailPage() {
     }
   };
 
-  // Find other letters for recommendation
   const otherLetters = letters.filter((l) => l.slug !== letter.slug).slice(0, 2);
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-background text-foreground antialiased selection:bg-primary/20">
       <SiteNav />
 
       <main id="main-content">
-        {/* Top Hero / Header Section */}
-        <section className="surface-ambient border-b border-border pt-36 pb-16 sm:pt-44 sm:pb-20">
-          <div className="mx-auto max-w-3xl px-6">
-            {/* Back link */}
-            <Link
-              to="/letters"
-              className="group inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground transition-colors hover:text-primary"
-            >
-              <ArrowLeft className="h-3.5 w-3.5 transition-transform duration-200 group-hover:-translate-x-1" />
-              Back to letters
-            </Link>
+        {/* Editorial Header */}
+        <header className="border-b border-border/80 bg-gradient-to-b from-secondary/40 via-background to-background pt-36 pb-16 sm:pt-44 sm:pb-20">
+          <div className="mx-auto max-w-[740px] px-6">
+            {/* Top breadcrumb & series tag */}
+            <div className="flex items-center justify-between text-xs text-muted-foreground">
+              <Link
+                to="/letters"
+                className="group inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-wider text-muted-foreground transition-colors hover:text-foreground"
+              >
+                <ArrowLeft className="h-3.5 w-3.5 transition-transform duration-200 group-hover:-translate-x-1" />
+                <span>Letters</span>
+                <span className="text-border">/</span>
+                <span className="text-primary font-bold">No. {letter.number}</span>
+              </Link>
 
-            {/* Letter Meta */}
-            <div className="mt-8 flex flex-wrap items-center gap-3 text-xs">
-              <span className="rounded-full bg-primary/10 px-3 py-1 font-sans text-[11px] font-bold uppercase tracking-wider text-primary border border-primary/20">
+              <span className="font-mono text-[11px] uppercase tracking-widest text-muted-foreground">
                 {letter.kind}
-              </span>
-              <span className="flex items-center gap-1.5 text-muted-foreground">
-                <Calendar className="h-3.5 w-3.5" />
-                {letter.date}
-              </span>
-              <span className="text-border">•</span>
-              <span className="flex items-center gap-1.5 text-muted-foreground">
-                <Clock className="h-3.5 w-3.5" />
-                {letter.readTime}
               </span>
             </div>
 
             {/* Title */}
-            <h1 className="mt-6 font-display text-[clamp(2rem,4.5vw,3.2rem)] font-extrabold leading-[1.12] text-foreground tracking-tight">
+            <h1 className="mt-8 font-display text-[clamp(2.1rem,4.4vw,3.25rem)] font-extrabold leading-[1.12] tracking-tight text-foreground">
               {letter.title}
             </h1>
 
-            {/* Lead description / abstract */}
-            <p className="mt-6 text-lg leading-relaxed text-muted-foreground font-medium border-l-2 border-primary/50 pl-4">
+            {/* Standfirst / Lead Description (Human, natural, confident) */}
+            <p className="mt-6 text-lg sm:text-[1.2rem] font-normal leading-[1.65] text-foreground/75">
               {letter.body}
             </p>
 
-            {/* Author bar & Share action */}
-            <div className="mt-10 flex flex-wrap items-center justify-between gap-4 border-t border-border pt-6">
-              <div>
-                <p className="text-sm font-bold text-foreground">{letter.author}</p>
-                <p className="text-xs text-muted-foreground">{letter.authorTitle}</p>
+            {/* Publishing Metadata & Share */}
+            <div className="mt-10 flex flex-wrap items-center justify-between gap-4 border-t border-border/70 pt-6 text-xs text-muted-foreground">
+              <div className="flex items-center gap-3">
+                <div className="h-7 w-7 rounded-full bg-primary/10 flex items-center justify-center font-display font-bold text-xs text-primary border border-primary/20">
+                  S
+                </div>
+                <div>
+                  <span className="font-semibold text-foreground">{letter.author}</span>
+                  <span className="mx-2 text-border">·</span>
+                  <span>{letter.date}</span>
+                  <span className="mx-2 text-border">·</span>
+                  <span>{letter.readTime}</span>
+                </div>
               </div>
 
               <button
                 type="button"
                 onClick={handleCopyLink}
-                className="inline-flex items-center gap-2 rounded-full border border-border bg-background px-4 py-2 text-xs font-semibold text-foreground transition-all hover:bg-secondary hover:border-primary/30"
+                className="inline-flex items-center gap-1.5 rounded-full border border-border px-3.5 py-1.5 text-[11px] font-mono uppercase tracking-wider text-muted-foreground transition-all hover:bg-secondary hover:text-foreground"
+                aria-label="Copy article link"
               >
                 {copied ? (
                   <>
-                    <Check className="h-3.5 w-3.5 text-primary" />
-                    <span>Link copied</span>
+                    <Check className="h-3 w-3 text-primary" />
+                    <span>Copied</span>
                   </>
                 ) : (
                   <>
-                    <Share2 className="h-3.5 w-3.5 text-muted-foreground" />
-                    <span>Share letter</span>
+                    <Copy className="h-3 w-3" />
+                    <span>Share</span>
                   </>
                 )}
               </button>
             </div>
           </div>
-        </section>
+        </header>
 
-        {/* Article Body */}
-        <section className="mx-auto max-w-3xl px-6 py-16 sm:py-24">
-          <article className="prose prose-neutral max-w-none text-foreground">
+        {/* Editorial Body */}
+        <article className="mx-auto max-w-[740px] px-6 py-16 sm:py-20">
+          <div className="space-y-12">
             {letter.content.map((section, idx) => (
-              <div key={idx} className={idx > 0 ? "mt-12 pt-8 border-t border-border/60" : ""}>
+              <section key={idx} className={idx > 0 ? "pt-6" : ""}>
                 {section.heading && (
-                  <h2 className="font-display text-2xl font-bold tracking-tight text-foreground sm:text-[1.65rem] mb-5">
+                  <h2 className="font-display text-2xl font-bold tracking-tight text-foreground sm:text-[1.65rem] mb-6">
                     {section.heading}
                   </h2>
                 )}
-                <div className="space-y-5">
+                <div className="space-y-6">
                   {section.paragraphs.map((p, pIdx) => (
                     <p
                       key={pIdx}
-                      className="text-base sm:text-[1.0625rem] leading-[1.8] text-muted-foreground selection:bg-primary/20"
+                      className="font-serif text-[18px] sm:text-[19.5px] leading-[1.85] text-foreground/85 tracking-[-0.003em]"
                     >
                       {p}
                     </p>
                   ))}
                 </div>
-              </div>
+              </section>
             ))}
-          </article>
-
-          {/* Letter signoff */}
-          <div className="mt-16 rounded-2xl border border-border bg-secondary/30 p-8 text-center sm:text-left">
-            <span className="eyebrow text-primary">Stradmont Laboratory</span>
-            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-              These notes and studies reflect real architectural patterns encountered during system implementations.
-              For questions, critiques, or to discuss how these principles apply to your operational stack, reach out to our team.
-            </p>
-            <div className="mt-6">
-              <Link
-                to="/contact"
-                className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-2.5 text-xs font-semibold text-primary-foreground shadow-[var(--shadow-lift)] transition-all hover:-translate-y-0.5"
-              >
-                Discuss with Stradmont
-              </Link>
-            </div>
           </div>
-        </section>
 
-        {/* Read Next / Other Letters */}
+          {/* Editorial Signoff Box */}
+          <footer className="mt-20 border-t border-border/80 pt-10">
+            <div className="rounded-2xl border border-border bg-secondary/30 p-8">
+              <span className="font-mono text-[11px] uppercase tracking-wider text-primary font-semibold">
+                Stradmont Systems Laboratory
+              </span>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                We study and architect operating foundations for institutions where technical and financial workflows intersect.
+                If you are re-evaluating core operational systems, our team welcomes technical dialogue.
+              </p>
+              <div className="mt-6">
+                <Link
+                  to="/contact"
+                  className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2 text-xs font-semibold text-primary-foreground shadow-[var(--shadow-lift)] transition-all hover:-translate-y-0.5"
+                >
+                  Write to the team
+                </Link>
+              </div>
+            </div>
+          </footer>
+        </article>
+
+        {/* Read Next Section */}
         {otherLetters.length > 0 && (
-          <section className="border-t border-border bg-secondary/20 py-20">
+          <aside className="border-t border-border bg-secondary/20 py-20">
             <div className="mx-auto max-w-5xl px-6">
               <div className="flex items-center justify-between mb-8">
                 <div>
-                  <span className="eyebrow">Continue reading</span>
-                  <h2 className="mt-2 font-display text-2xl font-bold text-foreground">
-                    More from Stradmont Letters
-                  </h2>
+                  <span className="eyebrow">Archival Index</span>
+                  <h3 className="mt-2 font-display text-2xl font-bold text-foreground">
+                    Further reading from the laboratory
+                  </h3>
                 </div>
                 <Link
                   to="/letters"
-                  className="hidden sm:inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-primary hover:underline"
+                  className="text-xs font-semibold uppercase tracking-wider text-primary hover:underline"
                 >
-                  All letters &rarr;
+                  Index &rarr;
                 </Link>
               </div>
 
@@ -254,29 +258,32 @@ function LetterDetailPage() {
                     key={item.slug}
                     to="/letters/$slug"
                     params={{ slug: item.slug }}
-                    className="card-lab group flex flex-col p-7 transition-all no-underline"
+                    className="card-lab group flex flex-col justify-between p-7 no-underline transition-all"
                   >
-                    <div className="flex items-center justify-between text-xs text-muted-foreground">
-                      <span className="font-sans text-[10px] font-bold uppercase tracking-wider text-primary">
-                        {item.kind}
-                      </span>
-                      <span>{item.date}</span>
+                    <div>
+                      <div className="flex items-center justify-between text-xs text-muted-foreground">
+                        <span className="font-mono text-[11px] uppercase tracking-wider text-primary font-semibold">
+                          No. {item.number} · {item.kind}
+                        </span>
+                        <span>{item.readTime}</span>
+                      </div>
+                      <h4 className="mt-4 font-display text-lg font-bold leading-snug text-foreground transition-colors group-hover:text-primary">
+                        {item.title}
+                      </h4>
+                      <p className="mt-3 text-sm leading-relaxed text-muted-foreground line-clamp-3">
+                        {item.body}
+                      </p>
                     </div>
-                    <h3 className="mt-4 font-display text-lg font-bold leading-snug text-foreground transition-colors group-hover:text-primary">
-                      {item.title}
-                    </h3>
-                    <p className="mt-3 text-sm leading-relaxed text-muted-foreground line-clamp-2">
-                      {item.body}
-                    </p>
+
                     <div className="mt-6 flex items-center gap-1.5 text-xs font-semibold text-primary">
-                      <span>Read letter</span>
+                      <span>Read note</span>
                       <span className="transition-transform duration-200 group-hover:translate-x-1">&rarr;</span>
                     </div>
                   </Link>
                 ))}
               </div>
             </div>
-          </section>
+          </aside>
         )}
       </main>
 

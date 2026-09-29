@@ -179,7 +179,7 @@ const featuredLetters = [
     date: "Sep 2026",
     readTime: "5 min read",
     title: "Why operating software should be written down before it is written",
-    body: "On design documents as an instrument of institutional memory.",
+    body: "Technical debt rarely originates from poor syntax; it stems from unwritten architecture. How concise design briefs preserve institutional memory.",
     featured: true,
   },
   {
@@ -188,7 +188,7 @@ const featuredLetters = [
     date: "Aug 2026",
     readTime: "4 min read",
     title: "Latency is a governance problem",
-    body: "How response-time budgets quietly become policy decisions inside finance teams.",
+    body: "Every cache expiration and scheduled batch is an unspoken statement about the allowable freshness of financial truth.",
     featured: false,
   },
 ];
