@@ -85,7 +85,7 @@ function ProductsPage() {
         <section className="surface-ambient border-b border-border">
           <div className="mx-auto max-w-3xl px-5 pb-14 pt-32 text-center sm:px-6 sm:pb-20 sm:pt-48">
             <span className="eyebrow">Our Products</span>
-            <h1 className="mt-5 font-display text-[clamp(2.2rem,5.5vw,3.8rem)] font-extrabold leading-[1.02] text-foreground">
+            <h1 className="mt-5 font-display text-[clamp(2rem,7vw,3.8rem)] font-extrabold leading-[1.02] text-foreground">
               Built for institutions.
             </h1>
             <p className="mx-auto mt-5 max-w-lg text-base leading-relaxed text-muted-foreground">
@@ -128,7 +128,7 @@ function ProductsPage() {
                       {product.status}
                     </span>
                   </div>
-                  <h2 className="mt-2.5 font-display text-2xl font-bold text-foreground sm:text-3xl">
+                  <h2 className="mt-2.5 font-display text-xl font-bold text-foreground sm:text-2xl md:text-3xl">
                     <a
                       href={product.url}
                       target="_blank"

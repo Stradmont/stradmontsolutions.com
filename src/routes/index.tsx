@@ -294,7 +294,7 @@ function Index() {
             >
               <Link
                 to="/products"
-                className="group inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold text-primary-foreground shadow-[var(--shadow-lift)] transition-transform duration-300 hover:-translate-y-0.5"
+                className="group inline-flex w-full items-center justify-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold text-primary-foreground shadow-[var(--shadow-lift)] transition-transform duration-300 hover:-translate-y-0.5 sm:w-auto sm:justify-start"
                 style={{ background: "var(--gradient-electric)" }}
               >
                 Our products
@@ -312,7 +312,7 @@ function Index() {
               </Link>
               <a
                 href="#letters"
-                className="inline-flex items-center rounded-full border border-border bg-background px-7 py-3.5 text-sm font-semibold text-foreground transition-colors hover:bg-secondary"
+                className="inline-flex w-full items-center justify-center rounded-full border border-border bg-background px-7 py-3.5 text-sm font-semibold text-foreground transition-colors hover:bg-secondary sm:w-auto"
               >
                 Read our letters
               </a>
@@ -325,7 +325,7 @@ function Index() {
           <div className="mx-auto grid max-w-6xl gap-8 px-5 py-14 sm:px-6 sm:py-20 md:grid-cols-[1.1fr_1fr] md:items-start">
             <div>
               <span className="eyebrow">Our philosophy</span>
-              <h2 className="mt-4 text-3xl font-bold leading-tight text-foreground sm:text-4xl">
+              <h2 className="mt-4 text-2xl font-bold leading-tight text-foreground sm:text-3xl md:text-4xl">
                 Systems over chaos.
               </h2>
             </div>
@@ -347,10 +347,10 @@ function Index() {
             {processSteps.map((m) => (
               <div
                 key={m.step}
-                className="bg-background p-6 text-left transition-colors hover:bg-secondary/40"
+                className="bg-background p-4 text-left transition-colors hover:bg-secondary/40 sm:p-6"
               >
                 <span className="text-xs font-semibold text-primary">{m.step}</span>
-                <div className="mt-2 text-lg font-bold text-foreground">{m.title}</div>
+                <div className="mt-2 text-base font-bold text-foreground sm:text-lg">{m.title}</div>
                 <div className="mt-2 text-xs leading-relaxed text-muted-foreground">
                   {m.description}
                 </div>
@@ -365,7 +365,7 @@ function Index() {
             {/* Heading */}
             <div className="mb-12 text-center">
               <span className="eyebrow">FAQ</span>
-              <h2 className="mt-4 text-3xl font-bold leading-tight text-foreground sm:text-4xl">
+              <h2 className="mt-4 text-2xl font-bold leading-tight text-foreground sm:text-3xl md:text-4xl">
                 Frequently asked questions.
               </h2>
             </div>
@@ -427,7 +427,7 @@ function Index() {
             <div className="mb-8 flex flex-wrap items-end justify-between gap-4 sm:mb-12">
               <div>
                 <span className="eyebrow">Stradmont Letters</span>
-                <h2 className="mt-4 text-3xl font-bold leading-tight text-foreground sm:text-4xl">
+                <h2 className="mt-4 text-2xl font-bold leading-tight text-foreground sm:text-3xl md:text-4xl">
                   Notes and studies.
                 </h2>
               </div>
@@ -475,7 +475,7 @@ function Index() {
                       <span className="text-xs text-white/70">· {featuredLetter.readTime}</span>
                     </div>
                     <h3 className="text-xl font-semibold leading-snug text-white">{featuredLetter.title}</h3>
-                    <p className="mt-3 text-sm text-white/80 leading-relaxed">
+                    <p className="mt-3 hidden text-sm text-white/80 leading-relaxed sm:block">
                       {featuredLetter.body}
                     </p>
                     <div className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-primary transition-transform duration-300 group-hover:translate-x-1">
@@ -597,7 +597,7 @@ function Index() {
           <div className="relative mx-auto grid max-w-6xl gap-10 px-5 py-14 sm:px-6 sm:py-24 sm:gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
             <div>
               <span className="eyebrow">Contact us</span>
-              <h2 className="mt-5 text-3xl font-bold leading-tight text-foreground sm:text-4xl">
+              <h2 className="mt-5 text-2xl font-bold leading-tight text-foreground sm:text-3xl md:text-4xl">
                 Found chaos in your business?
               </h2>
               <p className="mt-5 max-w-md text-base leading-relaxed text-muted-foreground">

@@ -155,7 +155,7 @@ function ContactPage() {
             {/* ── Left: contact info ── */}
             <div>
               <span className="eyebrow">Contact us</span>
-              <h1 className="mt-5 font-display text-[clamp(2.2rem,5vw,3.4rem)] font-extrabold leading-[1.05] text-foreground">
+              <h1 className="mt-5 font-display text-[clamp(2rem,7vw,3.4rem)] font-extrabold leading-[1.05] text-foreground">
                 Let's talk.
               </h1>
               <p className="mt-5 max-w-sm text-base leading-relaxed text-muted-foreground">
