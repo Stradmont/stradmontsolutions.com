@@ -195,43 +195,59 @@ const featuredLetters = [
 
 function FaqAccordion({ items }: { items: { q: string; a: string }[] }) {
   const [open, setOpen] = useState<number | null>(null);
+
   return (
     <div className="divide-y divide-border border-y border-border">
-      {items.map((item, i) => (
-        <div key={item.q}>
-          <button
-            type="button"
-            id={`faq-btn-${i}`}
-            aria-expanded={open === i}
-            aria-controls={`faq-panel-${i}`}
-            onClick={() => setOpen(open === i ? null : i)}
-            className="flex w-full items-center justify-between gap-6 py-5 text-left text-base font-medium text-foreground transition-colors hover:text-primary"
-          >
-            <span>{item.q}</span>
-            <svg
-              width="18"
-              height="18"
-              viewBox="0 0 18 18"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.6"
-              className={`shrink-0 text-muted-foreground transition-transform duration-300 ${open === i ? "rotate-180" : ""}`}
+      {items.map((item, i) => {
+        const isOpen = open === i;
+        return (
+          <div key={item.q} className="group">
+            <button
+              type="button"
+              id={`faq-btn-${i}`}
+              aria-expanded={isOpen}
+              aria-controls={`faq-panel-${i}`}
+              onClick={() => setOpen(isOpen ? null : i)}
+              className="flex w-full items-center justify-between gap-6 py-5 text-left text-base font-medium text-foreground transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary rounded-lg"
             >
-              <path d="M3 6l6 6 6-6" />
-            </svg>
-          </button>
-          {open === i && (
+              <span className="transition-colors group-hover:text-primary">{item.q}</span>
+              <div
+                className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-border bg-background transition-all duration-300 ${
+                  isOpen
+                    ? "rotate-180 border-primary/40 bg-primary/10 text-primary"
+                    : "text-muted-foreground group-hover:border-primary/30 group-hover:text-foreground"
+                }`}
+              >
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                >
+                  <path d="M3 6l5 5 5-5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </div>
+            </button>
+
             <div
               id={`faq-panel-${i}`}
               role="region"
               aria-labelledby={`faq-btn-${i}`}
-              className="pb-5 text-sm leading-relaxed text-muted-foreground"
+              className={`grid transition-[grid-template-rows,opacity] duration-300 ease-out ${
+                isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+              }`}
             >
-              {item.a}
+              <div className="overflow-hidden">
+                <div className="pb-5 pt-1 text-sm leading-relaxed text-muted-foreground">
+                  {item.a}
+                </div>
+              </div>
             </div>
-          )}
-        </div>
-      ))}
+          </div>
+        );
+      })}
     </div>
   );
 }
