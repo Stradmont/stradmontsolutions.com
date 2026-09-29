@@ -174,6 +174,7 @@ const faqCategories = [
 
 const featuredLetters = [
   {
+    slug: "why-operating-software-should-be-written-down-before-it-is-written",
     kind: "Letter",
     date: "Sep 2026",
     readTime: "5 min read",
@@ -182,6 +183,7 @@ const featuredLetters = [
     featured: true,
   },
   {
+    slug: "latency-is-a-governance-problem",
     kind: "Note",
     date: "Aug 2026",
     readTime: "4 min read",
@@ -439,7 +441,8 @@ function Index() {
             <div className="grid gap-4 lg:grid-cols-[1fr_1fr]">
               {/* Featured large card (left column) */}
               <Link
-                to="/letters"
+                to="/letters/$slug"
+                params={{ slug: featuredLetters[0].slug }}
                 className="card-lab group relative flex flex-col justify-end overflow-hidden rounded-3xl bg-foreground p-8 text-background min-h-[340px] no-underline"
               >
                 {/* Subtle pattern overlay */}
@@ -460,6 +463,7 @@ function Index() {
                     <span className="text-xs opacity-60">· {featuredLetters[0].readTime}</span>
                   </div>
                   <h3 className="text-xl font-semibold leading-snug">{featuredLetters[0].title}</h3>
+                  <p className="mt-3 text-sm opacity-70 leading-relaxed">{featuredLetters[0].body}</p>
                   <div className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-primary transition-transform duration-300 group-hover:translate-x-1">
                     Read full
                     <svg
@@ -498,7 +502,8 @@ function Index() {
                     <p className="mt-2 text-sm text-muted-foreground">{featuredLetters[1].body}</p>
                   </div>
                   <Link
-                    to="/letters"
+                    to="/letters/$slug"
+                    params={{ slug: featuredLetters[1].slug }}
                     className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-primary transition-transform duration-300 group-hover:translate-x-1"
                   >
                     Read full

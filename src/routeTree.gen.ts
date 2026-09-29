@@ -13,6 +13,8 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as LettersRouteImport } from './routes/letters'
 import { Route as ProductsRouteImport } from './routes/products'
+import { Route as LettersIndexRouteImport } from './routes/letters.index'
+import { Route as LettersSlugRouteImport } from './routes/letters.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -34,38 +36,61 @@ const ProductsRoute = ProductsRouteImport.update({
   path: '/products',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LettersIndexRoute = LettersIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => LettersRoute,
+} as any)
+const LettersSlugRoute = LettersSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => LettersRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/contact': typeof ContactRoute
-  '/letters': typeof LettersRoute
+  '/letters': typeof LettersRouteWithChildren
   '/products': typeof ProductsRoute
+  '/letters/$slug': typeof LettersSlugRoute
+  '/letters/': typeof LettersIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/contact': typeof ContactRoute
-  '/letters': typeof LettersRoute
   '/products': typeof ProductsRoute
+  '/letters/$slug': typeof LettersSlugRoute
+  '/letters': typeof LettersIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/contact': typeof ContactRoute
-  '/letters': typeof LettersRoute
+  '/letters': typeof LettersRouteWithChildren
   '/products': typeof ProductsRoute
+  '/letters/$slug': typeof LettersSlugRoute
+  '/letters/': typeof LettersIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/contact' | '/letters' | '/products'
+  fullPaths:
+    '/' | '/contact' | '/letters' | '/products' | '/letters/$slug' | '/letters/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/contact' | '/letters' | '/products'
-  id: '__root__' | '/' | '/contact' | '/letters' | '/products'
+  to: '/' | '/contact' | '/products' | '/letters/$slug' | '/letters'
+  id:
+    | '__root__'
+    | '/'
+    | '/contact'
+    | '/letters'
+    | '/products'
+    | '/letters/$slug'
+    | '/letters/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ContactRoute: typeof ContactRoute
-  LettersRoute: typeof LettersRoute
+  LettersRoute: typeof LettersRouteWithChildren
   ProductsRoute: typeof ProductsRoute
 }
 
@@ -99,13 +124,40 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProductsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/letters/': {
+      id: '/letters/'
+      path: '/'
+      fullPath: '/letters/'
+      preLoaderRoute: typeof LettersIndexRouteImport
+      parentRoute: typeof LettersRoute
+    }
+    '/letters/$slug': {
+      id: '/letters/$slug'
+      path: '/$slug'
+      fullPath: '/letters/$slug'
+      preLoaderRoute: typeof LettersSlugRouteImport
+      parentRoute: typeof LettersRoute
+    }
   }
 }
+
+interface LettersRouteChildren {
+  LettersSlugRoute: typeof LettersSlugRoute
+  LettersIndexRoute: typeof LettersIndexRoute
+}
+
+const LettersRouteChildren: LettersRouteChildren = {
+  LettersSlugRoute: LettersSlugRoute,
+  LettersIndexRoute: LettersIndexRoute,
+}
+
+const LettersRouteWithChildren =
+  LettersRoute._addFileChildren(LettersRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ContactRoute: ContactRoute,
-  LettersRoute: LettersRoute,
+  LettersRoute: LettersRouteWithChildren,
   ProductsRoute: ProductsRoute,
 }
 export const routeTree = rootRouteImport
