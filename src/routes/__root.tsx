@@ -12,13 +12,14 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportAppError } from "../lib/error-reporting";
+import { SITE_CONFIG } from "../lib/site-config";
 
 function BrandLogo() {
   return (
     <Link
       to="/"
       className="group inline-flex items-center gap-2.5 transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-xl"
-      aria-label="Stradmont Solutions Home"
+      aria-label={`${SITE_CONFIG.name} Home`}
     >
       <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-primary/30 bg-primary/10 shadow-soft transition-transform duration-300 group-hover:scale-105">
         <img
@@ -31,7 +32,7 @@ function BrandLogo() {
       </div>
       <div className="flex items-baseline gap-1.5">
         <span className="font-display text-xl font-extrabold tracking-tight text-foreground sm:text-2xl">
-          Stradmont
+          {SITE_CONFIG.shortName}
         </span>
         <span className="h-2 w-2 rounded-full bg-primary transition-transform duration-300 group-hover:scale-125" />
       </div>
@@ -142,15 +143,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Stradmont Solutions | Systems over chaos" },
+      { title: `${SITE_CONFIG.name} | ${SITE_CONFIG.tagline}` },
       {
         name: "description",
-        content:
-          "Stradmont Solutions: engineering specialised SaaS platforms and workflow software for technology and finance institutions.",
+        content: `${SITE_CONFIG.name}: engineering specialised SaaS platforms and workflow software for technology and finance institutions.`,
       },
-      { name: "author", content: "Stradmont Solutions" },
+      { name: "author", content: SITE_CONFIG.name },
       { name: "theme-color", content: "#1e1b4b" },
-      { property: "og:title", content: "Stradmont Solutions | Systems over chaos" },
+      { property: "og:title", content: `${SITE_CONFIG.name} | ${SITE_CONFIG.tagline}` },
       {
         property: "og:description",
         content:
@@ -159,16 +159,16 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:type", content: "website" },
       {
         property: "og:image",
-        content: "https://stradmontsolutions.com/og-image.png",
+        content: SITE_CONFIG.ogImage,
       },
       { name: "twitter:card", content: "summary_large_image" },
       {
         name: "twitter:image",
-        content: "https://stradmontsolutions.com/og-image.png",
+        content: SITE_CONFIG.ogImage,
       },
     ],
     links: [
-      { rel: "canonical", href: "https://stradmontsolutions.com" },
+      { rel: "canonical", href: SITE_CONFIG.url },
       {
         rel: "stylesheet",
         href: appCss,

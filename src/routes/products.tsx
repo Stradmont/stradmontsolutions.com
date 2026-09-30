@@ -1,44 +1,49 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteNav } from "@/components/SiteNav";
 import { SiteFooter } from "@/components/SiteFooter";
+import { fetchProducts } from "@/lib/api";
+import { SITE_CONFIG } from "@/lib/site-config";
+
+const defaultProduct = SITE_CONFIG.products.buildersBase;
 
 export const Route = createFileRoute("/products")({
+  loader: async () => {
+    const products = await fetchProducts();
+    return { products };
+  },
   head: () => ({
     meta: [
-      { title: "Our Products | Stradmont Solutions" },
+      { title: `Our Products | ${SITE_CONFIG.name}` },
       {
         name: "description",
-        content:
-          "Builders Base is software that helps insurance distribution organizations develop their people, support their leaders, and grow their organizations.",
+        content: defaultProduct.body,
       },
-      { property: "og:title", content: "Our Products | Stradmont Solutions" },
+      { property: "og:title", content: `Our Products | ${SITE_CONFIG.name}` },
       {
         property: "og:description",
-        content:
-          "Builders Base is software that helps insurance distribution organizations develop their people, support their leaders, and grow their organizations.",
+        content: defaultProduct.body,
       },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "https://stradmontsolutions.com/products" },
+      { property: "og:url", content: `${SITE_CONFIG.url}/products` },
       {
         property: "og:image",
-        content: "https://stradmontsolutions.com/og-image.png",
+        content: SITE_CONFIG.ogImage,
       },
       { name: "twitter:card", content: "summary_large_image" },
       {
         name: "twitter:title",
-        content: "Our Products | Stradmont Solutions",
+        content: `Our Products | ${SITE_CONFIG.name}`,
       },
       {
         name: "twitter:description",
-        content:
-          "Builders Base is software that helps insurance distribution organizations develop their people, support their leaders, and grow their organizations.",
+        content: defaultProduct.body,
       },
       {
         name: "twitter:image",
-        content: "https://stradmontsolutions.com/og-image.png",
+        content: SITE_CONFIG.ogImage,
       },
     ],
-    links: [{ rel: "canonical", href: "https://stradmontsolutions.com/products" }],
+    links: [{ rel: "canonical", href: `${SITE_CONFIG.url}/products` }],
     scripts: [
       {
         type: "application/ld+json",
@@ -50,13 +55,13 @@ export const Route = createFileRoute("/products")({
               "@type": "ListItem",
               position: 1,
               name: "Home",
-              item: "https://stradmontsolutions.com/",
+              item: `${SITE_CONFIG.url}/`,
             },
             {
               "@type": "ListItem",
               position: 2,
               name: "Our Products",
-              item: "https://stradmontsolutions.com/products",
+              item: `${SITE_CONFIG.url}/products`,
             },
           ],
         }),
@@ -66,16 +71,9 @@ export const Route = createFileRoute("/products")({
   component: ProductsPage,
 });
 
-const product = {
-  name: "Builders Base",
-  tag: "Platform",
-  status: "In development",
-  logo: "/buildersbase-logo.jpeg",
-  url: "https://thebuildersbase.com",
-  body: "Builders Base is software that helps insurance distribution organizations develop their people, support their leaders, and grow their organizations.",
-};
-
 function ProductsPage() {
+  const loaderData = Route.useLoaderData();
+  const product = loaderData?.products?.[0] ?? defaultProduct;
   return (
     <div className="min-h-screen bg-background">
       <SiteNav />
@@ -85,9 +83,7 @@ function ProductsPage() {
         <section className="surface-ambient border-b border-border">
           <div className="mx-auto max-w-3xl px-5 pb-14 pt-32 text-center sm:px-6 sm:pb-20 sm:pt-48">
             <span className="eyebrow">Our Products</span>
-            <h1 className="mt-5 page-title text-foreground">
-              Built for institutions.
-            </h1>
+            <h1 className="mt-5 page-title text-foreground">Built for institutions.</h1>
             <p className="mx-auto mt-5 max-w-lg text-base leading-relaxed text-muted-foreground">
               Every platform begins as deep operational research. The ones that hold up become tools
               institutions rely on.
@@ -153,7 +149,7 @@ function ProductsPage() {
                   className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-primary-foreground shadow-lift transition-transform duration-300 hover:-translate-y-0.5"
                   style={{ background: "var(--gradient-electric)" }}
                 >
-                  Visit thebuildersbase.com
+                  Visit {product.domain}
                   <svg
                     width="14"
                     height="14"

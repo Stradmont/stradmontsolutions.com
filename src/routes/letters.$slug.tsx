@@ -1,23 +1,28 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { SiteNav } from "@/components/SiteNav";
 import { SiteFooter } from "@/components/SiteFooter";
-import { getLetterBySlug, letters } from "@/lib/letters-data";
+import { fetchLetterBySlug, fetchLetters } from "@/lib/api";
+import { letters as staticLetters } from "@/lib/letters-data";
+import { SITE_CONFIG } from "@/lib/site-config";
 import { ArrowLeft, Check, Copy } from "lucide-react";
 import { useState } from "react";
 
 export const Route = createFileRoute("/letters/$slug")({
-  loader: ({ params }) => {
-    const letter = getLetterBySlug(params.slug);
+  loader: async ({ params }) => {
+    const [letter, allLetters] = await Promise.all([
+      fetchLetterBySlug(params.slug),
+      fetchLetters(),
+    ]);
     if (!letter) {
       throw notFound();
     }
-    return { letter };
+    return { letter, allLetters };
   },
   head: ({ loaderData }) => {
     const letter = loaderData?.letter;
     if (!letter) {
       return {
-        meta: [{ title: "Letter Not Found | Stradmont Solutions" }],
+        meta: [{ title: `Letter Not Found | ${SITE_CONFIG.name}` }],
       };
     }
     return {
@@ -29,24 +34,24 @@ export const Route = createFileRoute("/letters/$slug")({
         { property: "og:type", content: "article" },
         {
           property: "og:url",
-          content: `https://stradmontsolutions.com/letters/${letter.slug}`,
+          content: `${SITE_CONFIG.url}/letters/${letter.slug}`,
         },
         {
           property: "og:image",
-          content: `https://stradmontsolutions.com${letter.image}`,
+          content: `${SITE_CONFIG.url}${letter.image}`,
         },
         { name: "twitter:card", content: "summary_large_image" },
         { name: "twitter:title", content: `${letter.title} | Stradmont Letters` },
         { name: "twitter:description", content: letter.body },
         {
           name: "twitter:image",
-          content: `https://stradmontsolutions.com${letter.image}`,
+          content: `${SITE_CONFIG.url}${letter.image}`,
         },
       ],
       links: [
         {
           rel: "canonical",
-          href: `https://stradmontsolutions.com/letters/${letter.slug}`,
+          href: `${SITE_CONFIG.url}/letters/${letter.slug}`,
         },
       ],
       scripts: [
@@ -64,8 +69,8 @@ export const Route = createFileRoute("/letters/$slug")({
             },
             publisher: {
               "@type": "Organization",
-              name: "Stradmont Solutions",
-              url: "https://stradmontsolutions.com",
+              name: SITE_CONFIG.name,
+              url: SITE_CONFIG.url,
             },
           }),
         },
@@ -106,7 +111,7 @@ function LetterNotFound() {
 }
 
 function LetterDetailPage() {
-  const { letter } = Route.useLoaderData();
+  const { letter, allLetters } = Route.useLoaderData();
   const [copied, setCopied] = useState(false);
 
   const handleCopyLink = () => {
@@ -117,7 +122,8 @@ function LetterDetailPage() {
     }
   };
 
-  const otherLetters = letters.filter((l) => l.slug !== letter.slug).slice(0, 2);
+  const lettersList = allLetters ?? staticLetters;
+  const otherLetters = lettersList.filter((l) => l.slug !== letter.slug).slice(0, 2);
 
   return (
     <div className="min-h-screen bg-background text-foreground antialiased selection:bg-primary/20">
@@ -143,14 +149,10 @@ function LetterDetailPage() {
             </div>
 
             {/* Title */}
-            <h1 className="mt-6 article-title text-foreground sm:mt-8">
-              {letter.title}
-            </h1>
+            <h1 className="mt-6 article-title text-foreground sm:mt-8">{letter.title}</h1>
 
             {/* Standfirst / Lead Description (Natural case, natural font) */}
-            <p className="mt-4 standfirst sm:mt-6">
-              {letter.body}
-            </p>
+            <p className="mt-4 standfirst sm:mt-6">{letter.body}</p>
 
             {/* Publishing Metadata & Share */}
             <div className="mt-8 flex flex-col gap-4 border-t border-border/70 pt-5 text-xs text-muted-foreground sm:mt-10 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between sm:gap-4 sm:pt-6">
@@ -215,10 +217,7 @@ function LetterDetailPage() {
                 )}
                 <div className="space-y-6">
                   {section.paragraphs.map((p, pIdx) => (
-                    <p
-                      key={pIdx}
-                      className="prose-body"
-                    >
+                    <p key={pIdx} className="prose-body">
                       {p}
                     </p>
                   ))}
@@ -233,8 +232,8 @@ function LetterDetailPage() {
               <p className="text-sm font-semibold text-foreground">Stradmont Systems</p>
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                 We design and build specialised SaaS platforms for institutions where technical and
-                financial workflows intersect. If you are re-evaluating core software solutions,
-                our team welcomes technical dialogue.
+                financial workflows intersect. If you are re-evaluating core software solutions, our
+                team welcomes technical dialogue.
               </p>
               <div className="mt-6">
                 <Link
@@ -259,7 +258,10 @@ function LetterDetailPage() {
                     Further reading & studies
                   </h3>
                 </div>
-                <Link to="/letters" className="text-xs font-medium text-primary hover:underline transition-all duration-200 ease-out">
+                <Link
+                  to="/letters"
+                  className="text-xs font-medium text-primary hover:underline transition-all duration-200 ease-out"
+                >
                   All letters &rarr;
                 </Link>
               </div>

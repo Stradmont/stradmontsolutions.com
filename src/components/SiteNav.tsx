@@ -1,11 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-
-const links = [
-  { label: "Home", to: "/" },
-  { label: "Our Products", to: "/products" },
-  { label: "Letters", to: "/letters" },
-] as const;
+import { SITE_CONFIG } from "@/lib/site-config";
 
 export function SiteNav() {
   const [open, setOpen] = useState(false);
@@ -47,13 +42,13 @@ export function SiteNav() {
             className="group flex items-baseline gap-1.5 transition-opacity hover:opacity-90"
           >
             <span className="font-display text-lg font-extrabold tracking-tight text-foreground">
-              Stradmont
+              {SITE_CONFIG.shortName}
             </span>
             <span className="h-1.5 w-1.5 rounded-full bg-primary transition-transform duration-300 group-hover:scale-125" />
           </Link>
 
           <div className="hidden items-center gap-8 md:flex">
-            {links.map((l) => (
+            {SITE_CONFIG.navLinks.map((l) => (
               <Link
                 key={l.to}
                 to={l.to}
@@ -127,7 +122,7 @@ export function SiteNav() {
           }`}
         >
           <div className="flex flex-col gap-1">
-            {links.map((l) => (
+            {SITE_CONFIG.navLinks.map((l) => (
               <Link
                 key={l.to}
                 to={l.to}

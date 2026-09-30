@@ -4,20 +4,25 @@ import { FlowLines } from "@/components/FlowLines";
 import { SiteNav } from "@/components/SiteNav";
 import { SiteFooter } from "@/components/SiteFooter";
 import { ContactForm } from "@/components/ContactForm";
-import { letters } from "@/lib/letters-data";
+import { fetchLetters } from "@/lib/api";
+import { letters as staticLetters } from "@/lib/letters-data";
+import { SITE_CONFIG } from "@/lib/site-config";
 
 export const Route = createFileRoute("/")({
+  loader: async () => {
+    const items = await fetchLetters();
+    return { letters: items };
+  },
   head: () => ({
     meta: [
-      { title: "Stradmont Solutions | Systems over chaos" },
+      { title: `${SITE_CONFIG.name} | ${SITE_CONFIG.tagline}` },
       {
         name: "description",
-        content:
-          "Systems over chaos. Stradmont Solutions finds the chaos inside technology and finance operations and replaces it with systems that hold.",
+        content: `${SITE_CONFIG.tagline}. ${SITE_CONFIG.name} finds the chaos inside technology and finance operations and replaces it with systems that hold.`,
       },
       {
         property: "og:title",
-        content: "Stradmont Solutions | Systems over chaos",
+        content: `${SITE_CONFIG.name} | ${SITE_CONFIG.tagline}`,
       },
       {
         property: "og:description",
@@ -25,15 +30,15 @@ export const Route = createFileRoute("/")({
           "We find the chaos in technology and finance operations, and build the systems that end it.",
       },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "https://stradmontsolutions.com/" },
+      { property: "og:url", content: `${SITE_CONFIG.url}/` },
       {
         property: "og:image",
-        content: "https://stradmontsolutions.com/og-image.png",
+        content: SITE_CONFIG.ogImage,
       },
       { name: "twitter:card", content: "summary_large_image" },
       {
         name: "twitter:title",
-        content: "Stradmont Solutions | Systems over chaos",
+        content: `${SITE_CONFIG.name} | ${SITE_CONFIG.tagline}`,
       },
       {
         name: "twitter:description",
@@ -42,10 +47,10 @@ export const Route = createFileRoute("/")({
       },
       {
         name: "twitter:image",
-        content: "https://stradmontsolutions.com/og-image.png",
+        content: SITE_CONFIG.ogImage,
       },
     ],
-    links: [{ rel: "canonical", href: "https://stradmontsolutions.com/" }],
+    links: [{ rel: "canonical", href: `${SITE_CONFIG.url}/` }],
     scripts: [
       {
         type: "application/ld+json",
@@ -54,24 +59,21 @@ export const Route = createFileRoute("/")({
           "@graph": [
             {
               "@type": "Organization",
-              "@id": "https://stradmontsolutions.com/#organization",
-              name: "Stradmont Solutions",
-              url: "https://stradmontsolutions.com",
-              logo: "https://stradmontsolutions.com/favicon.svg",
-              email: "info@stradmontsolutions.com",
-              telephone: "+1-226-975-1978",
-              sameAs: [
-                "https://www.linkedin.com/company/stradmont-solutions",
-                "https://www.instagram.com/stradmont.solutions/",
-              ],
+              "@id": `${SITE_CONFIG.url}/#organization`,
+              name: SITE_CONFIG.name,
+              url: SITE_CONFIG.url,
+              logo: `${SITE_CONFIG.url}/favicon.svg`,
+              email: SITE_CONFIG.contact.email,
+              telephone: SITE_CONFIG.contact.phoneSchema,
+              sameAs: [SITE_CONFIG.socials.linkedin.href, SITE_CONFIG.socials.instagram.href],
             },
             {
               "@type": "WebSite",
-              "@id": "https://stradmontsolutions.com/#website",
-              url: "https://stradmontsolutions.com",
-              name: "Stradmont Solutions",
+              "@id": `${SITE_CONFIG.url}/#website`,
+              url: SITE_CONFIG.url,
+              name: SITE_CONFIG.name,
               publisher: {
-                "@id": "https://stradmontsolutions.com/#organization",
+                "@id": `${SITE_CONFIG.url}/#organization`,
               },
             },
           ],
@@ -82,9 +84,7 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const pills = [
-  { label: "Research", style: "left-[8%] top-[14%]", delay: "0s" },
-];
+const pills = [{ label: "Research", style: "left-[8%] top-[14%]", delay: "0s" }];
 
 const rightPills = [
   { label: "Systems", style: "right-[6%] top-[58%]", delay: "0.4s" },
@@ -171,8 +171,6 @@ const faqCategories = [
   },
 ];
 
-
-
 function FaqAccordion({ items }: { items: { q: string; a: string }[] }) {
   const [open, setOpen] = useState<number | null>(null);
 
@@ -233,9 +231,11 @@ function FaqAccordion({ items }: { items: { q: string; a: string }[] }) {
 }
 
 function Index() {
+  const loaderData = Route.useLoaderData();
+  const letters = loaderData?.letters ?? staticLetters;
   const [activeTab, setActiveTab] = useState(0);
   const featuredLetter = letters[0];
-  const secondLetter = letters[2];
+  const secondLetter = letters[2] ?? letters[1];
 
   return (
     <div className="min-h-screen bg-background">
@@ -310,10 +310,7 @@ function Index() {
                   <path d="M3 8h10M9 4l4 4-4 4" />
                 </svg>
               </Link>
-              <a
-                href="#letters"
-                className="btn-outline w-full sm:w-auto"
-              >
+              <a href="#letters" className="btn-outline w-full sm:w-auto">
                 Read our letters
               </a>
             </div>
@@ -325,9 +322,7 @@ function Index() {
           <div className="mx-auto grid max-w-6xl gap-8 px-5 py-14 sm:px-6 sm:py-20 md:grid-cols-[1.1fr_1fr] md:items-start">
             <div>
               <span className="eyebrow">Our philosophy</span>
-              <h2 className="mt-4 section-heading">
-                Systems over chaos.
-              </h2>
+              <h2 className="mt-4 section-heading">Systems over chaos.</h2>
             </div>
             <div className="space-y-5 text-base leading-relaxed text-muted-foreground">
               <p>
@@ -365,9 +360,7 @@ function Index() {
             {/* Heading */}
             <div className="mb-12 text-center">
               <span className="eyebrow">FAQ</span>
-              <h2 className="mt-4 section-heading">
-                Frequently asked questions.
-              </h2>
+              <h2 className="mt-4 section-heading">Frequently asked questions.</h2>
             </div>
 
             {/* Tab switcher with sliding pill indicator */}
@@ -427,9 +420,7 @@ function Index() {
             <div className="mb-8 flex flex-wrap items-end justify-between gap-4 sm:mb-12">
               <div>
                 <span className="eyebrow">Stradmont Letters</span>
-                <h2 className="mt-4 section-heading">
-                  Notes and studies.
-                </h2>
+                <h2 className="mt-4 section-heading">Notes and studies.</h2>
               </div>
               <Link
                 to="/letters"
@@ -474,7 +465,9 @@ function Index() {
                       <span className="text-xs text-white/70">{featuredLetter.date}</span>
                       <span className="text-xs text-white/70">· {featuredLetter.readTime}</span>
                     </div>
-                    <h3 className="text-xl font-semibold leading-snug text-white">{featuredLetter.title}</h3>
+                    <h3 className="text-xl font-semibold leading-snug text-white">
+                      {featuredLetter.title}
+                    </h3>
                     <p className="mt-3 hidden text-sm text-white/80 leading-relaxed sm:block">
                       {featuredLetter.body}
                     </p>
@@ -597,9 +590,7 @@ function Index() {
           <div className="relative mx-auto grid max-w-6xl gap-10 px-5 py-14 sm:px-6 sm:py-24 sm:gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
             <div>
               <span className="eyebrow">Contact us</span>
-              <h2 className="mt-5 section-heading">
-                Found chaos in your business?
-              </h2>
+              <h2 className="mt-5 section-heading">Found chaos in your business?</h2>
               <p className="mt-5 max-w-md text-base leading-relaxed text-muted-foreground">
                 Tell us where things break down. We will help you turn it into a system.
               </p>

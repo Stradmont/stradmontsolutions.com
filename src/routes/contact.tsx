@@ -2,31 +2,31 @@ import { createFileRoute } from "@tanstack/react-router";
 import { SiteNav } from "@/components/SiteNav";
 import { SiteFooter } from "@/components/SiteFooter";
 import { ContactForm } from "@/components/ContactForm";
+import { SITE_CONFIG, SOCIAL_LINKS } from "@/lib/site-config";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
-      { title: "Contact Us | Stradmont Solutions" },
+      { title: `Contact Us | ${SITE_CONFIG.name}` },
       {
         name: "description",
-        content:
-          "Get in touch with Stradmont Solutions about partnerships, products or investment.",
+        content: `Get in touch with ${SITE_CONFIG.name} about partnerships, products or investment.`,
       },
-      { property: "og:title", content: "Contact Us | Stradmont Solutions" },
+      { property: "og:title", content: `Contact Us | ${SITE_CONFIG.name}` },
       {
         property: "og:description",
         content: "Send the Stradmont team a message. Every enquiry is read by a person.",
       },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "https://stradmontsolutions.com/contact" },
+      { property: "og:url", content: `${SITE_CONFIG.url}/contact` },
       {
         property: "og:image",
-        content: "https://stradmontsolutions.com/og-image.png",
+        content: SITE_CONFIG.ogImage,
       },
       { name: "twitter:card", content: "summary_large_image" },
       {
         name: "twitter:title",
-        content: "Contact Us | Stradmont Solutions",
+        content: `Contact Us | ${SITE_CONFIG.name}`,
       },
       {
         name: "twitter:description",
@@ -34,10 +34,10 @@ export const Route = createFileRoute("/contact")({
       },
       {
         name: "twitter:image",
-        content: "https://stradmontsolutions.com/og-image.png",
+        content: SITE_CONFIG.ogImage,
       },
     ],
-    links: [{ rel: "canonical", href: "https://stradmontsolutions.com/contact" }],
+    links: [{ rel: "canonical", href: `${SITE_CONFIG.url}/contact` }],
     scripts: [
       {
         type: "application/ld+json",
@@ -49,13 +49,13 @@ export const Route = createFileRoute("/contact")({
               "@type": "ListItem",
               position: 1,
               name: "Home",
-              item: "https://stradmontsolutions.com/",
+              item: `${SITE_CONFIG.url}/`,
             },
             {
               "@type": "ListItem",
               position: 2,
               name: "Contact",
-              item: "https://stradmontsolutions.com/contact",
+              item: `${SITE_CONFIG.url}/contact`,
             },
           ],
         }),
@@ -68,8 +68,8 @@ export const Route = createFileRoute("/contact")({
 const contactDetails = [
   {
     label: "Email",
-    value: "info@stradmontsolutions.com",
-    href: "mailto:info@stradmontsolutions.com",
+    value: SITE_CONFIG.contact.email,
+    href: SITE_CONFIG.contact.emailHref,
     icon: (
       <svg
         width="15"
@@ -86,8 +86,8 @@ const contactDetails = [
   },
   {
     label: "Phone",
-    value: "+1 (226) 975-1978",
-    href: "tel:+12269751978",
+    value: SITE_CONFIG.contact.phone,
+    href: SITE_CONFIG.contact.phoneHref,
     icon: (
       <svg
         width="15"
@@ -103,7 +103,7 @@ const contactDetails = [
   },
   {
     label: "Location",
-    value: "Ontario, Canada",
+    value: SITE_CONFIG.contact.location,
     href: null,
     icon: (
       <svg
@@ -121,29 +121,6 @@ const contactDetails = [
   },
 ];
 
-const socials = [
-  {
-    label: "LinkedIn",
-    href: "https://www.linkedin.com/company/stradmont-solutions",
-    color: "#0A66C2",
-    icon: (
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M4.98 3.5A2.49 2.49 0 0 1 2.5 6a2.49 2.49 0 0 1-2.48-2.5A2.49 2.49 0 0 1 2.5 1a2.49 2.49 0 0 1 2.48 2.5zM.25 8.5H4.75V24H.25V8.5zm7.5 0H12v2.15h.06c.63-1.2 2.17-2.46 4.47-2.46C21.27 8.19 22 11.37 22 15.27V24h-4.5v-7.87c0-1.88-.03-4.3-2.62-4.3-2.62 0-3.02 2.05-3.02 4.16V24H7.75V8.5z" />
-      </svg>
-    ),
-  },
-  {
-    label: "Instagram",
-    href: "https://www.instagram.com/stradmont.solutions/",
-    color: "#E1306C",
-    icon: (
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z" />
-      </svg>
-    ),
-  },
-];
-
 function ContactPage() {
   return (
     <div className="min-h-screen bg-background">
@@ -155,9 +132,7 @@ function ContactPage() {
             {/* ── Left: contact info ── */}
             <div>
               <span className="eyebrow">Contact us</span>
-              <h1 className="mt-5 page-title text-foreground">
-                Let's talk.
-              </h1>
+              <h1 className="mt-5 page-title text-foreground">Let's talk.</h1>
               <p className="mt-5 max-w-sm text-base leading-relaxed text-muted-foreground">
                 Tell us about your company and what you need. We reply within two working days.
               </p>
@@ -192,7 +167,7 @@ function ContactPage() {
               <div className="mt-8 border-t border-border pt-8">
                 <p className="text-xs font-medium text-muted-foreground">Follow us</p>
                 <div className="mt-4 flex items-center gap-2.5">
-                  {socials.map((s) => (
+                  {SOCIAL_LINKS.map((s) => (
                     <a
                       key={s.label}
                       href={s.href}

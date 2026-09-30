@@ -124,8 +124,10 @@
     oklch(0.542 0.245 292.7) 0%,
     oklch(0.62 0.21 296) 100%
   );
-  --shadow-soft: 0 1px 2px oklch(0.251 0.089 288.2 / 0.04), 0 12px 32px -12px oklch(0.251 0.089 288.2 / 0.12);
-  --shadow-lift: 0 2px 4px oklch(0.251 0.089 288.2 / 0.05), 0 24px 60px -20px oklch(0.542 0.245 292.7 / 0.28);
+  --shadow-soft:
+    0 1px 2px oklch(0.251 0.089 288.2 / 0.04), 0 12px 32px -12px oklch(0.251 0.089 288.2 / 0.12);
+  --shadow-lift:
+    0 2px 4px oklch(0.251 0.089 288.2 / 0.05), 0 24px 60px -20px oklch(0.542 0.245 292.7 / 0.28);
   --transition-smooth: 260ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -293,7 +295,7 @@
 
 /* Section h2 heading — used across Overview, FAQ, Letters, Contact sections */
 @utility section-heading {
-  font-size: 1.5rem;    /* text-2xl */
+  font-size: 1.5rem; /* text-2xl */
   font-weight: 700;
   line-height: 1.25;
   color: var(--color-foreground);
@@ -303,7 +305,7 @@
   }
 
   @media (min-width: 768px) {
-    font-size: 2.25rem;  /* md:text-4xl */
+    font-size: 2.25rem; /* md:text-4xl */
   }
 }
 
@@ -374,7 +376,9 @@
   font-size: 0.875rem;
   font-weight: 600;
   color: var(--color-foreground);
-  transition: background-color 200ms ease, border-color 200ms ease;
+  transition:
+    background-color 200ms ease,
+    border-color 200ms ease;
 
   &:hover {
     background: var(--color-secondary);

@@ -1,29 +1,33 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteNav } from "@/components/SiteNav";
 import { SiteFooter } from "@/components/SiteFooter";
-import { letters } from "@/lib/letters-data";
+import { fetchLetters } from "@/lib/api";
+import { letters as staticLetters } from "@/lib/letters-data";
+import { SITE_CONFIG } from "@/lib/site-config";
 import { ArrowUpRight } from "lucide-react";
 
 export const Route = createFileRoute("/letters/")({
+  loader: async () => {
+    const items = await fetchLetters();
+    return { letters: items };
+  },
   head: () => ({
     meta: [
       { title: "Stradmont Letters | Notes & Studies" },
       {
         name: "description",
-        content:
-          "Letters, notes and studies from Stradmont Solutions. On systems, technology and finance operations.",
+        content: `Letters, notes and studies from ${SITE_CONFIG.name}. On systems, technology and finance operations.`,
       },
       { property: "og:title", content: "Stradmont Letters | Notes & Studies" },
       {
         property: "og:description",
-        content:
-          "Letters, notes and studies from Stradmont Solutions. On systems, technology and finance operations.",
+        content: `Letters, notes and studies from ${SITE_CONFIG.name}. On systems, technology and finance operations.`,
       },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "https://stradmontsolutions.com/letters" },
+      { property: "og:url", content: `${SITE_CONFIG.url}/letters` },
       {
         property: "og:image",
-        content: "https://stradmontsolutions.com/og-image.png",
+        content: SITE_CONFIG.ogImage,
       },
       { name: "twitter:card", content: "summary_large_image" },
       {
@@ -32,15 +36,14 @@ export const Route = createFileRoute("/letters/")({
       },
       {
         name: "twitter:description",
-        content:
-          "Letters, notes and studies from Stradmont Solutions. On systems, technology and finance operations.",
+        content: `Letters, notes and studies from ${SITE_CONFIG.name}. On systems, technology and finance operations.`,
       },
       {
         name: "twitter:image",
-        content: "https://stradmontsolutions.com/og-image.png",
+        content: SITE_CONFIG.ogImage,
       },
     ],
-    links: [{ rel: "canonical", href: "https://stradmontsolutions.com/letters" }],
+    links: [{ rel: "canonical", href: `${SITE_CONFIG.url}/letters` }],
     scripts: [
       {
         type: "application/ld+json",
@@ -52,13 +55,13 @@ export const Route = createFileRoute("/letters/")({
               "@type": "ListItem",
               position: 1,
               name: "Home",
-              item: "https://stradmontsolutions.com/",
+              item: `${SITE_CONFIG.url}/`,
             },
             {
               "@type": "ListItem",
               position: 2,
               name: "Letters",
-              item: "https://stradmontsolutions.com/letters",
+              item: `${SITE_CONFIG.url}/letters`,
             },
           ],
         }),
@@ -69,6 +72,9 @@ export const Route = createFileRoute("/letters/")({
 });
 
 function LettersIndexPage() {
+  const loaderData = Route.useLoaderData();
+  const letters = loaderData?.letters ?? staticLetters;
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SiteNav />
@@ -84,7 +90,8 @@ function LettersIndexPage() {
               we solve.
             </h1>
             <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-muted-foreground">
-              Letters, notes and studies from Stradmont. On systems, technology and finance operations.
+              Letters, notes and studies from Stradmont. On systems, technology and finance
+              operations.
             </p>
           </div>
         </section>
