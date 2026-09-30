@@ -251,7 +251,7 @@ function Index() {
             {pills.map((p, i) => (
               <span
                 key={`pos-${p.label}`}
-                className={`animate-float absolute ${p.style} rounded-full bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground shadow-[var(--shadow-lift)]`}
+                className={`animate-float absolute ${p.style} rounded-full bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground shadow-lift`}
                 style={{ animationDelay: p.delay, rotate: `${-8 + i * 5}deg` }}
               >
                 {p.label}
@@ -260,7 +260,7 @@ function Index() {
             {rightPills.map((p, i) => (
               <span
                 key={p.label}
-                className={`animate-float absolute ${p.style} rounded-full bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground shadow-[var(--shadow-lift)]`}
+                className={`animate-float absolute ${p.style} rounded-full bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground shadow-lift`}
                 style={{ animationDelay: p.delay, rotate: `${10 + i * 6}deg` }}
               >
                 {p.label}
@@ -268,11 +268,11 @@ function Index() {
             ))}
           </div>
 
-          <div className="relative mx-auto flex min-h-[85vh] max-w-5xl flex-col items-center justify-center px-5 pb-16 pt-32 text-center sm:min-h-[92vh] sm:px-6 sm:pb-24 sm:pt-40">
+          <div className="relative mx-auto flex hero-section max-w-5xl flex-col items-center justify-center px-5 pb-16 pt-32 text-center sm:px-6 sm:pb-24 sm:pt-40">
             <span className="eyebrow animate-rise">Systems over chaos</span>
 
             <h1
-              className="animate-rise mt-5 font-display text-[clamp(2rem,8vw,4.8rem)] font-extrabold leading-[1.02] text-foreground sm:mt-6 sm:leading-[0.98]"
+              className="animate-rise mt-5 hero-title text-foreground sm:mt-6"
               style={{ animationDelay: "60ms" }}
             >
               Where there is chaos,
@@ -281,7 +281,7 @@ function Index() {
             </h1>
 
             <p
-              className="animate-rise mt-5 max-w-xl text-[0.9375rem] leading-relaxed text-muted-foreground sm:mt-7 sm:text-lg"
+              className="animate-rise mt-5 max-w-xl text-base leading-relaxed text-muted-foreground sm:mt-7 sm:text-lg"
               style={{ animationDelay: "140ms" }}
             >
               Scattered data, manual work, tools that don't talk to each other. We go where the
@@ -294,7 +294,7 @@ function Index() {
             >
               <Link
                 to="/products"
-                className="group inline-flex w-full items-center justify-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold text-primary-foreground shadow-[var(--shadow-lift)] transition-transform duration-300 hover:-translate-y-0.5 sm:w-auto sm:justify-start"
+                className="group btn-primary w-full sm:w-auto sm:justify-start"
                 style={{ background: "var(--gradient-electric)" }}
               >
                 Our products
@@ -312,7 +312,7 @@ function Index() {
               </Link>
               <a
                 href="#letters"
-                className="inline-flex w-full items-center justify-center rounded-full border border-border bg-background px-7 py-3.5 text-sm font-semibold text-foreground transition-colors hover:bg-secondary sm:w-auto"
+                className="btn-outline w-full sm:w-auto"
               >
                 Read our letters
               </a>
@@ -325,7 +325,7 @@ function Index() {
           <div className="mx-auto grid max-w-6xl gap-8 px-5 py-14 sm:px-6 sm:py-20 md:grid-cols-[1.1fr_1fr] md:items-start">
             <div>
               <span className="eyebrow">Our philosophy</span>
-              <h2 className="mt-4 text-2xl font-bold leading-tight text-foreground sm:text-3xl md:text-4xl">
+              <h2 className="mt-4 section-heading">
                 Systems over chaos.
               </h2>
             </div>
@@ -365,7 +365,7 @@ function Index() {
             {/* Heading */}
             <div className="mb-12 text-center">
               <span className="eyebrow">FAQ</span>
-              <h2 className="mt-4 text-2xl font-bold leading-tight text-foreground sm:text-3xl md:text-4xl">
+              <h2 className="mt-4 section-heading">
                 Frequently asked questions.
               </h2>
             </div>
@@ -374,7 +374,7 @@ function Index() {
             <div className="relative mb-8 grid grid-cols-3 rounded-2xl border border-border bg-background p-1 shadow-xs sm:rounded-full">
               {/* Fluid sliding pill */}
               <div
-                className="absolute top-1 bottom-1 left-1 rounded-full bg-primary shadow-[var(--shadow-lift)] transition-transform duration-300 ease-out"
+                className="absolute top-1 bottom-1 left-1 rounded-full bg-primary shadow-lift transition-transform duration-300 ease-out"
                 style={{
                   width: "calc((100% - 8px) / 3)",
                   transform: `translateX(calc(${activeTab} * 100%))`,
@@ -387,7 +387,7 @@ function Index() {
                   type="button"
                   id={`faq-tab-${cat.id}`}
                   onClick={() => setActiveTab(idx)}
-                  className={`relative z-10 rounded-xl py-2.5 px-1.5 text-center text-[11px] font-medium leading-tight transition-colors duration-200 sm:rounded-full sm:px-2 sm:text-sm ${
+                  className={`relative z-10 rounded-xl py-2.5 px-1.5 text-center text-xs font-medium leading-tight transition-colors duration-200 sm:rounded-full sm:px-2 sm:text-sm ${
                     activeTab === idx
                       ? "text-primary-foreground font-semibold"
                       : "text-muted-foreground hover:text-foreground"
@@ -427,7 +427,7 @@ function Index() {
             <div className="mb-8 flex flex-wrap items-end justify-between gap-4 sm:mb-12">
               <div>
                 <span className="eyebrow">Stradmont Letters</span>
-                <h2 className="mt-4 text-2xl font-bold leading-tight text-foreground sm:text-3xl md:text-4xl">
+                <h2 className="mt-4 section-heading">
                   Notes and studies.
                 </h2>
               </div>
@@ -456,7 +456,7 @@ function Index() {
                 <Link
                   to="/letters/$slug"
                   params={{ slug: featuredLetter.slug }}
-                  className="card-lab group relative flex flex-col justify-end overflow-hidden rounded-3xl p-6 text-background min-h-[280px] no-underline sm:p-8 sm:min-h-[380px]"
+                  className="card-lab group relative flex flex-col justify-end overflow-hidden rounded-3xl p-6 text-background min-h-72 no-underline sm:p-8 sm:min-h-96"
                 >
                   {/* Background cover image */}
                   <img
@@ -550,7 +550,7 @@ function Index() {
                   {/* "Everything we've written" CTA card */}
                   <Link
                     to="/letters"
-                    className="card-lab group flex items-center justify-between rounded-3xl bg-foreground p-6 text-background min-h-[130px] no-underline sm:p-8 sm:min-h-[160px]"
+                    className="card-lab group flex items-center justify-between rounded-3xl bg-foreground p-6 text-background min-h-32 no-underline sm:p-8 sm:min-h-40"
                   >
                     <div>
                       <p className="text-lg font-semibold leading-snug">
@@ -597,7 +597,7 @@ function Index() {
           <div className="relative mx-auto grid max-w-6xl gap-10 px-5 py-14 sm:px-6 sm:py-24 sm:gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
             <div>
               <span className="eyebrow">Contact us</span>
-              <h2 className="mt-5 text-2xl font-bold leading-tight text-foreground sm:text-3xl md:text-4xl">
+              <h2 className="mt-5 section-heading">
                 Found chaos in your business?
               </h2>
               <p className="mt-5 max-w-md text-base leading-relaxed text-muted-foreground">

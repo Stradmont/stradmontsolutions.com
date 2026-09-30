@@ -60,6 +60,10 @@
   --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
   --font-serif: "Newsreader", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  /* ── Shadow aliases — makes shadow-soft and shadow-lift usable as Tailwind utilities ── */
+  --shadow-soft: var(--shadow-soft);
+  --shadow-lift: var(--shadow-lift);
 }
 
 :root {
@@ -120,10 +124,8 @@
     oklch(0.542 0.245 292.7) 0%,
     oklch(0.62 0.21 296) 100%
   );
-  --shadow-soft:
-    0 1px 2px oklch(0.251 0.089 288.2 / 0.04), 0 12px 32px -12px oklch(0.251 0.089 288.2 / 0.12);
-  --shadow-lift:
-    0 2px 4px oklch(0.251 0.089 288.2 / 0.05), 0 24px 60px -20px oklch(0.542 0.245 292.7 / 0.28);
+  --shadow-soft: 0 1px 2px oklch(0.251 0.089 288.2 / 0.04), 0 12px 32px -12px oklch(0.251 0.089 288.2 / 0.12);
+  --shadow-lift: 0 2px 4px oklch(0.251 0.089 288.2 / 0.05), 0 24px 60px -20px oklch(0.542 0.245 292.7 / 0.28);
   --transition-smooth: 260ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -190,6 +192,205 @@
   button:disabled,
   [aria-disabled="true"] {
     cursor: not-allowed;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Layout utilities
+   Centralises container widths, section padding, and page headers
+   so every route uses the same spatial rhythm.
+───────────────────────────────────────────────────────────── */
+
+/* Outer page wrapper — constrains to max-w-6xl with consistent horizontal padding */
+@utility page-container {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 72rem; /* 1152 px — Tailwind max-w-6xl */
+  padding-inline: 1.25rem; /* px-5 */
+
+  @media (min-width: 640px) {
+    padding-inline: 1.5rem; /* sm:px-6 */
+  }
+}
+
+/* Narrow container for prose / focused content (contact LHS, articles) */
+@utility section-narrow {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 48rem; /* 768 px — Tailwind max-w-3xl */
+  padding-inline: 1.25rem;
+
+  @media (min-width: 640px) {
+    padding-inline: 1.5rem;
+  }
+}
+
+/* Wide container for editorial prose / article body */
+@utility prose-container {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 46.25rem; /* ~740 px — editorial reading width */
+  padding-inline: 1.25rem;
+
+  @media (min-width: 640px) {
+    padding-inline: 1.5rem;
+  }
+}
+
+/* Consistent vertical section padding */
+@utility section-py {
+  padding-block: 3.5rem; /* py-14 */
+
+  @media (min-width: 640px) {
+    padding-block: 6rem; /* sm:py-24 */
+  }
+}
+
+/* Page header top padding — clears the fixed nav */
+@utility page-header-pt {
+  padding-top: 8rem; /* pt-32 — clears fixed nav at ~64px with breathing room */
+
+  @media (min-width: 640px) {
+    padding-top: 12rem; /* sm:pt-48 */
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Typography scale
+   Replaces arbitrary text-[clamp(...)] and pixel sizes.
+───────────────────────────────────────────────────────────── */
+
+/* Hero display heading — largest viewport-fluid size */
+@utility hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 8vw, 4.8rem);
+  font-weight: 800;
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+
+  @media (min-width: 640px) {
+    line-height: 0.98;
+  }
+}
+
+/* Page hero heading — used on inner page headers (contact, products, letters) */
+@utility page-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 7vw, 3.8rem);
+  font-weight: 800;
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+}
+
+/* Article / letter detail heading */
+@utility article-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.85rem, 5.5vw, 3.25rem);
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: -0.03em;
+}
+
+/* Section h2 heading — used across Overview, FAQ, Letters, Contact sections */
+@utility section-heading {
+  font-size: 1.5rem;    /* text-2xl */
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--color-foreground);
+
+  @media (min-width: 640px) {
+    font-size: 1.875rem; /* sm:text-3xl */
+  }
+
+  @media (min-width: 768px) {
+    font-size: 2.25rem;  /* md:text-4xl */
+  }
+}
+
+/* Editorial prose body text */
+@utility prose-body {
+  font-family: var(--font-serif);
+  font-size: 1.03125rem; /* ~16.5px */
+  line-height: 1.85;
+  letter-spacing: -0.003em;
+  color: oklch(from var(--color-foreground) l c h / 0.85);
+
+  @media (min-width: 640px) {
+    font-size: 1.125rem; /* sm:~18px */
+  }
+
+  @media (min-width: 768px) {
+    font-size: 1.21875rem; /* md:~19.5px */
+  }
+}
+
+/* Standfirst / article lead paragraph */
+@utility standfirst {
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.65;
+  color: oklch(from var(--color-foreground) l c h / 0.75);
+
+  @media (min-width: 640px) {
+    font-size: 1.2rem;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Button utilities
+   Eliminates repeated inline button classes across all pages.
+───────────────────────────────────────────────────────────── */
+
+/* Primary CTA — electric-violet gradient pill */
+@utility btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 9999px;
+  padding: 0.875rem 1.75rem; /* py-3.5 px-7 */
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-primary-foreground);
+  background: var(--gradient-electric);
+  box-shadow: var(--shadow-lift);
+  transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+}
+
+/* Secondary / outline pill button */
+@utility btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 9999px;
+  border: 1px solid var(--color-border);
+  background: var(--color-background);
+  padding: 0.875rem 1.75rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-foreground);
+  transition: background-color 200ms ease, border-color 200ms ease;
+
+  &:hover {
+    background: var(--color-secondary);
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Min-height tokens for hero and card contexts
+───────────────────────────────────────────────────────────── */
+
+/* Hero section viewport fill */
+@utility hero-section {
+  min-height: 85svh;
+
+  @media (min-width: 640px) {
+    min-height: 92svh;
   }
 }
 

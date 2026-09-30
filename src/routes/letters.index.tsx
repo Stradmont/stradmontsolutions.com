@@ -78,7 +78,7 @@ function LettersIndexPage() {
         <section className="surface-ambient border-b border-border pt-32 pb-14 sm:pt-40 sm:pb-20">
           <div className="mx-auto max-w-5xl px-6 text-center">
             <span className="eyebrow">Stradmont Letters</span>
-            <h1 className="mt-5 font-display text-[clamp(2rem,7vw,3.8rem)] font-extrabold leading-[0.98] text-foreground">
+            <h1 className="mt-5 page-title text-foreground">
               Notes from the chaos
               <br />
               we solve.

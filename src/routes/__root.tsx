@@ -20,7 +20,7 @@ function BrandLogo() {
       className="group inline-flex items-center gap-2.5 transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-xl"
       aria-label="Stradmont Solutions Home"
     >
-      <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-primary/30 bg-primary/10 shadow-[var(--shadow-glow)] transition-transform duration-300 group-hover:scale-105">
+      <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-primary/30 bg-primary/10 shadow-soft transition-transform duration-300 group-hover:scale-105">
         <img
           src="/favicon.svg"
           alt="Stradmont monogram mark"
@@ -57,7 +57,7 @@ function NotFoundComponent() {
         <div className="mt-8 flex flex-wrap justify-center gap-3">
           <Link
             to="/"
-            className="inline-flex items-center justify-center rounded-full px-7 py-3.5 text-sm font-semibold text-primary-foreground shadow-[var(--shadow-lift)] transition-transform duration-300 hover:-translate-y-0.5"
+            className="inline-flex items-center justify-center rounded-full px-7 py-3.5 text-sm font-semibold text-primary-foreground shadow-lift transition-transform duration-300 hover:-translate-y-0.5"
             style={{ background: "var(--gradient-electric)" }}
           >
             Return to Home
@@ -120,7 +120,7 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
               router.invalidate();
               reset();
             }}
-            className="inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-semibold text-primary-foreground shadow-[var(--shadow-lift)] transition-transform duration-300 hover:-translate-y-0.5"
+            className="inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-semibold text-primary-foreground shadow-lift transition-transform duration-300 hover:-translate-y-0.5"
             style={{ background: "var(--gradient-electric)" }}
           >
             Try again

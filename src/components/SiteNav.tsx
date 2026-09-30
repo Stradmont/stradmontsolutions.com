@@ -31,7 +31,7 @@ export function SiteNav() {
     <>
       <a
         href="#main-content"
-        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[60] focus:rounded-full focus:bg-primary focus:px-5 focus:py-2.5 focus:text-sm focus:font-semibold focus:text-primary-foreground focus:shadow-[var(--shadow-lift)]"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[60] focus:rounded-full focus:bg-primary focus:px-5 focus:py-2.5 focus:text-sm focus:font-semibold focus:text-primary-foreground focus:shadow-lift"
       >
         Skip to main content
       </a>
@@ -39,7 +39,7 @@ export function SiteNav() {
       <header className="fixed inset-x-0 top-4 z-50 px-4">
         <nav
           className={`mx-auto flex max-w-5xl items-center justify-between rounded-full border border-border/80 bg-background/90 px-6 py-3.5 backdrop-blur-xl transition-all duration-300 ${
-            scrolled ? "shadow-[var(--shadow-soft)] border-border" : "shadow-xs"
+            scrolled ? "shadow-soft border-border" : "shadow-xs"
           }`}
         >
           <Link
@@ -58,7 +58,7 @@ export function SiteNav() {
                 key={l.to}
                 to={l.to}
                 activeOptions={{ exact: l.to === "/" }}
-                className="group relative px-1 py-1.5 text-[15px] font-medium tracking-tight text-muted-foreground transition-colors duration-200 ease-out hover:text-foreground"
+                className="group relative px-1 py-1.5 text-sm font-medium tracking-tight text-muted-foreground transition-colors duration-200 ease-out hover:text-foreground"
                 activeProps={{
                   className: "text-foreground font-semibold",
                 }}
@@ -120,7 +120,7 @@ export function SiteNav() {
 
         {/* Mobile Drawer with smooth slide & fade */}
         <div
-          className={`relative z-50 mx-auto mt-2 max-w-5xl rounded-3xl border border-border bg-background/95 p-4 shadow-[var(--shadow-lift)] backdrop-blur-xl transition-all duration-300 ease-out md:hidden ${
+          className={`relative z-50 mx-auto mt-2 max-w-5xl rounded-3xl border border-border bg-background/95 p-4 shadow-lift backdrop-blur-xl transition-all duration-300 ease-out md:hidden ${
             open
               ? "opacity-100 translate-y-0 scale-100 pointer-events-auto"
               : "opacity-0 -translate-y-3 scale-[0.98] pointer-events-none"

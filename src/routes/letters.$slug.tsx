@@ -82,7 +82,7 @@ function LetterNotFound() {
       <SiteNav />
       <main
         id="main-content"
-        className="flex min-h-[70vh] flex-col items-center justify-center px-6 text-center"
+        className="flex min-h-[70svh] flex-col items-center justify-center px-6 text-center"
       >
         <span className="text-xs font-semibold text-primary">404</span>
         <h1 className="mt-3 font-display text-3xl font-extrabold text-foreground sm:text-4xl">
@@ -126,7 +126,7 @@ function LetterDetailPage() {
       <main id="main-content" key={letter.slug} className="animate-page-transition">
         {/* Editorial Header */}
         <header className="border-b border-border/70 bg-gradient-to-b from-secondary/40 via-background to-background pb-12 pt-28 sm:pb-20 sm:pt-44">
-          <div className="mx-auto max-w-[740px] px-5 sm:px-6">
+          <div className="prose-container">
             {/* Top breadcrumb & series tag */}
             <div className="flex flex-wrap items-center justify-between gap-2 text-xs text-muted-foreground">
               <Link
@@ -143,12 +143,12 @@ function LetterDetailPage() {
             </div>
 
             {/* Title */}
-            <h1 className="mt-6 font-display text-[clamp(1.85rem,5.5vw,3.25rem)] font-extrabold leading-[1.12] tracking-tight text-foreground sm:mt-8">
+            <h1 className="mt-6 article-title text-foreground sm:mt-8">
               {letter.title}
             </h1>
 
             {/* Standfirst / Lead Description (Natural case, natural font) */}
-            <p className="mt-4 text-base font-normal leading-[1.65] text-foreground/75 sm:mt-6 sm:text-[1.2rem]">
+            <p className="mt-4 standfirst sm:mt-6">
               {letter.body}
             </p>
 
@@ -190,8 +190,8 @@ function LetterDetailPage() {
         </header>
 
         {/* Editorial Feature Image */}
-        <div className="mx-auto max-w-[800px] px-5 pt-8 sm:px-6 sm:pt-14">
-          <figure className="overflow-hidden rounded-3xl border border-border bg-secondary/30 shadow-[var(--shadow-soft)]">
+        <div className="prose-container pt-8 sm:pt-14">
+          <figure className="overflow-hidden rounded-3xl border border-border bg-secondary/30 shadow-soft">
             <img
               src={letter.image}
               alt={letter.title}
@@ -204,12 +204,12 @@ function LetterDetailPage() {
         </div>
 
         {/* Editorial Body */}
-        <article className="mx-auto max-w-[740px] px-5 py-10 sm:px-6 sm:py-16">
+        <article className="prose-container py-10 sm:py-16">
           <div className="space-y-12">
             {letter.content.map((section, idx) => (
               <section key={idx} className={idx > 0 ? "pt-6" : ""}>
                 {section.heading && (
-                  <h2 className="mb-6 font-display text-2xl font-bold tracking-tight text-foreground sm:text-[1.65rem]">
+                  <h2 className="mb-6 font-display text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
                     {section.heading}
                   </h2>
                 )}
@@ -217,7 +217,7 @@ function LetterDetailPage() {
                   {section.paragraphs.map((p, pIdx) => (
                     <p
                       key={pIdx}
-                      className="font-serif text-[16.5px] leading-[1.85] tracking-[-0.003em] text-foreground/85 sm:text-[18px] md:text-[19.5px]"
+                      className="prose-body"
                     >
                       {p}
                     </p>
@@ -239,7 +239,7 @@ function LetterDetailPage() {
               <div className="mt-6">
                 <Link
                   to="/contact"
-                  className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2 text-xs font-semibold text-primary-foreground shadow-[var(--shadow-lift)] transition-all duration-300 ease-out hover:-translate-y-0.5 active:scale-[0.98]"
+                  className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2 text-xs font-semibold text-primary-foreground shadow-lift transition-all duration-300 ease-out hover:-translate-y-0.5 active:scale-[0.98]"
                 >
                   Write to the team
                 </Link>

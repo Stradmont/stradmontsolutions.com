@@ -85,7 +85,7 @@ function ProductsPage() {
         <section className="surface-ambient border-b border-border">
           <div className="mx-auto max-w-3xl px-5 pb-14 pt-32 text-center sm:px-6 sm:pb-20 sm:pt-48">
             <span className="eyebrow">Our Products</span>
-            <h1 className="mt-5 font-display text-[clamp(2rem,7vw,3.8rem)] font-extrabold leading-[1.02] text-foreground">
+            <h1 className="mt-5 page-title text-foreground">
               Built for institutions.
             </h1>
             <p className="mx-auto mt-5 max-w-lg text-base leading-relaxed text-muted-foreground">
@@ -107,7 +107,7 @@ function ProductsPage() {
                   href={product.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-2xl border border-border bg-white shadow-[var(--shadow-soft)] transition-transform duration-300 group-hover:scale-105 sm:h-20 sm:w-20"
+                  className="flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-2xl border border-border bg-white shadow-soft transition-transform duration-300 group-hover:scale-105 sm:h-20 sm:w-20"
                   aria-label={`Visit ${product.name} website`}
                 >
                   <img
@@ -150,7 +150,7 @@ function ProductsPage() {
                   href={product.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-primary-foreground shadow-[var(--shadow-lift)] transition-transform duration-300 hover:-translate-y-0.5"
+                  className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-primary-foreground shadow-lift transition-transform duration-300 hover:-translate-y-0.5"
                   style={{ background: "var(--gradient-electric)" }}
                 >
                   Visit thebuildersbase.com
@@ -189,7 +189,7 @@ function ProductsPage() {
             </div>
             <Link
               to="/contact"
-              className="shrink-0 inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-primary-foreground shadow-[var(--shadow-lift)] transition-all duration-300 ease-out hover:-translate-y-0.5 active:scale-[0.98]"
+              className="shrink-0 inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-primary-foreground shadow-lift transition-all duration-300 ease-out hover:-translate-y-0.5 active:scale-[0.98]"
               style={{ background: "var(--gradient-electric)" }}
             >
               Get in touch

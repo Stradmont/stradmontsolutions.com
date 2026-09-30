@@ -232,7 +232,7 @@ export function ContactForm() {
       </Field>
       <button
         type="submit"
-        className="inline-flex w-full items-center justify-center rounded-full px-7 py-3.5 text-sm font-semibold text-primary-foreground shadow-[var(--shadow-lift)] transition-transform duration-300 hover:-translate-y-0.5 sm:w-auto"
+        className="inline-flex w-full items-center justify-center rounded-full px-7 py-3.5 text-sm font-semibold text-primary-foreground shadow-lift transition-transform duration-300 hover:-translate-y-0.5 sm:w-auto"
         style={{ background: "var(--gradient-electric)" }}
       >
         Send message
