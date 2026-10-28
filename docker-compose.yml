@@ -1,0 +1,17 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        VITE_API_BASE_URL: https://api.stradmontsolutions.com/api/v1
+        VITE_TURNSTILE_SITE_KEY: 1x00000000000000000000AA
+    container_name: stradmont_client
+    restart: always
+    ports:
+      - "127.0.0.1:3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - HOST=0.0.0.0
+      - VITE_API_BASE_URL=https://api.stradmontsolutions.com/api/v1
