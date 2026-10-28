@@ -1,16 +1,22 @@
 import type { ReactNode } from "react";
 
+const rawApiBaseUrl =
+  (typeof import.meta !== "undefined" && import.meta.env?.VITE_API_BASE_URL) ||
+  (typeof process !== "undefined" && process.env?.VITE_API_BASE_URL) ||
+  "http://localhost:4000/api/v1";
+
+const rawTurnstileSiteKey =
+  (typeof import.meta !== "undefined" && import.meta.env?.VITE_TURNSTILE_SITE_KEY) ||
+  (typeof process !== "undefined" && process.env?.VITE_TURNSTILE_SITE_KEY) ||
+  "1x00000000000000000000AA";
+
 export const SITE_CONFIG = {
   name: "Stradmont Solutions",
   shortName: "Stradmont",
   tagline: "Systems over chaos",
   url: "https://stradmontsolutions.com",
-  apiBaseUrl:
-    (typeof import.meta !== "undefined" && import.meta.env?.VITE_API_BASE_URL) ||
-    "http://localhost:4000/api/v1",
-  turnstileSiteKey:
-    (typeof import.meta !== "undefined" && import.meta.env?.VITE_TURNSTILE_SITE_KEY) ||
-    "1x00000000000000000000AA",
+  apiBaseUrl: rawApiBaseUrl.replace(/\/+$/, ""),
+  turnstileSiteKey: rawTurnstileSiteKey.trim(),
   ogImage: "https://stradmontsolutions.com/og-image.png",
   contact: {
     email: "info@stradmontsolutions.com",

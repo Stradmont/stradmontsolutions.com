@@ -81,6 +81,7 @@ export function ContactForm() {
   const [copied, setCopied] = useState(false);
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
   const [turnstileError, setTurnstileError] = useState<string | null>(null);
+  const [turnstileLoadError, setTurnstileLoadError] = useState(false);
   const turnstileContainerRef = useRef<HTMLDivElement | null>(null);
   const turnstileWidgetIdRef = useRef<string | null>(null);
 
@@ -128,6 +129,7 @@ export function ContactForm() {
         callback: (token: string) => {
           setTurnstileToken(token);
           setTurnstileError(null);
+          setTurnstileLoadError(false);
         },
         "expired-callback": () => {
           setTurnstileToken(null);
@@ -147,12 +149,14 @@ export function ContactForm() {
 
       if (existingScript) {
         existingScript.addEventListener("load", mountWidget);
+        existingScript.addEventListener("error", () => setTurnstileLoadError(true));
       } else {
         const script = document.createElement("script");
         script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
         script.async = true;
         script.defer = true;
         script.addEventListener("load", mountWidget);
+        script.addEventListener("error", () => setTurnstileLoadError(true));
         document.head.appendChild(script);
       }
     }
@@ -186,7 +190,13 @@ export function ContactForm() {
     setTurnstileError(null);
 
     if (SITE_CONFIG.turnstileSiteKey && !turnstileToken) {
-      setTurnstileError("Please complete the security verification challenge.");
+      if (turnstileLoadError) {
+        setTurnstileError(
+          `Security verification could not load. Please reach us directly at ${SITE_CONFIG.contact.email} or try disabling ad blockers.`,
+        );
+      } else {
+        setTurnstileError("Please complete the security verification challenge.");
+      }
       return;
     }
 

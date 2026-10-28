@@ -208,7 +208,7 @@ function LetterDetailPage() {
         {/* Editorial Body */}
         <article className="prose-container py-10 sm:py-16">
           <div className="space-y-12">
-            {letter.content.map((section, idx) => (
+            {(letter.content || []).map((section, idx) => (
               <section key={idx} className={idx > 0 ? "pt-6" : ""}>
                 {section.heading && (
                   <h2 className="mb-6 font-display text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
@@ -216,7 +216,7 @@ function LetterDetailPage() {
                   </h2>
                 )}
                 <div className="space-y-6">
-                  {section.paragraphs.map((p, pIdx) => (
+                  {(section.paragraphs || []).map((p, pIdx) => (
                     <p key={pIdx} className="prose-body">
                       {p}
                     </p>

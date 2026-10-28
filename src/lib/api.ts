@@ -46,6 +46,31 @@ export class ApiClientError extends Error {
   }
 }
 
+function normalizeLetter(raw: Record<string, unknown>): Letter {
+  const contentArray = Array.isArray(raw.content) ? raw.content : [];
+  return {
+    slug: String(raw.slug || ""),
+    number: String(raw.number || ""),
+    kind: (raw.kind as "Letter" | "Note" | "Study") || "Letter",
+    date: String(raw.date || ""),
+    readTime: String(raw.readTime || ""),
+    title: String(raw.title || ""),
+    body: String(raw.body || ""),
+    image: String(raw.image || "/images/letters/design-docs.jpg"),
+    content: contentArray.map((sec) => {
+      const sectionObj = sec && typeof sec === "object" ? (sec as Record<string, unknown>) : {};
+      return {
+        heading: typeof sectionObj.heading === "string" ? sectionObj.heading : undefined,
+        paragraphs: Array.isArray(sectionObj.paragraphs)
+          ? sectionObj.paragraphs.map((p) => String(p))
+          : [],
+      };
+    }),
+    author: String(raw.author || "Stradmont Engineering"),
+    authorTitle: String(raw.authorTitle || "Systems Architecture"),
+  };
+}
+
 /**
  * Submits a contact enquiry to the Node.js backend (`POST /api/v1/contact`),
  * which verifies the Cloudflare Turnstile token, persists the enquiry, and
@@ -73,9 +98,19 @@ export async function submitContactEnquiry(
   const json = await response.json().catch(() => null);
 
   if (!response.ok) {
-    const validationErrors: string[] | undefined = Array.isArray(json?.errors)
-      ? json.errors
-      : undefined;
+    let validationErrors: string[] | undefined = undefined;
+    if (Array.isArray(json?.errors)) {
+      validationErrors = json.errors;
+    } else if (json?.details && typeof json.details === "object") {
+      validationErrors = Object.values(json.details as Record<string, unknown>).map((d) => {
+        if (typeof d === "string") return d;
+        if (d && typeof d === "object" && "message" in d) {
+          return String((d as { message: unknown }).message);
+        }
+        return JSON.stringify(d);
+      });
+    }
+
     const message =
       validationErrors?.[0] ||
       json?.message ||
@@ -92,13 +127,13 @@ export async function submitContactEnquiry(
  */
 export async function fetchLetters(): Promise<Letter[]> {
   try {
-    const response = await fetch(`${SITE_CONFIG.apiBaseUrl}/letters`, {
+    const response = await fetch(`${SITE_CONFIG.apiBaseUrl}/letters?limit=100&publishedOnly=true`, {
       headers: { Accept: "application/json" },
     });
     if (!response.ok) return letters;
     const json = await response.json();
     if (Array.isArray(json?.data) && json.data.length > 0) {
-      return json.data as Letter[];
+      return json.data.map(normalizeLetter);
     }
     return letters;
   } catch {
@@ -111,18 +146,19 @@ export async function fetchLetters(): Promise<Letter[]> {
  * with automatic fallback to local editorial data if the backend is offline.
  */
 export async function fetchLetterBySlug(slug: string): Promise<Letter | undefined> {
+  const fallback = getLetterBySlug(slug);
   try {
     const response = await fetch(`${SITE_CONFIG.apiBaseUrl}/letters/${encodeURIComponent(slug)}`, {
       headers: { Accept: "application/json" },
     });
-    if (!response.ok) return getLetterBySlug(slug);
+    if (!response.ok) return fallback;
     const json = await response.json();
     if (json?.data?.slug) {
-      return json.data as Letter;
+      return normalizeLetter(json.data);
     }
-    return getLetterBySlug(slug);
+    return fallback;
   } catch {
-    return getLetterBySlug(slug);
+    return fallback;
   }
 }
 
@@ -136,16 +172,29 @@ export async function fetchProducts(): Promise<ProductRecord[]> {
     slug: "builders-base",
   };
   try {
-    const response = await fetch(`${SITE_CONFIG.apiBaseUrl}/products`, {
+    const response = await fetch(`${SITE_CONFIG.apiBaseUrl}/products?activeOnly=true`, {
       headers: { Accept: "application/json" },
     });
     if (!response.ok) return [fallback];
     const json = await response.json();
     if (Array.isArray(json?.data) && json.data.length > 0) {
-      return json.data.map((item: ProductRecord) => ({
-        ...item,
-        domain: item.domain || new URL(item.url).hostname.replace(/^www\./, ""),
-      }));
+      return json.data.map((item: ProductRecord) => {
+        let domain = item.domain;
+        if (!domain && item.url) {
+          try {
+            domain = new URL(item.url).hostname.replace(/^www\./, "");
+          } catch {
+            domain = item.url
+              .replace(/^https?:\/\//, "")
+              .split("/")[0]
+              .replace(/^www\./, "");
+          }
+        }
+        return {
+          ...item,
+          domain: domain || "thebuildersbase.com",
+        };
+      });
     }
     return [fallback];
   } catch {
