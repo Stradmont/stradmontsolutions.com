@@ -16,7 +16,7 @@ export function SiteFooter() {
               <span className="h-1.5 w-1.5 rounded-full bg-primary" />
             </Link>
             <p className="mt-3 max-w-[32ch] text-sm leading-relaxed text-muted-foreground">
-              {SITE_CONFIG.tagline}. Built for technology and finance.
+              {SITE_CONFIG.tagline}.
             </p>
 
             {/* Social icons with native brand colours */}
@@ -123,7 +123,7 @@ export function SiteFooter() {
           <p>
             © {new Date().getFullYear()} {SITE_CONFIG.name}. All rights reserved.
           </p>
-          <p>{SITE_CONFIG.tagline}.</p>
+          <p>Built for technology and finance.</p>
         </div>
       </div>
     </footer>

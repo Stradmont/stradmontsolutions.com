@@ -1,7 +1,7 @@
 # Stradmont Solutions
 
-> **Systems over chaos.**
-> Stradmont Solutions finds the chaos inside technology and finance operations and replaces it with systems that hold.
+> **Building Products That Move the World Forward.**
+> Stradmont Solutions engineers specialised SaaS platforms and workflow software for technology and finance institutions.
 
 Stradmont Solutions is a parent research laboratory engineering specialised platforms and operational architectures for technology and financial institutions.
 

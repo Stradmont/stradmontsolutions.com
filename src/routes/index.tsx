@@ -95,7 +95,7 @@ const rightPills = [
 const processSteps = [
   {
     step: "Phase 01",
-    title: "Find the chaos",
+    title: "Analyze the problem",
     description: "Audit workflows and map operational choke points.",
   },
   {
@@ -122,7 +122,7 @@ const faqCategories = [
     items: [
       {
         q: "What does Stradmont Solutions do?",
-        a: "We find the chaos inside technology and finance operations. Scattered data, manual work, tools that don't talk to each other. We replace it with clear systems that hold. We research, architect, and engineer those systems, then stay to make sure they keep running.",
+        a: "We solve complex operational challenges inside technology and finance operations. Scattered data, manual work, tools that don't talk to each other. We replace them with clear, scalable systems that hold. We research, architect, and engineer those platforms, then stay to make sure they keep running.",
       },
       {
         q: "Who do you typically work with?",
@@ -269,7 +269,7 @@ function Index() {
           </div>
 
           <div className="relative mx-auto flex hero-section max-w-5xl flex-col items-center justify-center px-5 pb-16 pt-32 text-center sm:px-6 sm:pb-24 sm:pt-40">
-            <span className="eyebrow animate-rise">Systems over chaos</span>
+            <span className="eyebrow animate-rise">Stradmont Solutions</span>
 
             <h1
               className="animate-rise mt-5 hero-title text-foreground sm:mt-6"
@@ -320,18 +320,18 @@ function Index() {
           <div className="mx-auto grid max-w-6xl gap-8 px-5 py-14 sm:px-6 sm:py-20 md:grid-cols-[1.1fr_1fr] md:items-start">
             <div>
               <span className="eyebrow">Our philosophy</span>
-              <h2 className="mt-4 section-heading">Systems over chaos.</h2>
+              <h2 className="mt-4 section-heading">Purpose-built systems.</h2>
             </div>
             <div className="space-y-5 text-base leading-relaxed text-muted-foreground">
               <p>
-                Every business has chaos somewhere: a process nobody owns, numbers that never match,
-                work done twice. That is where we start. We find it, study it, and replace it with a
-                system that runs the same way every time.
+                Every growing organization reaches a point where existing processes create friction:
+                unconnected tools, manual bottlenecks, and fragmented workflows. That is where we start.
+                We study the problem and build reliable systems designed to run seamlessly.
               </p>
               <p>
                 The platforms we build, including{" "}
-                <span className="font-semibold text-foreground">Builders Base</span>, began as chaos
-                we found and solved.
+                <span className="font-semibold text-foreground">Builders Base</span>, began as real operational
+                challenges we solved through thoughtful engineering.
               </p>
             </div>
           </div>

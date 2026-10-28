@@ -6,7 +6,7 @@ export { SITE_DOMAIN, SITE_URL };
 export const SITE_CONFIG = {
   name: "Stradmont Solutions",
   shortName: "Stradmont",
-  tagline: "Systems over chaos",
+  tagline: "Building Products That Move the World Forward",
   url: SITE_URL,
   domain: SITE_DOMAIN,
   apiBaseUrl: ENV.API_BASE_URL,
