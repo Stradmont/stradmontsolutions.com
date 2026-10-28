@@ -199,17 +199,8 @@ export function CapabilityMap() {
       className="scroll-mt-28 border-y border-border bg-gradient-to-b from-background via-secondary/20 to-background py-16 text-foreground antialiased sm:py-24"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        {/* Top Architectural Technical Header Strip */}
-        <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border pb-4 font-mono text-[11px] tracking-wider text-muted-foreground uppercase sm:text-xs">
-          <span className="font-semibold text-primary">[ MASTERY / 01 ]</span>
-          <span className="tracking-widest text-foreground font-medium">
-            STRADMONT — CAPABILITY MAP
-          </span>
-          <span>2026 / STRADMONTSOLUTIONS.COM</span>
-        </div>
-
         {/* Section Sub-heading */}
-        <div className="mt-8 text-center sm:mt-10">
+        <div className="text-center">
           <p className="font-mono text-xs tracking-widest text-primary font-semibold uppercase">
             — WHAT WE DO BEST —
           </p>
