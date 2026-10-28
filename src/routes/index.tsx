@@ -4,6 +4,7 @@ import { FlowLines } from "@/components/FlowLines";
 import { SiteNav } from "@/components/SiteNav";
 import { SiteFooter } from "@/components/SiteFooter";
 import { ContactForm } from "@/components/ContactForm";
+import { CapabilityMap } from "@/components/CapabilityMap";
 import { fetchLetters } from "@/lib/api";
 import { SITE_CONFIG } from "@/lib/site-config";
 
@@ -310,8 +311,8 @@ function Index() {
                   <path d="M3 8h10M9 4l4 4-4 4" />
                 </svg>
               </Link>
-              <a href="#letters" className="btn-outline w-full sm:w-auto">
-                Read our letters
+              <a href="#capabilities" className="btn-outline w-full sm:w-auto">
+                Capability map
               </a>
             </div>
           </div>
@@ -353,6 +354,9 @@ function Index() {
             ))}
           </div>
         </section>
+
+        {/* ---------------- Capability Map (Radar & Orbit) ---------------- */}
+        <CapabilityMap />
 
         {/* ---------------- FAQ ---------------- */}
         <section id="faq" className="scroll-mt-28 border-y border-border bg-secondary/40">
