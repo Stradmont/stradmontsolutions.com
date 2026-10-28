@@ -1,3 +1,4 @@
+import { ENV } from "@/config/env.config";
 import { getLetterBySlug, letters, type Letter } from "@/lib/letters-data";
 import { SITE_CONFIG } from "@/lib/site-config";
 
@@ -79,7 +80,7 @@ function normalizeLetter(raw: Record<string, unknown>): Letter {
 export async function submitContactEnquiry(
   payload: ContactEnquiryPayload,
 ): Promise<ApiResponse<ContactEnquiryRecord>> {
-  const response = await fetch(`${SITE_CONFIG.apiBaseUrl}/contact`, {
+  const response = await fetch(`${ENV.API_BASE_URL}/contact`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -127,7 +128,7 @@ export async function submitContactEnquiry(
  */
 export async function fetchLetters(): Promise<Letter[]> {
   try {
-    const response = await fetch(`${SITE_CONFIG.apiBaseUrl}/letters?limit=100&publishedOnly=true`, {
+    const response = await fetch(`${ENV.API_BASE_URL}/letters?limit=100&publishedOnly=true`, {
       headers: { Accept: "application/json" },
     });
     if (!response.ok) return letters;
@@ -148,7 +149,7 @@ export async function fetchLetters(): Promise<Letter[]> {
 export async function fetchLetterBySlug(slug: string): Promise<Letter | undefined> {
   const fallback = getLetterBySlug(slug);
   try {
-    const response = await fetch(`${SITE_CONFIG.apiBaseUrl}/letters/${encodeURIComponent(slug)}`, {
+    const response = await fetch(`${ENV.API_BASE_URL}/letters/${encodeURIComponent(slug)}`, {
       headers: { Accept: "application/json" },
     });
     if (!response.ok) return fallback;
@@ -172,7 +173,7 @@ export async function fetchProducts(): Promise<ProductRecord[]> {
     slug: "builders-base",
   };
   try {
-    const response = await fetch(`${SITE_CONFIG.apiBaseUrl}/products?activeOnly=true`, {
+    const response = await fetch(`${ENV.API_BASE_URL}/products?activeOnly=true`, {
       headers: { Accept: "application/json" },
     });
     if (!response.ok) return [fallback];

@@ -1,26 +1,20 @@
 import type { ReactNode } from "react";
+import { ENV, SITE_DOMAIN, SITE_URL } from "@/config/env.config";
 
-const rawApiBaseUrl =
-  (typeof import.meta !== "undefined" && import.meta.env?.VITE_API_BASE_URL) ||
-  (typeof process !== "undefined" && process.env?.VITE_API_BASE_URL) ||
-  "http://localhost:4000/api/v1";
-
-const rawTurnstileSiteKey =
-  (typeof import.meta !== "undefined" && import.meta.env?.VITE_TURNSTILE_SITE_KEY) ||
-  (typeof process !== "undefined" && process.env?.VITE_TURNSTILE_SITE_KEY) ||
-  "1x00000000000000000000AA";
+export { SITE_DOMAIN, SITE_URL };
 
 export const SITE_CONFIG = {
   name: "Stradmont Solutions",
   shortName: "Stradmont",
   tagline: "Systems over chaos",
-  url: "https://stradmontsolutions.com",
-  apiBaseUrl: rawApiBaseUrl.replace(/\/+$/, ""),
-  turnstileSiteKey: rawTurnstileSiteKey.trim(),
-  ogImage: "https://stradmontsolutions.com/og-image.png",
+  url: SITE_URL,
+  domain: SITE_DOMAIN,
+  apiBaseUrl: ENV.API_BASE_URL,
+  turnstileSiteKey: ENV.TURNSTILE_SITE_KEY,
+  ogImage: `${SITE_URL}/og-image.png`,
   contact: {
-    email: "info@stradmontsolutions.com",
-    emailHref: "mailto:info@stradmontsolutions.com",
+    email: `info@${SITE_DOMAIN}`,
+    emailHref: `mailto:info@${SITE_DOMAIN}`,
     phone: "+1 (226) 975-1978",
     phoneSchema: "+1-226-975-1978",
     phoneHref: "tel:+12269751978",

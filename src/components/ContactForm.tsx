@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { ENV } from "@/config/env.config";
 import { ApiClientError, submitContactEnquiry } from "@/lib/api";
 import { SITE_CONFIG } from "@/lib/site-config";
 
@@ -107,7 +108,7 @@ export function ContactForm() {
 
   useEffect(() => {
     if (submission) return;
-    if (typeof window === "undefined" || !SITE_CONFIG.turnstileSiteKey) return;
+    if (typeof window === "undefined" || !ENV.TURNSTILE_SITE_KEY) return;
 
     let cancelled = false;
 
@@ -124,7 +125,7 @@ export function ContactForm() {
       }
 
       turnstileWidgetIdRef.current = window.turnstile.render(turnstileContainerRef.current, {
-        sitekey: SITE_CONFIG.turnstileSiteKey,
+        sitekey: ENV.TURNSTILE_SITE_KEY,
         theme: "light",
         callback: (token: string) => {
           setTurnstileToken(token);
@@ -189,7 +190,7 @@ export function ContactForm() {
     setServerError(null);
     setTurnstileError(null);
 
-    if (SITE_CONFIG.turnstileSiteKey && !turnstileToken) {
+    if (ENV.TURNSTILE_SITE_KEY && !turnstileToken) {
       if (turnstileLoadError) {
         setTurnstileError(
           `Security verification could not load. Please reach us directly at ${SITE_CONFIG.contact.email} or try disabling ad blockers.`,
