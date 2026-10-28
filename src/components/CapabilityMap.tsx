@@ -321,16 +321,6 @@ export function CapabilityMap() {
                     ))}
                   </div>
 
-                  {/* Central Reticle Core Nucleus */}
-                  <div className="my-1 flex items-center justify-center">
-                    <div className="flex items-center gap-2 rounded-full border border-primary/30 bg-primary/5 px-4 py-1.5 shadow-xs">
-                      <Sparkles className="h-3.5 w-3.5 text-primary animate-pulse" />
-                      <span className="font-mono text-[11px] font-bold tracking-widest uppercase text-primary">
-                        STRADMONT BUILD CORE
-                      </span>
-                    </div>
-                  </div>
-
                   {/* Row 3: Platform & Data + Web Development */}
                   <div className="flex flex-wrap items-center justify-center gap-3">
                     {coreCapabilities.slice(3, 5).map((item) => (

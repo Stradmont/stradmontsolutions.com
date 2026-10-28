@@ -600,9 +600,12 @@ function Index() {
           <div className="relative mx-auto grid max-w-6xl gap-10 px-5 py-14 sm:px-6 sm:py-24 sm:gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
             <div>
               <span className="eyebrow">Contact us</span>
-              <h2 className="mt-5 section-heading">Found chaos in your business?</h2>
+              <h2 className="mt-5 section-heading">
+                Bring us a system you can't afford to get wrong.
+              </h2>
               <p className="mt-5 max-w-md text-base leading-relaxed text-muted-foreground">
-                Tell us where things break down. We will help you turn it into a system.
+                Whether you're launching an ambitious new product or engineering a mission-critical
+                platform that must perform under pressure—let's build it together.
               </p>
             </div>
             <ContactForm />
