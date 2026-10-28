@@ -137,9 +137,16 @@ function ProductsPage() {
                   </div>
                 </div>
 
-                <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground">
-                  {product.body}
-                </p>
+                {product.body.includes('<') ? (
+                  <div
+                    className="mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground prose prose-neutral dark:prose-invert"
+                    dangerouslySetInnerHTML={{ __html: product.body }}
+                  />
+                ) : (
+                  <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground">
+                    {product.body}
+                  </p>
+                )}
 
                 <div className="mt-8 flex flex-wrap items-center gap-4">
                   <a
