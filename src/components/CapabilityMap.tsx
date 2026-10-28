@@ -190,20 +190,8 @@ function renderSymbol(type: CapabilityNode["symbol"], color: string) {
   }
 }
 
-interface ActiveDetail {
-  name: string;
-  summary: string;
-  deliverables?: string[] | undefined;
-}
-
-const initialCapability = coreCapabilities[0]!;
-
 export function CapabilityMap() {
-  const [activeItem, setActiveItem] = useState<ActiveDetail>({
-    name: initialCapability.name,
-    summary: initialCapability.summary,
-    deliverables: initialCapability.deliverables,
-  });
+  const [activeId, setActiveId] = useState<string>("applied-ai");
 
   return (
     <section
@@ -256,11 +244,11 @@ export function CapabilityMap() {
           {/* Horizontal Strategy-to-Growth Axis Line */}
           <div className="pointer-events-none absolute inset-x-4 top-1/2 -translate-y-1/2 flex items-center justify-between px-2 sm:px-6">
             <span className="font-mono text-[10px] tracking-widest text-muted-foreground uppercase sm:text-xs">
-              STRATEGY (STRAD) ←
+              STRATEGY
             </span>
             <div className="mx-3 h-px flex-1 border-t border-dashed border-border sm:mx-8" />
             <span className="font-mono text-[10px] tracking-widest text-muted-foreground uppercase sm:text-xs">
-              → GROWTH (MONT)
+              GROWTH
             </span>
           </div>
 
@@ -270,28 +258,16 @@ export function CapabilityMap() {
               {/* Left Column: Strategy Satellites (Desktop) */}
               <div className="hidden flex-col items-end gap-5 lg:flex pr-4">
                 {strategySatellites.map((sat) => {
-                  const isSelected = activeItem.name === sat.name;
+                  const isSelected = activeId === sat.id;
                   return (
                     <button
                       key={sat.id}
                       type="button"
-                      onMouseEnter={() =>
-                        setActiveItem({
-                          name: sat.name,
-                          summary: sat.summary,
-                          deliverables: sat.deliverables,
-                        })
-                      }
-                      onClick={() =>
-                        setActiveItem({
-                          name: sat.name,
-                          summary: sat.summary,
-                          deliverables: sat.deliverables,
-                        })
-                      }
+                      onMouseEnter={() => setActiveId(sat.id)}
+                      onClick={() => setActiveId(sat.id)}
                       className={`group inline-flex items-center rounded-full border px-4 py-2 font-mono text-xs lowercase tracking-wide transition-all duration-300 ${
                         isSelected
-                          ? "border-primary bg-primary/10 text-primary font-semibold shadow-xs"
+                          ? "border-primary bg-primary/10 text-primary font-semibold shadow-xs scale-[1.03]"
                           : "border-border bg-white text-muted-foreground hover:border-primary/40 hover:text-foreground"
                       }`}
                     >
@@ -308,23 +284,11 @@ export function CapabilityMap() {
                   {coreCapabilities[0] && (
                     <button
                       type="button"
-                      onMouseEnter={() =>
-                        setActiveItem({
-                          name: coreCapabilities[0]!.name,
-                          summary: coreCapabilities[0]!.summary,
-                          deliverables: coreCapabilities[0]!.deliverables,
-                        })
-                      }
-                      onClick={() =>
-                        setActiveItem({
-                          name: coreCapabilities[0]!.name,
-                          summary: coreCapabilities[0]!.summary,
-                          deliverables: coreCapabilities[0]!.deliverables,
-                        })
-                      }
+                      onMouseEnter={() => setActiveId(coreCapabilities[0]!.id)}
+                      onClick={() => setActiveId(coreCapabilities[0]!.id)}
                       className={`group inline-flex items-center gap-2.5 rounded-full border px-5 py-2.5 text-xs sm:text-sm font-medium transition-all duration-300 ${
-                        activeItem.name === coreCapabilities[0]!.name
-                          ? "border-primary bg-primary/10 text-primary shadow-soft"
+                        activeId === coreCapabilities[0]!.id
+                          ? "border-primary bg-primary/10 text-primary shadow-soft scale-[1.03]"
                           : "border-border bg-white text-foreground hover:border-primary/50 hover:bg-secondary/40 shadow-xs"
                       }`}
                     >
@@ -342,23 +306,11 @@ export function CapabilityMap() {
                       <button
                         key={item.id}
                         type="button"
-                        onMouseEnter={() =>
-                          setActiveItem({
-                            name: item.name,
-                            summary: item.summary,
-                            deliverables: item.deliverables,
-                          })
-                        }
-                        onClick={() =>
-                          setActiveItem({
-                            name: item.name,
-                            summary: item.summary,
-                            deliverables: item.deliverables,
-                          })
-                        }
+                        onMouseEnter={() => setActiveId(item.id)}
+                        onClick={() => setActiveId(item.id)}
                         className={`group inline-flex items-center gap-2.5 rounded-full border px-5 py-2.5 text-xs sm:text-sm font-medium transition-all duration-300 ${
-                          activeItem.name === item.name
-                            ? "border-primary bg-primary/10 text-primary shadow-soft"
+                          activeId === item.id
+                            ? "border-primary bg-primary/10 text-primary shadow-soft scale-[1.03]"
                             : "border-border bg-white text-foreground hover:border-primary/50 hover:bg-secondary/40 shadow-xs"
                         }`}
                       >
@@ -385,23 +337,11 @@ export function CapabilityMap() {
                       <button
                         key={item.id}
                         type="button"
-                        onMouseEnter={() =>
-                          setActiveItem({
-                            name: item.name,
-                            summary: item.summary,
-                            deliverables: item.deliverables,
-                          })
-                        }
-                        onClick={() =>
-                          setActiveItem({
-                            name: item.name,
-                            summary: item.summary,
-                            deliverables: item.deliverables,
-                          })
-                        }
+                        onMouseEnter={() => setActiveId(item.id)}
+                        onClick={() => setActiveId(item.id)}
                         className={`group inline-flex items-center gap-2.5 rounded-full border px-5 py-2.5 text-xs sm:text-sm font-medium transition-all duration-300 ${
-                          activeItem.name === item.name
-                            ? "border-primary bg-primary/10 text-primary shadow-soft"
+                          activeId === item.id
+                            ? "border-primary bg-primary/10 text-primary shadow-soft scale-[1.03]"
                             : "border-border bg-white text-foreground hover:border-primary/50 hover:bg-secondary/40 shadow-xs"
                         }`}
                       >
@@ -418,23 +358,11 @@ export function CapabilityMap() {
                       <button
                         key={item.id}
                         type="button"
-                        onMouseEnter={() =>
-                          setActiveItem({
-                            name: item.name,
-                            summary: item.summary,
-                            deliverables: item.deliverables,
-                          })
-                        }
-                        onClick={() =>
-                          setActiveItem({
-                            name: item.name,
-                            summary: item.summary,
-                            deliverables: item.deliverables,
-                          })
-                        }
+                        onMouseEnter={() => setActiveId(item.id)}
+                        onClick={() => setActiveId(item.id)}
                         className={`group inline-flex items-center gap-2.5 rounded-full border px-5 py-2.5 text-xs sm:text-sm font-medium transition-all duration-300 ${
-                          activeItem.name === item.name
-                            ? "border-primary bg-primary/10 text-primary shadow-soft"
+                          activeId === item.id
+                            ? "border-primary bg-primary/10 text-primary shadow-soft scale-[1.03]"
                             : "border-border bg-white text-foreground hover:border-primary/50 hover:bg-secondary/40 shadow-xs"
                         }`}
                       >
@@ -449,23 +377,11 @@ export function CapabilityMap() {
                   {coreCapabilities[7] && (
                     <button
                       type="button"
-                      onMouseEnter={() =>
-                        setActiveItem({
-                          name: coreCapabilities[7]!.name,
-                          summary: coreCapabilities[7]!.summary,
-                          deliverables: coreCapabilities[7]!.deliverables,
-                        })
-                      }
-                      onClick={() =>
-                        setActiveItem({
-                          name: coreCapabilities[7]!.name,
-                          summary: coreCapabilities[7]!.summary,
-                          deliverables: coreCapabilities[7]!.deliverables,
-                        })
-                      }
+                      onMouseEnter={() => setActiveId(coreCapabilities[7]!.id)}
+                      onClick={() => setActiveId(coreCapabilities[7]!.id)}
                       className={`group inline-flex items-center gap-2.5 rounded-full border px-5 py-2.5 text-xs sm:text-sm font-medium transition-all duration-300 ${
-                        activeItem.name === coreCapabilities[7]!.name
-                          ? "border-primary bg-primary/10 text-primary shadow-soft"
+                        activeId === coreCapabilities[7]!.id
+                          ? "border-primary bg-primary/10 text-primary shadow-soft scale-[1.03]"
                           : "border-border bg-white text-foreground hover:border-primary/50 hover:bg-secondary/40 shadow-xs"
                       }`}
                     >
@@ -482,28 +398,16 @@ export function CapabilityMap() {
               {/* Right Column: Growth Satellites (Desktop) */}
               <div className="hidden flex-col items-start gap-5 lg:flex pl-4">
                 {growthSatellites.map((sat) => {
-                  const isSelected = activeItem.name === sat.name;
+                  const isSelected = activeId === sat.id;
                   return (
                     <button
                       key={sat.id}
                       type="button"
-                      onMouseEnter={() =>
-                        setActiveItem({
-                          name: sat.name,
-                          summary: sat.summary,
-                          deliverables: sat.deliverables,
-                        })
-                      }
-                      onClick={() =>
-                        setActiveItem({
-                          name: sat.name,
-                          summary: sat.summary,
-                          deliverables: sat.deliverables,
-                        })
-                      }
+                      onMouseEnter={() => setActiveId(sat.id)}
+                      onClick={() => setActiveId(sat.id)}
                       className={`group inline-flex items-center rounded-full border px-4 py-2 font-mono text-xs lowercase tracking-wide transition-all duration-300 ${
                         isSelected
-                          ? "border-primary bg-primary/10 text-primary font-semibold shadow-xs"
+                          ? "border-primary bg-primary/10 text-primary font-semibold shadow-xs scale-[1.03]"
                           : "border-border bg-white text-muted-foreground hover:border-primary/40 hover:text-foreground"
                       }`}
                     >
@@ -520,15 +424,9 @@ export function CapabilityMap() {
                 <button
                   key={sat.id}
                   type="button"
-                  onClick={() =>
-                    setActiveItem({
-                      name: sat.name,
-                      summary: sat.summary,
-                      deliverables: sat.deliverables,
-                    })
-                  }
+                  onClick={() => setActiveId(sat.id)}
                   className={`rounded-full border px-3 py-1.5 font-mono text-[11px] lowercase transition-colors ${
-                    activeItem.name === sat.name
+                    activeId === sat.id
                       ? "border-primary bg-primary/15 text-primary font-semibold"
                       : "border-border bg-white text-muted-foreground hover:text-foreground"
                   }`}
@@ -536,36 +434,6 @@ export function CapabilityMap() {
                   {sat.name}
                 </button>
               ))}
-            </div>
-          </div>
-
-          {/* ── Interactive Detail HUD Bar (Bottom) ── */}
-          <div className="relative z-20 mt-4 rounded-2xl border border-border bg-white/95 p-4 shadow-soft backdrop-blur-md transition-all duration-300 sm:p-5">
-            <div className="flex flex-col items-start justify-between gap-4 md:flex-row md:items-center">
-              <div>
-                <div className="flex items-center gap-2.5">
-                  <span className="h-2 w-2 rounded-full bg-primary animate-pulse" />
-                  <h4 className="font-mono text-sm font-bold tracking-wide uppercase text-foreground">
-                    {activeItem.name}
-                  </h4>
-                </div>
-                <p className="mt-1 text-xs leading-relaxed text-muted-foreground sm:text-sm">
-                  {activeItem.summary}
-                </p>
-              </div>
-
-              {activeItem.deliverables && activeItem.deliverables.length > 0 && (
-                <div className="flex flex-wrap gap-1.5 md:justify-end">
-                  {activeItem.deliverables.map((item) => (
-                    <span
-                      key={item}
-                      className="rounded-md border border-border bg-secondary/60 px-2.5 py-1 font-mono text-[11px] font-medium text-foreground"
-                    >
-                      {item}
-                    </span>
-                  ))}
-                </div>
-              )}
             </div>
           </div>
         </div>
