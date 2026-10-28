@@ -8,7 +8,7 @@ interface CapabilityNode {
   code: string;
   symbol: "circle" | "square" | "diamond" | "triangle";
   symbolColor: string;
-  category: "core" | "strategy" | "delivery";
+  category: "core" | "strategy" | "growth";
   summary: string;
   deliverables: string[];
 }
@@ -139,7 +139,7 @@ const strategySatellites = [
   },
 ];
 
-const deliverySatellites = [
+const growthSatellites = [
   {
     id: "analytics",
     name: "analytics",
@@ -229,8 +229,8 @@ export function CapabilityMap() {
             The Stradmont System Orbit.
           </h2>
           <p className="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-muted-foreground sm:text-base">
-            From strategic inception to continuous delivery—engineered to build systems that hold
-            under real-world demand.
+            Where strategy meets compounding growth—engineered through the Stradmont build core to
+            perform under real-world demand.
           </p>
         </div>
 
@@ -253,14 +253,14 @@ export function CapabilityMap() {
             />
           </div>
 
-          {/* Horizontal Strategy-to-Delivery Axis Line */}
+          {/* Horizontal Strategy-to-Growth Axis Line */}
           <div className="pointer-events-none absolute inset-x-4 top-1/2 -translate-y-1/2 flex items-center justify-between px-2 sm:px-6">
             <span className="font-mono text-[10px] tracking-widest text-muted-foreground uppercase sm:text-xs">
-              STRATEGY ←
+              STRATEGY (STRAD) ←
             </span>
             <div className="mx-3 h-px flex-1 border-t border-dashed border-border sm:mx-8" />
             <span className="font-mono text-[10px] tracking-widest text-muted-foreground uppercase sm:text-xs">
-              → DELIVERY
+              → GROWTH (MONT)
             </span>
           </div>
 
@@ -479,9 +479,9 @@ export function CapabilityMap() {
                 </div>
               </div>
 
-              {/* Right Column: Delivery Satellites (Desktop) */}
+              {/* Right Column: Growth Satellites (Desktop) */}
               <div className="hidden flex-col items-start gap-5 lg:flex pl-4">
-                {deliverySatellites.map((sat) => {
+                {growthSatellites.map((sat) => {
                   const isSelected = activeItem.name === sat.name;
                   return (
                     <button
@@ -516,7 +516,7 @@ export function CapabilityMap() {
 
             {/* Mobile / Tablet Satellites Horizontal Cluster */}
             <div className="mt-8 flex flex-wrap justify-center gap-2 lg:hidden">
-              {[...strategySatellites, ...deliverySatellites].map((sat) => (
+              {[...strategySatellites, ...growthSatellites].map((sat) => (
                 <button
                   key={sat.id}
                   type="button"
