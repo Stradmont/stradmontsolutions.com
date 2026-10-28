@@ -14,19 +14,20 @@ export const Route = createFileRoute("/")({
   },
   head: () => ({
     meta: [
-      { title: `${SITE_CONFIG.name} | ${SITE_CONFIG.tagline}` },
+      { title: `${SITE_CONFIG.name} | Building Products That Move the World Forward` },
       {
         name: "description",
-        content: `${SITE_CONFIG.tagline}. ${SITE_CONFIG.name} finds the chaos inside technology and finance operations and replaces it with systems that hold.`,
+        content:
+          "We build products that solve meaningful problems, simplify complexity, and become an essential part of everyday life. Every product starts with a purpose and is built to make a lasting impact.",
       },
       {
         property: "og:title",
-        content: `${SITE_CONFIG.name} | ${SITE_CONFIG.tagline}`,
+        content: `${SITE_CONFIG.name} | Building Products That Move the World Forward`,
       },
       {
         property: "og:description",
         content:
-          "We find the chaos in technology and finance operations, and build the systems that end it.",
+          "We build products that solve meaningful problems, simplify complexity, and become an essential part of everyday life. Every product starts with a purpose and is built to make a lasting impact.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: `${SITE_CONFIG.url}/` },
@@ -37,12 +38,12 @@ export const Route = createFileRoute("/")({
       { name: "twitter:card", content: "summary_large_image" },
       {
         name: "twitter:title",
-        content: `${SITE_CONFIG.name} | ${SITE_CONFIG.tagline}`,
+        content: `${SITE_CONFIG.name} | Building Products That Move the World Forward`,
       },
       {
         name: "twitter:description",
         content:
-          "We find the chaos in technology and finance operations, and build the systems that end it.",
+          "We build products that solve meaningful problems, simplify complexity, and become an essential part of everyday life. Every product starts with a purpose and is built to make a lasting impact.",
       },
       {
         name: "twitter:image",
@@ -273,17 +274,18 @@ function Index() {
               className="animate-rise mt-5 hero-title text-foreground sm:mt-6"
               style={{ animationDelay: "60ms" }}
             >
-              Where there is chaos,
+              Building Products That
               <br />
-              we build systems.
+              Move the World Forward.
             </h1>
 
             <p
-              className="animate-rise mt-5 max-w-xl text-base leading-relaxed text-muted-foreground sm:mt-7 sm:text-lg"
+              className="animate-rise mt-5 max-w-2xl text-base leading-relaxed text-muted-foreground sm:mt-7 sm:text-lg"
               style={{ animationDelay: "140ms" }}
             >
-              Scattered data, manual work, tools that don't talk to each other. We go where the
-              chaos is in technology and finance, and replace it with clear systems that hold.
+              We build products that solve meaningful problems, simplify complexity, and become an
+              essential part of everyday life. Every product starts with a purpose and is built to
+              make a lasting impact.
             </p>
 
             <div
