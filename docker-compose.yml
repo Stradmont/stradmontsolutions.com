@@ -5,7 +5,7 @@ services:
       dockerfile: Dockerfile
       args:
         VITE_API_BASE_URL: https://api.stradmontsolutions.com/api/v1
-        VITE_TURNSTILE_SITE_KEY: 1x00000000000000000000AA
+        VITE_TURNSTILE_SITE_KEY: 0x4AAAAAAFphy2llg1TQOC61
     container_name: stradmont_client
     restart: always
     ports:
