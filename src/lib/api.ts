@@ -1,5 +1,5 @@
 import { ENV } from "@/config/env.config";
-import { getLetterBySlug, letters, type Letter, type Section } from "@/lib/letters-data";
+import { getLetterBySlug, letters, type Letter } from "@/lib/letters-data";
 import { SITE_CONFIG } from "@/lib/site-config";
 
 export interface ApiResponse<T> {
@@ -23,16 +23,34 @@ export interface ContactEnquiryRecord extends ContactEnquiryPayload {
   createdAt: string;
 }
 
-export interface ProductRecord {
-  id?: string;
+export interface ProductDto {
+  id: string;
   name: string;
-  slug?: string;
+  slug: string;
   tag: string;
   status: string;
   logo: string;
   url: string;
-  domain?: string;
   body: string;
+  isActive: boolean;
+}
+
+export interface ProductRecord {
+  id?: string;
+  name: string;
+  slug: string;
+  tag: string;
+  status: string;
+  logo: string;
+  url: string;
+  domain: string;
+  body: string;
+}
+
+export interface BackendErrorResponse {
+  message?: string;
+  errors?: string[];
+  success?: boolean;
 }
 
 export class ApiClientError extends Error {
@@ -47,50 +65,22 @@ export class ApiClientError extends Error {
   }
 }
 
-export interface ApiLetterSection {
-  heading?: string | undefined;
-  paragraphs?: string[] | undefined;
-}
-
-export interface ApiLetter {
-  slug: string;
-  number: string;
-  kind?: "Letter" | "Note" | "Study" | undefined;
-  date: string;
-  readTime: string;
-  title: string;
-  body: string;
-  image?: string | undefined;
-  content?: ApiLetterSection[] | undefined;
-  author: string;
-  authorTitle: string;
-}
-
-function normalizeLetter(letter: ApiLetter): Letter {
-  const content: Section[] = (letter.content || []).map((sec) => ({
-    heading: sec.heading || undefined,
-    paragraphs: Array.isArray(sec.paragraphs) ? sec.paragraphs : [],
-  }));
-
-  return {
-    slug: letter.slug,
-    number: letter.number,
-    kind: letter.kind || "Letter",
-    date: letter.date,
-    readTime: letter.readTime,
-    title: letter.title,
-    body: letter.body,
-    image: letter.image || "/images/letters/design-docs.jpg",
-    content,
-    author: letter.author,
-    authorTitle: letter.authorTitle,
-  };
+/**
+ * Extracts and normalizes the domain hostname from a fully-qualified product URL.
+ * Throws an explicit Error if the URL is invalid or malformed.
+ */
+export function extractDomain(url: string): string {
+  if (!url || typeof url !== "string") {
+    throw new Error("Cannot extract domain from empty or invalid URL");
+  }
+  const parsed = new URL(url);
+  return parsed.hostname.replace(/^www\./, "");
 }
 
 /**
- * Submits a contact enquiry to the Node.js backend (`POST /api/v1/contact`),
+ * Submits a contact enquiry to the backend (`POST /api/v1/contact`),
  * which verifies the Cloudflare Turnstile token, persists the enquiry, and
- * dispatches both the Admin Notification and User Acknowledgement emails.
+ * dispatches notifications.
  */
 export async function submitContactEnquiry(
   payload: ContactEnquiryPayload,
@@ -111,117 +101,128 @@ export async function submitContactEnquiry(
     body: JSON.stringify({
       name: payload.name.trim(),
       email: payload.email.trim(),
-      company: payload.company?.trim() || undefined,
+      company: payload.company ? payload.company.trim() : undefined,
       topic: payload.topic,
       message: payload.message.trim(),
-      turnstileToken: payload.turnstileToken || undefined,
+      turnstileToken: payload.turnstileToken,
     }),
   });
-
-  const json = await response.json().catch(() => null);
+  const contentType = response.headers.get("content-type");
+  const isJson = Boolean(contentType && contentType.includes("application/json"));
+  const json = isJson ? ((await response.json()) as BackendErrorResponse) : null;
 
   if (!response.ok) {
+    let errorMessage = "Unable to submit your enquiry right now. Please try again.";
     let validationErrors: string[] | undefined = undefined;
-    if (Array.isArray(json?.errors)) {
-      validationErrors = json.errors;
-    } else if (json?.details && typeof json.details === "object") {
-      validationErrors = Object.values(json.details as Record<string, unknown>).map((d) => {
-        if (typeof d === "string") return d;
-        if (d && typeof d === "object" && "message" in d) {
-          return String((d as { message: unknown }).message);
+
+    if (json) {
+      if (Array.isArray(json.errors) && json.errors.length > 0) {
+        validationErrors = json.errors;
+        const firstError = validationErrors[0];
+        if (typeof firstError === "string" && firstError.length > 0) {
+          errorMessage = firstError;
         }
-        return JSON.stringify(d);
-      });
+      } else if (typeof json.message === "string" && json.message.trim().length > 0) {
+        errorMessage = json.message;
+      }
     }
 
-    const message =
-      validationErrors?.[0] ||
-      json?.message ||
-      "Unable to submit your enquiry right now. Please try again.";
-    throw new ApiClientError(message, response.status, validationErrors);
+    throw new ApiClientError(errorMessage, response.status, validationErrors);
   }
 
-  return json as ApiResponse<ContactEnquiryRecord>;
+  return json as unknown as ApiResponse<ContactEnquiryRecord>;
 }
 
 /**
- * Fetches published Stradmont Letters from the backend API (`GET /api/v1/letters`)
- * with automatic fallback to local editorial data if the backend is offline.
+ * Fetches published Stradmont Letters from the backend API (`GET /api/v1/letters`).
+ * Uses editorial content when the backend API URL is not configured.
  */
 export async function fetchLetters(): Promise<Letter[]> {
-  if (!ENV.API_BASE_URL) return letters;
-  try {
-    const response = await fetch(`${ENV.API_BASE_URL}/letters?limit=100&publishedOnly=true`, {
-      headers: { Accept: "application/json" },
-    });
-    if (!response.ok) return letters;
-    const json = await response.json();
-    if (Array.isArray(json?.data) && json.data.length > 0) {
-      return json.data.map(normalizeLetter);
-    }
-    return letters;
-  } catch {
+  if (!ENV.API_BASE_URL) {
     return letters;
   }
+
+  const response = await fetch(`${ENV.API_BASE_URL}/letters?limit=100&publishedOnly=true`, {
+    headers: { Accept: "application/json" },
+  });
+
+  if (!response.ok) {
+    throw new ApiClientError(
+      `Failed to fetch letters from backend: ${response.status} ${response.statusText}`,
+      response.status,
+    );
+  }
+
+  const json = (await response.json()) as ApiResponse<Letter[]>;
+  if (!Array.isArray(json.data)) {
+    throw new ApiClientError("Invalid response format: expected letters array", response.status);
+  }
+
+  return json.data;
 }
 
 /**
- * Fetches a single Stradmont Letter by slug from the backend API (`GET /api/v1/letters/:slug`)
- * with automatic fallback to local editorial data if the backend is offline.
+ * Fetches a single Stradmont Letter by slug from the backend API (`GET /api/v1/letters/:slug`).
+ * Returns undefined if not found (404).
  */
 export async function fetchLetterBySlug(slug: string): Promise<Letter | undefined> {
-  const fallback = getLetterBySlug(slug);
-  if (!ENV.API_BASE_URL) return fallback;
-  try {
-    const response = await fetch(`${ENV.API_BASE_URL}/letters/${encodeURIComponent(slug)}`, {
-      headers: { Accept: "application/json" },
-    });
-    if (!response.ok) return fallback;
-    const json = await response.json();
-    if (json?.data?.slug) {
-      return normalizeLetter(json.data);
-    }
-    return fallback;
-  } catch {
-    return fallback;
+  if (!ENV.API_BASE_URL) {
+    return getLetterBySlug(slug);
   }
+
+  const response = await fetch(`${ENV.API_BASE_URL}/letters/${encodeURIComponent(slug)}`, {
+    headers: { Accept: "application/json" },
+  });
+
+  if (response.status === 404) {
+    return undefined;
+  }
+
+  if (!response.ok) {
+    throw new ApiClientError(
+      `Failed to fetch letter "${slug}" from backend: ${response.status} ${response.statusText}`,
+      response.status,
+    );
+  }
+
+  const json = (await response.json()) as ApiResponse<Letter>;
+  return json.data;
 }
 
 /**
- * Fetches active products from the backend API (`GET /api/v1/products`)
- * with automatic fallback to `SITE_CONFIG.products` if the backend is offline.
+ * Fetches active products from the backend API (`GET /api/v1/products`).
+ * Uses editorial product configuration when the backend API URL is not configured.
  */
 export async function fetchProducts(): Promise<ProductRecord[]> {
-  const fallback: ProductRecord = {
-    ...SITE_CONFIG.products.buildersBase,
-    slug: "builders-base",
-  };
-  if (!ENV.API_BASE_URL) return [fallback];
-  try {
-    const response = await fetch(`${ENV.API_BASE_URL}/products?activeOnly=true`, {
-      headers: { Accept: "application/json" },
-    });
-    if (!response.ok) return [fallback];
-    const json = await response.json();
-    if (Array.isArray(json?.data) && json.data.length > 0) {
-      return json.data.map((item: ProductRecord) => {
-        let domain = item.domain;
-        if (!domain && item.url) {
-          try {
-            domain = new URL(item.url).hostname.replace(/^www\./, "");
-          } catch {
-            const hostPart = item.url.replace(/^https?:\/\//, "").split("/")[0] ?? "";
-            domain = hostPart.replace(/^www\./, "");
-          }
-        }
-        return {
-          ...item,
-          domain: domain || "thebuildersbase.com",
-        };
-      });
-    }
-    return [fallback];
-  } catch {
-    return [fallback];
+  if (!ENV.API_BASE_URL) {
+    return [SITE_CONFIG.products.buildersBase];
   }
+
+  const response = await fetch(`${ENV.API_BASE_URL}/products?activeOnly=true`, {
+    headers: { Accept: "application/json" },
+  });
+
+  if (!response.ok) {
+    throw new ApiClientError(
+      `Failed to fetch products from backend: ${response.status} ${response.statusText}`,
+      response.status,
+    );
+  }
+
+  const json = (await response.json()) as ApiResponse<ProductDto[]>;
+  if (!Array.isArray(json.data)) {
+    throw new ApiClientError("Invalid response format: expected products array", response.status);
+  }
+
+  return json.data.map((item) => ({
+    id: item.id,
+    name: item.name,
+    slug: item.slug,
+    tag: item.tag,
+    status: item.status,
+    logo: item.logo,
+    url: item.url,
+    domain: extractDomain(item.url),
+    body: item.body,
+  }));
 }

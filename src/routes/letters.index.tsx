@@ -2,7 +2,6 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteNav } from "@/components/SiteNav";
 import { SiteFooter } from "@/components/SiteFooter";
 import { fetchLetters } from "@/lib/api";
-import { letters as staticLetters } from "@/lib/letters-data";
 import { SITE_CONFIG } from "@/lib/site-config";
 import { ArrowUpRight } from "lucide-react";
 
@@ -72,8 +71,7 @@ export const Route = createFileRoute("/letters/")({
 });
 
 function LettersIndexPage() {
-  const loaderData = Route.useLoaderData();
-  const letters = loaderData?.letters ?? staticLetters;
+  const { letters } = Route.useLoaderData();
 
   return (
     <div className="min-h-screen bg-background text-foreground">

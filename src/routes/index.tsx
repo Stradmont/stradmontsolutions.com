@@ -5,7 +5,6 @@ import { SiteNav } from "@/components/SiteNav";
 import { SiteFooter } from "@/components/SiteFooter";
 import { ContactForm } from "@/components/ContactForm";
 import { fetchLetters } from "@/lib/api";
-import { letters as staticLetters } from "@/lib/letters-data";
 import { SITE_CONFIG } from "@/lib/site-config";
 
 export const Route = createFileRoute("/")({
@@ -231,11 +230,10 @@ function FaqAccordion({ items }: { items: { q: string; a: string }[] }) {
 }
 
 function Index() {
-  const loaderData = Route.useLoaderData();
-  const letters = loaderData?.letters ?? staticLetters;
+  const { letters } = Route.useLoaderData();
   const [activeTab, setActiveTab] = useState(0);
   const featuredLetter = letters[0];
-  const secondLetter = letters[2] ?? letters[1];
+  const secondLetter = letters[1];
 
   return (
     <div className="min-h-screen bg-background">
@@ -392,14 +390,20 @@ function Index() {
             </div>
 
             {/* Accordion with smooth entrance */}
-            <div
-              key={activeTab}
-              style={{
-                animation: "stradmont-rise 280ms cubic-bezier(0.22, 1, 0.36, 1) both",
-              }}
-            >
-              <FaqAccordion items={faqCategories[activeTab]?.items ?? []} />
-            </div>
+            {(() => {
+              const currentCategory = faqCategories[activeTab];
+              if (!currentCategory) return null;
+              return (
+                <div
+                  key={activeTab}
+                  style={{
+                    animation: "stradmont-rise 280ms cubic-bezier(0.22, 1, 0.36, 1) both",
+                  }}
+                >
+                  <FaqAccordion items={currentCategory.items} />
+                </div>
+              );
+            })()}
 
             <p className="mt-8 text-center text-sm text-muted-foreground">
               Still have a question?{" "}

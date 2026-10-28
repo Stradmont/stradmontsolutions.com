@@ -2,7 +2,6 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { SiteNav } from "@/components/SiteNav";
 import { SiteFooter } from "@/components/SiteFooter";
 import { fetchLetterBySlug, fetchLetters } from "@/lib/api";
-import { letters as staticLetters } from "@/lib/letters-data";
 import { SITE_CONFIG } from "@/lib/site-config";
 import { ArrowLeft, Check, Copy } from "lucide-react";
 import { useState } from "react";
@@ -122,8 +121,7 @@ function LetterDetailPage() {
     }
   };
 
-  const lettersList = allLetters ?? staticLetters;
-  const otherLetters = lettersList.filter((l) => l.slug !== letter.slug).slice(0, 2);
+  const otherLetters = allLetters.filter((l) => l.slug !== letter.slug).slice(0, 2);
 
   return (
     <div className="min-h-screen bg-background text-foreground antialiased selection:bg-primary/20">

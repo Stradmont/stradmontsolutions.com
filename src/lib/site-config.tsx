@@ -46,6 +46,7 @@ export const SITE_CONFIG = {
   products: {
     buildersBase: {
       name: "Builders Base",
+      slug: "builders-base",
       tag: "Platform",
       status: "In development",
       logo: "/buildersbase-logo.jpeg",

@@ -210,15 +210,14 @@ export function ContactForm() {
       const response = await submitContactEnquiry({
         name: data.name,
         email: data.email,
-        company: data.company || undefined,
+        company: data.company && data.company.trim() ? data.company.trim() : undefined,
         topic: data.topic,
         message: data.message,
-        turnstileToken: turnstileToken || undefined,
+        turnstileToken:
+          turnstileToken && turnstileToken.trim().length > 0 ? turnstileToken.trim() : undefined,
       });
 
-      const referenceId = response.data?.id
-        ? response.data.id.slice(0, 8).toUpperCase()
-        : undefined;
+      const referenceId = response.data.id.slice(0, 8).toUpperCase();
 
       setSubmission({
         name: data.name,
