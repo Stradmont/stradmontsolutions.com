@@ -1,5 +1,5 @@
 import { ENV } from "@/config/env.config";
-import { getLetterBySlug, letters, type Letter } from "@/lib/letters-data";
+import { getLetterBySlug, letters, type Letter, type Section } from "@/lib/letters-data";
 import { SITE_CONFIG } from "@/lib/site-config";
 
 export interface ApiResponse<T> {
@@ -47,28 +47,43 @@ export class ApiClientError extends Error {
   }
 }
 
-function normalizeLetter(raw: Record<string, unknown>): Letter {
-  const contentArray = Array.isArray(raw.content) ? raw.content : [];
+export interface ApiLetterSection {
+  heading?: string | undefined;
+  paragraphs?: string[] | undefined;
+}
+
+export interface ApiLetter {
+  slug: string;
+  number: string;
+  kind?: "Letter" | "Note" | "Study" | undefined;
+  date: string;
+  readTime: string;
+  title: string;
+  body: string;
+  image?: string | undefined;
+  content?: ApiLetterSection[] | undefined;
+  author: string;
+  authorTitle: string;
+}
+
+function normalizeLetter(letter: ApiLetter): Letter {
+  const content: Section[] = (letter.content || []).map((sec) => ({
+    heading: sec.heading || undefined,
+    paragraphs: Array.isArray(sec.paragraphs) ? sec.paragraphs : [],
+  }));
+
   return {
-    slug: String(raw.slug || ""),
-    number: String(raw.number || ""),
-    kind: (raw.kind as "Letter" | "Note" | "Study") || "Letter",
-    date: String(raw.date || ""),
-    readTime: String(raw.readTime || ""),
-    title: String(raw.title || ""),
-    body: String(raw.body || ""),
-    image: String(raw.image || "/images/letters/design-docs.jpg"),
-    content: contentArray.map((sec) => {
-      const sectionObj = sec && typeof sec === "object" ? (sec as Record<string, unknown>) : {};
-      return {
-        heading: typeof sectionObj.heading === "string" ? sectionObj.heading : undefined,
-        paragraphs: Array.isArray(sectionObj.paragraphs)
-          ? sectionObj.paragraphs.map((p) => String(p))
-          : [],
-      };
-    }),
-    author: String(raw.author || "Stradmont Engineering"),
-    authorTitle: String(raw.authorTitle || "Systems Architecture"),
+    slug: letter.slug,
+    number: letter.number,
+    kind: letter.kind || "Letter",
+    date: letter.date,
+    readTime: letter.readTime,
+    title: letter.title,
+    body: letter.body,
+    image: letter.image || "/images/letters/design-docs.jpg",
+    content,
+    author: letter.author,
+    authorTitle: letter.authorTitle,
   };
 }
 
@@ -195,10 +210,8 @@ export async function fetchProducts(): Promise<ProductRecord[]> {
           try {
             domain = new URL(item.url).hostname.replace(/^www\./, "");
           } catch {
-            domain = item.url
-              .replace(/^https?:\/\//, "")
-              .split("/")[0]
-              .replace(/^www\./, "");
+            const hostPart = item.url.replace(/^https?:\/\//, "").split("/")[0] ?? "";
+            domain = hostPart.replace(/^www\./, "");
           }
         }
         return {

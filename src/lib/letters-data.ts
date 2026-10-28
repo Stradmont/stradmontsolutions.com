@@ -13,7 +13,7 @@ export interface Letter {
 }
 
 export interface Section {
-  heading?: string;
+  heading?: string | undefined;
   paragraphs: string[];
 }
 
