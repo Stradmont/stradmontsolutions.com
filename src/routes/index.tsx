@@ -290,15 +290,15 @@ function Index() {
             </p>
 
             <div
-              className="animate-rise mt-8 flex flex-col items-center gap-3 sm:mt-10 sm:flex-row"
+              className="animate-rise mt-8 flex justify-center sm:mt-10"
               style={{ animationDelay: "220ms" }}
             >
               <Link
                 to="/products"
-                className="group btn-primary w-full sm:w-auto sm:justify-start"
+                className="group btn-primary w-full sm:w-auto"
                 style={{ background: "var(--gradient-electric)" }}
               >
-                Our products
+                Our Products
                 <svg
                   width="16"
                   height="16"
@@ -311,9 +311,6 @@ function Index() {
                   <path d="M3 8h10M9 4l4 4-4 4" />
                 </svg>
               </Link>
-              <a href="#capabilities" className="btn-outline w-full sm:w-auto">
-                Capability map
-              </a>
             </div>
           </div>
         </section>

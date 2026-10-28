@@ -92,7 +92,7 @@ export async function submitContactEnquiry(
     );
   }
 
-  const response = await fetch(`${ENV.API_BASE_URL}/contact`, {
+  const response = await fetch(`${ENV.API_BASE_URL}/public/contact`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -134,7 +134,7 @@ export async function submitContactEnquiry(
 }
 
 /**
- * Fetches published Stradmont Letters from the backend API (`GET /api/v1/letters`).
+ * Fetches published Stradmont Letters from the backend API (`GET /api/v1/public/letters`).
  * Uses editorial content when the backend API URL is not configured.
  */
 export async function fetchLetters(): Promise<Letter[]> {
@@ -142,7 +142,7 @@ export async function fetchLetters(): Promise<Letter[]> {
     return letters;
   }
 
-  const response = await fetch(`${ENV.API_BASE_URL}/letters?limit=100&publishedOnly=true`, {
+  const response = await fetch(`${ENV.API_BASE_URL}/public/letters?limit=100`, {
     headers: { Accept: "application/json" },
   });
 
@@ -162,7 +162,7 @@ export async function fetchLetters(): Promise<Letter[]> {
 }
 
 /**
- * Fetches a single Stradmont Letter by slug from the backend API (`GET /api/v1/letters/:slug`).
+ * Fetches a single Stradmont Letter by slug from the backend API (`GET /api/v1/public/letters/:slug`).
  * Returns undefined if not found (404).
  */
 export async function fetchLetterBySlug(slug: string): Promise<Letter | undefined> {
@@ -170,7 +170,7 @@ export async function fetchLetterBySlug(slug: string): Promise<Letter | undefine
     return getLetterBySlug(slug);
   }
 
-  const response = await fetch(`${ENV.API_BASE_URL}/letters/${encodeURIComponent(slug)}`, {
+  const response = await fetch(`${ENV.API_BASE_URL}/public/letters/${encodeURIComponent(slug)}`, {
     headers: { Accept: "application/json" },
   });
 
@@ -190,7 +190,7 @@ export async function fetchLetterBySlug(slug: string): Promise<Letter | undefine
 }
 
 /**
- * Fetches active products from the backend API (`GET /api/v1/products`).
+ * Fetches active products from the backend API (`GET /api/v1/public/products`).
  * Uses editorial product configuration when the backend API URL is not configured.
  */
 export async function fetchProducts(): Promise<ProductRecord[]> {
@@ -198,7 +198,7 @@ export async function fetchProducts(): Promise<ProductRecord[]> {
     return [SITE_CONFIG.products.buildersBase];
   }
 
-  const response = await fetch(`${ENV.API_BASE_URL}/products?activeOnly=true`, {
+  const response = await fetch(`${ENV.API_BASE_URL}/public/products`, {
     headers: { Accept: "application/json" },
   });
 
