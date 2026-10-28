@@ -12,15 +12,15 @@ export const Route = createFileRoute("/letters/")({
   },
   head: () => ({
     meta: [
-      { title: "Stradmont Letters | Notes & Studies" },
+      { title: "Stradmont Letters | Systems Architecture & Dispatches" },
       {
         name: "description",
-        content: `Letters, notes and studies from ${SITE_CONFIG.name}. On systems, technology and finance operations.`,
+        content: `Dispatches on architecture, systems engineering, and building software that holds under real-world demand from ${SITE_CONFIG.name}.`,
       },
-      { property: "og:title", content: "Stradmont Letters | Notes & Studies" },
+      { property: "og:title", content: "Stradmont Letters | Systems Architecture & Dispatches" },
       {
         property: "og:description",
-        content: `Letters, notes and studies from ${SITE_CONFIG.name}. On systems, technology and finance operations.`,
+        content: `Dispatches on architecture, systems engineering, and building software that holds under real-world demand from ${SITE_CONFIG.name}.`,
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: `${SITE_CONFIG.url}/letters` },
@@ -31,11 +31,11 @@ export const Route = createFileRoute("/letters/")({
       { name: "twitter:card", content: "summary_large_image" },
       {
         name: "twitter:title",
-        content: "Stradmont Letters | Notes & Studies",
+        content: "Stradmont Letters | Systems Architecture & Dispatches",
       },
       {
         name: "twitter:description",
-        content: `Letters, notes and studies from ${SITE_CONFIG.name}. On systems, technology and finance operations.`,
+        content: `Dispatches on architecture, systems engineering, and building software that holds under real-world demand from ${SITE_CONFIG.name}.`,
       },
       {
         name: "twitter:image",
@@ -81,15 +81,11 @@ function LettersIndexPage() {
         {/* Header */}
         <section className="surface-ambient border-b border-border pt-32 pb-14 sm:pt-40 sm:pb-20">
           <div className="mx-auto max-w-5xl px-6 text-center">
-            <span className="eyebrow">Stradmont Letters</span>
-            <h1 className="mt-5 page-title text-foreground">
-              Notes from the chaos
-              <br />
-              we solve.
-            </h1>
+            <span className="eyebrow">Publication</span>
+            <h1 className="mt-5 page-title text-foreground">Stradmont Letters.</h1>
             <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-muted-foreground">
-              Letters, notes and studies from Stradmont. On systems, technology and finance
-              operations.
+              Dispatches on architecture, systems engineering, and building software that holds
+              under real-world demand.
             </p>
           </div>
         </section>
