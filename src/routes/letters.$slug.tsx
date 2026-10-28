@@ -213,13 +213,20 @@ function LetterDetailPage() {
                     {section.heading}
                   </h2>
                 )}
-                <div className="space-y-6">
-                  {(section.paragraphs || []).map((p, pIdx) => (
-                    <p key={pIdx} className="prose-body">
-                      {p}
-                    </p>
-                  ))}
-                </div>
+                {section.html ? (
+                  <div
+                    className="prose-body prose prose-neutral dark:prose-invert max-w-none text-muted-foreground [&_h2]:text-foreground [&_h2]:font-display [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:mt-8 [&_h2]:mb-4 [&_h3]:text-foreground [&_h3]:font-display [&_h3]:text-xl [&_h3]:font-bold [&_h3]:mt-6 [&_h3]:mb-3 [&_p]:leading-relaxed [&_p]:mb-6 [&_blockquote]:border-l-2 [&_blockquote]:border-primary [&_blockquote]:pl-4 [&_blockquote]:italic [&_blockquote]:my-6 [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:my-6 [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:my-6 [&_img]:rounded-2xl [&_img]:border [&_img]:border-border [&_img]:my-6 [&_a]:text-primary [&_a]:underline hover:[&_a]:opacity-80"
+                    dangerouslySetInnerHTML={{ __html: section.html }}
+                  />
+                ) : (
+                  <div className="space-y-6">
+                    {(section.paragraphs || []).map((p, pIdx) => (
+                      <p key={pIdx} className="prose-body">
+                        {p}
+                      </p>
+                    ))}
+                  </div>
+                )}
               </section>
             ))}
           </div>

@@ -14,7 +14,8 @@ export interface Letter {
 
 export interface Section {
   heading?: string | undefined;
-  paragraphs: string[];
+  paragraphs?: string[];
+  html?: string | undefined;
 }
 
 export const letters: Letter[] = [
