@@ -80,6 +80,13 @@ function normalizeLetter(raw: Record<string, unknown>): Letter {
 export async function submitContactEnquiry(
   payload: ContactEnquiryPayload,
 ): Promise<ApiResponse<ContactEnquiryRecord>> {
+  if (!ENV.API_BASE_URL) {
+    throw new ApiClientError(
+      `Service is temporarily unavailable. Please contact us directly at ${SITE_CONFIG.contact.email}.`,
+      503,
+    );
+  }
+
   const response = await fetch(`${ENV.API_BASE_URL}/contact`, {
     method: "POST",
     headers: {
@@ -127,6 +134,7 @@ export async function submitContactEnquiry(
  * with automatic fallback to local editorial data if the backend is offline.
  */
 export async function fetchLetters(): Promise<Letter[]> {
+  if (!ENV.API_BASE_URL) return letters;
   try {
     const response = await fetch(`${ENV.API_BASE_URL}/letters?limit=100&publishedOnly=true`, {
       headers: { Accept: "application/json" },
@@ -148,6 +156,7 @@ export async function fetchLetters(): Promise<Letter[]> {
  */
 export async function fetchLetterBySlug(slug: string): Promise<Letter | undefined> {
   const fallback = getLetterBySlug(slug);
+  if (!ENV.API_BASE_URL) return fallback;
   try {
     const response = await fetch(`${ENV.API_BASE_URL}/letters/${encodeURIComponent(slug)}`, {
       headers: { Accept: "application/json" },
@@ -172,6 +181,7 @@ export async function fetchProducts(): Promise<ProductRecord[]> {
     ...SITE_CONFIG.products.buildersBase,
     slug: "builders-base",
   };
+  if (!ENV.API_BASE_URL) return [fallback];
   try {
     const response = await fetch(`${ENV.API_BASE_URL}/products?activeOnly=true`, {
       headers: { Accept: "application/json" },

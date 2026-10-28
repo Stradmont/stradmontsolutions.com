@@ -482,7 +482,7 @@ export function ContactForm() {
       </Field>
 
       {/* Cloudflare Turnstile Widget */}
-      {SITE_CONFIG.turnstileSiteKey && (
+      {ENV.TURNSTILE_SITE_KEY && (
         <div className="flex flex-col gap-1.5">
           <div ref={turnstileContainerRef} className="min-h-[65px]" />
           {turnstileError && (
