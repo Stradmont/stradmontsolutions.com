@@ -226,3 +226,61 @@ export async function fetchProducts(): Promise<ProductRecord[]> {
     body: item.body,
   }));
 }
+
+export interface CareerRecord {
+  id: string;
+  title: string;
+  slug: string;
+  department: string;
+  location: string;
+  type: string;
+  experience: string;
+  summary: string;
+  descriptionHtml: string;
+  status: 'OPEN' | 'CLOSED' | 'DRAFT';
+  isFeatured: boolean;
+  applyEmail: string;
+  applyUrl?: string | null;
+  createdAt: string;
+}
+
+export async function fetchCareers(department?: string): Promise<CareerRecord[]> {
+  if (!ENV.API_BASE_URL) return [];
+  const url = new URL(`${ENV.API_BASE_URL}/public/careers`);
+  if (department) url.searchParams.set('department', department);
+
+  const response = await fetch(url.toString(), {
+    headers: { Accept: 'application/json' },
+  });
+
+  if (!response.ok) {
+    throw new ApiClientError(
+      `Failed to fetch careers: ${response.status} ${response.statusText}`,
+      response.status,
+    );
+  }
+
+  const json = (await response.json()) as ApiResponse<CareerRecord[]>;
+  return json.data || [];
+}
+
+export async function fetchCareerBySlug(slug: string): Promise<CareerRecord> {
+  if (!ENV.API_BASE_URL) {
+    throw new ApiClientError('Backend API URL not configured', 500);
+  }
+
+  const response = await fetch(`${ENV.API_BASE_URL}/public/careers/${encodeURIComponent(slug)}`, {
+    headers: { Accept: 'application/json' },
+  });
+
+  if (!response.ok) {
+    throw new ApiClientError(
+      `Failed to fetch career opening "${slug}": ${response.status} ${response.statusText}`,
+      response.status,
+    );
+  }
+
+  const json = (await response.json()) as ApiResponse<CareerRecord>;
+  return json.data;
+}
+

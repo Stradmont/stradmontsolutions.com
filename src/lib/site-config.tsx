@@ -36,11 +36,13 @@ export const SITE_CONFIG = {
     { label: "Home", to: "/" },
     { label: "Our Products", to: "/products" },
     { label: "Letters", to: "/letters" },
+    { label: "Careers", to: "/careers" },
   ] as const,
   footerNavLinks: [
     { label: "Home", to: "/" },
     { label: "Our Products", to: "/products" },
     { label: "Letters", to: "/letters" },
+    { label: "Careers", to: "/careers" },
     { label: "Contact", to: "/contact" },
   ] as const,
   products: {

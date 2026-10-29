@@ -10,15 +10,23 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CareersRouteImport } from './routes/careers'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as LettersRouteImport } from './routes/letters'
 import { Route as ProductsRouteImport } from './routes/products'
+import { Route as CareersIndexRouteImport } from './routes/careers.index'
+import { Route as CareersSlugRouteImport } from './routes/careers.$slug'
 import { Route as LettersIndexRouteImport } from './routes/letters.index'
 import { Route as LettersSlugRouteImport } from './routes/letters.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CareersRoute = CareersRouteImport.update({
+  id: '/careers',
+  path: '/careers',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -36,6 +44,16 @@ const ProductsRoute = ProductsRouteImport.update({
   path: '/products',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CareersIndexRoute = CareersIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => CareersRoute,
+} as any)
+const CareersSlugRoute = CareersSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => CareersRoute,
+} as any)
 const LettersIndexRoute = LettersIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -49,46 +67,73 @@ const LettersSlugRoute = LettersSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/careers': typeof CareersRouteWithChildren
   '/contact': typeof ContactRoute
   '/letters': typeof LettersRouteWithChildren
   '/products': typeof ProductsRoute
+  '/careers/$slug': typeof CareersSlugRoute
   '/letters/$slug': typeof LettersSlugRoute
+  '/careers/': typeof CareersIndexRoute
   '/letters/': typeof LettersIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/contact': typeof ContactRoute
   '/products': typeof ProductsRoute
+  '/careers/$slug': typeof CareersSlugRoute
   '/letters/$slug': typeof LettersSlugRoute
+  '/careers': typeof CareersIndexRoute
   '/letters': typeof LettersIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/careers': typeof CareersRouteWithChildren
   '/contact': typeof ContactRoute
   '/letters': typeof LettersRouteWithChildren
   '/products': typeof ProductsRoute
+  '/careers/$slug': typeof CareersSlugRoute
   '/letters/$slug': typeof LettersSlugRoute
+  '/careers/': typeof CareersIndexRoute
   '/letters/': typeof LettersIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/contact' | '/letters' | '/products' | '/letters/$slug' | '/letters/'
-  fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/contact' | '/products' | '/letters/$slug' | '/letters'
-  id:
-    | '__root__'
     | '/'
+    | '/careers'
     | '/contact'
     | '/letters'
     | '/products'
+    | '/careers/$slug'
     | '/letters/$slug'
+    | '/careers/'
+    | '/letters/'
+  fileRoutesByTo: FileRoutesByTo
+  to:
+    | '/'
+    | '/contact'
+    | '/products'
+    | '/careers/$slug'
+    | '/letters/$slug'
+    | '/careers'
+    | '/letters'
+  id:
+    | '__root__'
+    | '/'
+    | '/careers'
+    | '/contact'
+    | '/letters'
+    | '/products'
+    | '/careers/$slug'
+    | '/letters/$slug'
+    | '/careers/'
     | '/letters/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CareersRoute: typeof CareersRouteWithChildren
   ContactRoute: typeof ContactRoute
   LettersRoute: typeof LettersRouteWithChildren
   ProductsRoute: typeof ProductsRoute
@@ -101,6 +146,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/careers': {
+      id: '/careers'
+      path: '/careers'
+      fullPath: '/careers'
+      preLoaderRoute: typeof CareersRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -124,6 +176,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProductsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/careers/': {
+      id: '/careers/'
+      path: '/'
+      fullPath: '/careers/'
+      preLoaderRoute: typeof CareersIndexRouteImport
+      parentRoute: typeof CareersRoute
+    }
+    '/careers/$slug': {
+      id: '/careers/$slug'
+      path: '/$slug'
+      fullPath: '/careers/$slug'
+      preLoaderRoute: typeof CareersSlugRouteImport
+      parentRoute: typeof CareersRoute
+    }
     '/letters/': {
       id: '/letters/'
       path: '/'
@@ -141,6 +207,19 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface CareersRouteChildren {
+  CareersSlugRoute: typeof CareersSlugRoute
+  CareersIndexRoute: typeof CareersIndexRoute
+}
+
+const CareersRouteChildren: CareersRouteChildren = {
+  CareersSlugRoute: CareersSlugRoute,
+  CareersIndexRoute: CareersIndexRoute,
+}
+
+const CareersRouteWithChildren =
+  CareersRoute._addFileChildren(CareersRouteChildren)
+
 interface LettersRouteChildren {
   LettersSlugRoute: typeof LettersSlugRoute
   LettersIndexRoute: typeof LettersIndexRoute
@@ -156,6 +235,7 @@ const LettersRouteWithChildren =
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CareersRoute: CareersRouteWithChildren,
   ContactRoute: ContactRoute,
   LettersRoute: LettersRouteWithChildren,
   ProductsRoute: ProductsRoute,
