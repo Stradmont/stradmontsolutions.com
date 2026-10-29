@@ -231,25 +231,6 @@ function LetterDetailPage() {
             ))}
           </div>
 
-          {/* Editorial Signoff Box */}
-          <footer className="mt-20 border-t border-border/80 pt-10">
-            <div className="rounded-2xl border border-border bg-secondary/30 p-8">
-              <p className="text-sm font-semibold text-foreground">Stradmont Systems</p>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                We design and build specialised SaaS platforms for institutions where technical and
-                financial workflows intersect. If you are re-evaluating core software solutions, our
-                team welcomes technical dialogue.
-              </p>
-              <div className="mt-6">
-                <Link
-                  to="/contact"
-                  className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2 text-xs font-semibold text-primary-foreground shadow-lift transition-all duration-300 ease-out hover:-translate-y-0.5 active:scale-[0.98]"
-                >
-                  Write to the team
-                </Link>
-              </div>
-            </div>
-          </footer>
         </article>
 
         {/* Read Next Section */}
