@@ -58,19 +58,60 @@ export const Route = createFileRoute("/letters/$slug")({
           type: "application/ld+json",
           children: JSON.stringify({
             "@context": "https://schema.org",
-            "@type": "Article",
-            headline: letter.title,
-            description: letter.body,
-            datePublished: letter.date,
-            author: {
-              "@type": "Organization",
-              name: letter.author,
-            },
-            publisher: {
-              "@type": "Organization",
-              name: SITE_CONFIG.name,
-              url: SITE_CONFIG.url,
-            },
+            "@graph": [
+              {
+                "@type": "Article",
+                "@id": `${SITE_CONFIG.url}/letters/${letter.slug}#article`,
+                mainEntityOfPage: {
+                  "@type": "WebPage",
+                  "@id": `${SITE_CONFIG.url}/letters/${letter.slug}`,
+                },
+                headline: letter.title,
+                description: letter.body,
+                image: [`${SITE_CONFIG.url}${letter.image}`],
+                datePublished: letter.date,
+                author: {
+                  "@type": "Organization",
+                  "@id": `${SITE_CONFIG.url}/#organization`,
+                  name: letter.author,
+                  url: SITE_CONFIG.url,
+                },
+                publisher: {
+                  "@type": "Organization",
+                  "@id": `${SITE_CONFIG.url}/#organization`,
+                  name: SITE_CONFIG.name,
+                  url: SITE_CONFIG.url,
+                  logo: {
+                    "@type": "ImageObject",
+                    url: `${SITE_CONFIG.url}/favicon.svg`,
+                  },
+                },
+                isPartOf: { "@id": `${SITE_CONFIG.url}/#website` },
+              },
+              {
+                "@type": "BreadcrumbList",
+                itemListElement: [
+                  {
+                    "@type": "ListItem",
+                    position: 1,
+                    name: "Home",
+                    item: `${SITE_CONFIG.url}/`,
+                  },
+                  {
+                    "@type": "ListItem",
+                    position: 2,
+                    name: "Stradmont Letters",
+                    item: `${SITE_CONFIG.url}/letters`,
+                  },
+                  {
+                    "@type": "ListItem",
+                    position: 3,
+                    name: letter.title,
+                    item: `${SITE_CONFIG.url}/letters/${letter.slug}`,
+                  },
+                ],
+              },
+            ],
           }),
         },
       ],

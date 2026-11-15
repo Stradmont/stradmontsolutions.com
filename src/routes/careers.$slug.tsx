@@ -21,6 +21,11 @@ export const Route = createFileRoute("/careers/$slug")({
       ? `${career.title} | Careers at ${SITE_CONFIG.name}`
       : `Career Opportunity | ${SITE_CONFIG.name}`;
     const desc = career?.summary || `Career opportunity at ${SITE_CONFIG.name}`;
+    const normalizedType = career?.type?.toLowerCase().includes("part")
+      ? "PART_TIME"
+      : career?.type?.toLowerCase().includes("contract")
+        ? "CONTRACTOR"
+        : "FULL_TIME";
 
     return {
       meta: [
@@ -51,10 +56,12 @@ export const Route = createFileRoute("/careers/$slug")({
                 "@graph": [
                   {
                     "@type": "JobPosting",
+                    "@id": `${SITE_CONFIG.url}/careers/${career.slug}#jobposting`,
                     title: career.title,
-                    description: career.summary,
+                    description: career.descriptionHtml || career.summary,
                     datePosted: career.createdAt,
-                    employmentType: career.type,
+                    employmentType: normalizedType,
+                    directApply: true,
                     hiringOrganization: {
                       "@type": "Organization",
                       "@id": `${SITE_CONFIG.url}/#organization`,
@@ -65,7 +72,7 @@ export const Route = createFileRoute("/careers/$slug")({
                     jobLocationType: "TELECOMMUTE",
                     applicantLocationRequirements: {
                       "@type": "Country",
-                      name: "Worldwide",
+                      name: "CA",
                     },
                   },
                   {

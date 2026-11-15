@@ -147,6 +147,30 @@ export const Route = createFileRoute("/")({
                 },
               ],
             },
+            {
+              "@type": "WebPage",
+              "@id": `${SITE_CONFIG.url}/#webpage`,
+              url: `${SITE_CONFIG.url}/`,
+              name: `${SITE_CONFIG.name} | ${SITE_CONFIG.tagline}`,
+              isPartOf: { "@id": `${SITE_CONFIG.url}/#website` },
+              about: { "@id": `${SITE_CONFIG.url}/#organization` },
+              description:
+                "We build products that solve meaningful problems, simplify complexity, and become an essential part of everyday life.",
+            },
+            {
+              "@type": "FAQPage",
+              "@id": `${SITE_CONFIG.url}/#faq`,
+              mainEntity: faqCategories.flatMap((cat) =>
+                cat.items.map((item) => ({
+                  "@type": "Question",
+                  name: item.q,
+                  acceptedAnswer: {
+                    "@type": "Answer",
+                    text: item.a,
+                  },
+                })),
+              ),
+            },
           ],
         }),
       },

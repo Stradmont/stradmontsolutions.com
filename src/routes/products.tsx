@@ -59,6 +59,18 @@ export const Route = createFileRoute("/products")({
               isPartOf: { "@id": `${SITE_CONFIG.url}/#website` },
             },
             {
+              "@type": "SoftwareApplication",
+              name: defaultProduct.name,
+              applicationCategory: "BusinessApplication",
+              operatingSystem: "Web",
+              url: defaultProduct.url,
+              image: `${SITE_CONFIG.url}${defaultProduct.logo}`,
+              description: defaultProduct.body,
+              publisher: {
+                "@id": `${SITE_CONFIG.url}/#organization`,
+              },
+            },
+            {
               "@type": "BreadcrumbList",
               itemListElement: [
                 {
