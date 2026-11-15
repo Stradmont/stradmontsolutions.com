@@ -3,16 +3,7 @@ import { SiteNav } from "@/components/SiteNav";
 import { SiteFooter } from "@/components/SiteFooter";
 import { fetchCareerBySlug, CareerRecord } from "@/lib/api";
 import { SITE_CONFIG } from "@/lib/site-config";
-import {
-  ArrowLeft,
-  ArrowUpRight,
-  Briefcase,
-  MapPin,
-  Clock,
-  Mail,
-  ShieldCheck,
-  CheckCircle2,
-} from "lucide-react";
+import { ArrowLeft, ArrowUpRight } from "lucide-react";
 
 export const Route = createFileRoute("/careers/$slug")({
   loader: async ({ params }) => {
@@ -76,138 +67,133 @@ export const Route = createFileRoute("/careers/$slug")({
     };
   },
   component: CareerDetailPage,
+  notFoundComponent: CareerNotFound,
 });
+
+function CareerNotFound() {
+  return (
+    <div className="min-h-screen bg-background text-foreground">
+      <SiteNav />
+      <main
+        id="main-content"
+        className="flex min-h-[70svh] flex-col items-center justify-center px-6 text-center"
+      >
+        <span className="eyebrow">404</span>
+        <h1 className="mt-3 font-display text-3xl font-extrabold text-foreground sm:text-4xl">
+          Position not found
+        </h1>
+        <p className="mt-3 max-w-md text-sm leading-relaxed text-muted-foreground">
+          This role may have been filled or is no longer accepting applications.
+        </p>
+        <Link
+          to="/careers"
+          className="mt-7 inline-flex items-center gap-2 rounded-full border border-border bg-background px-5 py-2.5 text-xs font-semibold text-foreground transition-all hover:border-primary/40 hover:bg-secondary"
+        >
+          <ArrowLeft className="h-3.5 w-3.5" />
+          Back to careers
+        </Link>
+      </main>
+      <SiteFooter />
+    </div>
+  );
+}
 
 function CareerDetailPage() {
   const { career } = Route.useLoaderData() as { career: CareerRecord };
 
+  const applyEmail = career.applyEmail || `careers@${SITE_CONFIG.domain}`;
   const applySubject = encodeURIComponent(
     `Application: ${career.title} (${career.slug}) — [Your Name]`,
   );
   const applyBody = encodeURIComponent(
-    `Hello Stradmont Hiring Team,\n\nI am writing to express my strong interest in the ${career.title} position (${career.department}).\n\nPlease find my background and work below:\n- LinkedIn/Portfolio/GitHub: \n- Relevant experience summary: \n\nLooking forward to speaking with the team.\n\nBest regards,\n[Your Name]`,
+    `Hello Stradmont Team,\n\nI would like to apply for the ${career.title} role (${career.department}).\n\nLinks & background:\n- GitHub / Portfolio / LinkedIn: \n- Relevant work: \n\nBest regards,\n[Your Name]`,
   );
-  const mailtoUrl = `mailto:${career.applyEmail || "careers@stradmontsolutions.com"}?subject=${applySubject}&body=${applyBody}`;
+  const mailtoUrl = `mailto:${applyEmail}?subject=${applySubject}&body=${applyBody}`;
+  const applyHref = career.applyUrl || mailtoUrl;
+
+  const metaItems = [career.department, career.location, career.type, career.experience].filter(
+    Boolean,
+  );
 
   return (
-    <div className="surface-ambient min-h-screen text-foreground antialiased selection:bg-primary/20 selection:text-foreground">
+    <div className="min-h-screen bg-background text-foreground">
       <SiteNav />
 
-      <main id="main-content" className="pt-28 sm:pt-36 pb-20">
-        <div className="mx-auto max-w-4xl px-4 sm:px-6">
-          {/* Back Navigation */}
-          <div>
+      <main id="main-content" className="animate-page-transition">
+        {/* ── Header ── */}
+        <header className="surface-ambient border-b border-border pt-32 pb-12 sm:pt-44 sm:pb-16">
+          <div className="mx-auto max-w-3xl px-5 sm:px-6">
             <Link
               to="/careers"
-              className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-muted-foreground hover:text-foreground transition-colors group"
+              className="group inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground"
             >
-              <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
-              <span>Back to all open positions</span>
+              <ArrowLeft className="h-3.5 w-3.5 transition-transform duration-200 group-hover:-translate-x-0.5" />
+              <span>Careers</span>
             </Link>
-          </div>
 
-          {/* Role Header */}
-          <header className="mt-8 border-b border-border/70 pb-8 space-y-4">
-            <div className="flex flex-wrap items-center gap-2">
-              <span className="rounded-md border border-primary/20 bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
-                {career.department}
-              </span>
-              <span className="rounded-md border border-border bg-secondary/50 px-3 py-1 text-xs font-medium text-muted-foreground">
-                {career.type}
-              </span>
-              <span className="rounded-md border border-border bg-secondary/50 px-3 py-1 text-xs font-medium text-muted-foreground">
-                {career.experience}
-              </span>
-            </div>
+            <h1 className="mt-5 article-title text-foreground">{career.title}</h1>
 
-            <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-foreground">
-              {career.title}
-            </h1>
+            {career.summary && (
+              <p className="mt-4 text-base leading-relaxed text-muted-foreground sm:text-lg">
+                {career.summary}
+              </p>
+            )}
 
-            <p className="text-base sm:text-lg text-muted-foreground leading-relaxed max-w-3xl">
-              {career.summary}
-            </p>
-
-            <div className="flex flex-wrap items-center gap-4 pt-2 text-xs sm:text-sm text-muted-foreground">
-              <span className="flex items-center gap-1.5">
-                <MapPin className="h-4 w-4 text-primary" />
-                <span>{career.location}</span>
-              </span>
-              <span>&bull;</span>
-              <span className="flex items-center gap-1.5">
-                <Clock className="h-4 w-4 text-primary" />
-                <span>Published on {new Date(career.createdAt).toLocaleDateString()}</span>
-              </span>
-            </div>
-          </header>
-
-          {/* Content Layout: 2 Columns on desktop */}
-          <div className="mt-10 grid grid-cols-1 lg:grid-cols-3 gap-10">
-            {/* Main Description */}
-            <div className="lg:col-span-2 space-y-8">
-              <div
-                className="prose prose-slate dark:prose-invert max-w-none prose-headings:font-display prose-headings:tracking-tight prose-headings:text-foreground prose-p:text-muted-foreground prose-p:leading-relaxed prose-li:text-muted-foreground prose-a:text-primary"
-                dangerouslySetInnerHTML={{ __html: career.descriptionHtml }}
-              />
-            </div>
-
-            {/* Sticky Application Card */}
-            <div className="lg:col-span-1">
-              <div className="card-lab rounded-2xl border border-border/80 p-6 sm:p-7 sticky top-28 space-y-5">
-                <div>
-                  <span className="eyebrow text-primary">Direct Application</span>
-                  <h3 className="font-display font-bold text-lg text-foreground mt-1">
-                    Apply for this position
-                  </h3>
-                  <p className="text-xs text-muted-foreground mt-1 leading-relaxed">
-                    We review applications continuously. No cover letter required—share your GitHub,
-                    portfolio, or past architecture highlights.
-                  </p>
-                </div>
-
-                <div className="space-y-3">
-                  <a
-                    href={career.applyUrl || mailtoUrl}
-                    target={career.applyUrl ? "_blank" : undefined}
-                    rel="noreferrer"
-                    className="inline-flex w-full items-center justify-center gap-2 rounded-xl py-3 px-4 text-sm font-semibold text-primary-foreground shadow-lift transition-transform hover:-translate-y-0.5"
-                    style={{ background: "var(--gradient-electric)" }}
-                  >
-                    <span>Submit Application</span>
-                    <ArrowUpRight className="h-4 w-4" />
-                  </a>
-
-                  <div className="text-center">
-                    <span className="text-[11px] text-muted-foreground">
-                      Or email directly to{" "}
-                      <a
-                        href={mailtoUrl}
-                        className="text-primary hover:underline font-medium"
-                      >
-                        {career.applyEmail || "careers@stradmontsolutions.com"}
-                      </a>
-                    </span>
-                  </div>
-                </div>
-
-                <div className="border-t border-border/60 pt-4 space-y-2.5">
-                  <div className="flex items-start gap-2 text-xs text-muted-foreground">
-                    <CheckCircle2 className="h-3.5 w-3.5 text-primary shrink-0 mt-0.5" />
-                    <span>High-trust autonomy &amp; flexible hours</span>
-                  </div>
-                  <div className="flex items-start gap-2 text-xs text-muted-foreground">
-                    <CheckCircle2 className="h-3.5 w-3.5 text-primary shrink-0 mt-0.5" />
-                    <span>Top-tier hardware and tooling stipend</span>
-                  </div>
-                  <div className="flex items-start gap-2 text-xs text-muted-foreground">
-                    <CheckCircle2 className="h-3.5 w-3.5 text-primary shrink-0 mt-0.5" />
-                    <span>Direct collaboration with senior leadership</span>
-                  </div>
-                </div>
+            <div className="mt-8 flex flex-col gap-4 border-t border-border/70 pt-6 sm:flex-row sm:items-center sm:justify-between">
+              <div className="flex flex-wrap items-center gap-2 text-xs font-medium text-muted-foreground">
+                {metaItems.map((item, idx) => (
+                  <span key={item} className="inline-flex items-center gap-2">
+                    {idx > 0 && <span className="text-border">·</span>}
+                    <span className={idx === 0 ? "font-semibold text-primary" : ""}>{item}</span>
+                  </span>
+                ))}
               </div>
+
+              <a
+                href={applyHref}
+                target={career.applyUrl ? "_blank" : undefined}
+                rel={career.applyUrl ? "noopener noreferrer" : undefined}
+                className="inline-flex shrink-0 items-center justify-center gap-2 rounded-full px-5 py-2.5 text-xs font-semibold text-primary-foreground shadow-lift transition-transform duration-200 hover:-translate-y-0.5"
+                style={{ background: "var(--gradient-electric)" }}
+              >
+                <span>Apply for this role</span>
+                <ArrowUpRight className="h-3.5 w-3.5" />
+              </a>
             </div>
           </div>
-        </div>
+        </header>
+
+        {/* ── Single-Column Role Description ── */}
+        <section className="mx-auto max-w-3xl px-5 py-12 sm:px-6 sm:py-16">
+          <div
+            className="max-w-none text-base leading-relaxed text-muted-foreground [&_h2]:font-display [&_h2]:text-xl sm:[&_h2]:text-2xl [&_h2]:font-bold [&_h2]:tracking-tight [&_h2]:text-foreground [&_h2]:mt-10 [&_h2]:mb-3 first:[&_h2]:mt-0 [&_h3]:font-display [&_h3]:text-lg [&_h3]:font-bold [&_h3]:text-foreground [&_h3]:mt-8 [&_h3]:mb-2 [&_p]:mb-5 [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:mb-6 [&_ul]:space-y-2 [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:mb-6 [&_ol]:space-y-2 [&_strong]:font-semibold [&_strong]:text-foreground [&_a]:text-primary [&_a]:underline hover:[&_a]:opacity-80"
+            dangerouslySetInnerHTML={{ __html: career.descriptionHtml }}
+          />
+
+          {/* ── Bottom Apply Strip ── */}
+          <div className="mt-14 flex flex-col gap-5 rounded-3xl border border-border bg-secondary/40 px-6 py-6 sm:flex-row sm:items-center sm:justify-between sm:px-8 sm:py-7">
+            <div>
+              <p className="font-semibold text-foreground">Ready to apply?</p>
+              <p className="mt-1 text-sm text-muted-foreground">
+                Send your resume, GitHub, or portfolio to{" "}
+                <a href={mailtoUrl} className="font-medium text-primary hover:underline">
+                  {applyEmail}
+                </a>
+                .
+              </p>
+            </div>
+            <a
+              href={applyHref}
+              target={career.applyUrl ? "_blank" : undefined}
+              rel={career.applyUrl ? "noopener noreferrer" : undefined}
+              className="shrink-0 inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-primary-foreground shadow-lift transition-all duration-300 ease-out hover:-translate-y-0.5 active:scale-[0.98]"
+              style={{ background: "var(--gradient-electric)" }}
+            >
+              <span>Apply now</span>
+              <ArrowUpRight className="h-4 w-4" />
+            </a>
+          </div>
+        </section>
       </main>
 
       <SiteFooter />
