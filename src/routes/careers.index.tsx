@@ -102,7 +102,7 @@ function CareersIndexPage() {
       <SiteNav />
 
       <main id="main-content" className="animate-page-transition">
-        {/* ── Header ── */}
+        {/* Header */}
         <section className="surface-ambient border-b border-border">
           <div className="mx-auto max-w-3xl px-5 pb-14 pt-32 text-center sm:px-6 sm:pb-20 sm:pt-48">
             <span className="eyebrow">Careers</span>
@@ -114,7 +114,7 @@ function CareersIndexPage() {
           </div>
         </section>
 
-        {/* ── Open Positions ── */}
+        {/* Open Positions */}
         <section className="mx-auto max-w-4xl px-5 py-14 sm:px-6 sm:py-20">
           {departments.length > 2 && (
             <div className="mb-6 flex flex-wrap gap-1.5">
@@ -135,7 +135,7 @@ function CareersIndexPage() {
             </div>
           )}
 
-          {/* ── Roles List ── */}
+          {/* Roles List */}
           {filteredCareers.length === 0 ? (
             <div className="rounded-3xl border border-border bg-secondary/30 px-6 py-14 text-center sm:px-10 sm:py-16">
               <p className="font-display text-lg font-bold text-foreground">
@@ -192,7 +192,7 @@ function CareersIndexPage() {
             </div>
           )}
 
-          {/* ── Bottom CTA strip ── */}
+          {/* Bottom CTA strip */}
           <div className="mt-8 flex flex-col gap-5 rounded-3xl border border-border bg-secondary/40 px-6 py-6 sm:mt-10 sm:flex-row sm:items-center sm:justify-between sm:px-8 sm:py-7">
             <div>
               <p className="font-semibold text-foreground">Don't see a role that fits?</p>
@@ -208,7 +208,7 @@ function CareersIndexPage() {
               </p>
             </div>
             <a
-              href={`mailto:${careersEmail}?subject=${encodeURIComponent(`Open Application — ${SITE_CONFIG.name}`)}`}
+              href={`mailto:${careersEmail}?subject=${encodeURIComponent(`Open Application: ${SITE_CONFIG.name}`)}`}
               className="shrink-0 inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-primary-foreground shadow-lift transition-all duration-300 ease-out hover:-translate-y-0.5 active:scale-[0.98]"
               style={{ background: "var(--gradient-electric)" }}
             >

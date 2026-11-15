@@ -696,7 +696,7 @@ function Index() {
               </h2>
               <p className="mt-5 max-w-md text-base leading-relaxed text-muted-foreground">
                 Whether you're launching an ambitious new product or engineering a mission-critical
-                platform that must perform under pressure—let's build it together.
+                platform that must perform under pressure, let's build it together.
               </p>
             </div>
             <ContactForm />

@@ -201,14 +201,12 @@ export function CapabilityMap() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Section Sub-heading */}
         <div className="text-center">
-          <p className="font-mono text-xs tracking-widest text-primary font-semibold uppercase">
-            — WHAT WE DO BEST —
-          </p>
+          <span className="eyebrow">What we do best</span>
           <h2 className="mt-3 font-display text-2xl font-bold tracking-tight text-foreground sm:text-3xl md:text-4xl">
             The Stradmont System Orbit.
           </h2>
           <p className="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-muted-foreground sm:text-base">
-            Where strategy meets compounding growth—engineered through the Stradmont build core to
+            Where strategy meets compounding growth, engineered through the Stradmont build core to
             perform under real-world demand.
           </p>
         </div>

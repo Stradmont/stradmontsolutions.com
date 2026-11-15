@@ -75,7 +75,7 @@ export const letters: Letter[] = [
     content: [
       {
         paragraphs: [
-          "Across capital markets and financial technology platforms, discussions regarding latency are almost exclusively categorized as engineering concerns—benchmarked in milliseconds, CPU cycles, and network hops. Yet at the boundary where operational data informs capital allocation, latency is rarely a technical metric; it is an organizational governance policy.",
+          "Across capital markets and financial technology platforms, discussions regarding latency are almost exclusively categorized as engineering concerns, benchmarked in milliseconds, CPU cycles, and network hops. Yet at the boundary where operational data informs capital allocation, latency is rarely a technical metric; it is an organizational governance policy.",
         ],
       },
       {
@@ -108,7 +108,7 @@ export const letters: Letter[] = [
     date: "July 2026",
     readTime: "7 min read",
     title: "The finance data layer nobody owns",
-    body: "A practical examination of the fragmented territory between core transaction engines and audited financial reporting—and what happens when an organization establishes explicit custody over it.",
+    body: "A practical examination of the fragmented territory between core transaction engines and audited financial reporting, and what happens when an organization establishes explicit custody over it.",
     image: "/images/letters/data-layer.jpg",
     author: "Stradmont Research",
     authorTitle: "Operational Systems",
@@ -138,7 +138,7 @@ export const letters: Letter[] = [
         heading: "Custody before code",
         paragraphs: [
           "Remediating this operational friction cannot be accomplished solely by purchasing additional BI dashboards or data warehouse tooling. The primary remedy is jurisdictional: an organization must establish clear custody over the financial data pipeline as a first-class production system.",
-          "When the finance data layer is treated with the same architectural discipline as core transactional systems—with strict data contracts, reproducible transformations, immutable logging, and clear ownership—close cycles contract from weeks to hours.",
+          "When the finance data layer is treated with the same architectural discipline as core transactional systems, with strict data contracts, reproducible transformations, immutable logging, and clear ownership, close cycles contract from weeks to hours.",
           "Sound financial systems are not born from heroic manual reconciliations; they are the result of deliberate operational architecture that runs reliably every single day.",
         ],
       },

@@ -142,7 +142,7 @@ function CareerDetailPage() {
 
   const applyEmail = career.applyEmail || `careers@${SITE_CONFIG.domain}`;
   const applySubject = encodeURIComponent(
-    `Application: ${career.title} (${career.slug}) — [Your Name]`,
+    `Application: ${career.title} (${career.slug})`,
   );
   const applyBody = encodeURIComponent(
     `Hello Stradmont Team,\n\nI would like to apply for the ${career.title} role (${career.department}).\n\nLinks & background:\n- GitHub / Portfolio / LinkedIn: \n- Relevant work: \n\nBest regards,\n[Your Name]`,
@@ -159,7 +159,7 @@ function CareerDetailPage() {
       <SiteNav />
 
       <main id="main-content" className="animate-page-transition">
-        {/* ── Header ── */}
+        {/* Header */}
         <header className="surface-ambient border-b border-border pt-32 pb-12 sm:pt-44 sm:pb-16">
           <div className="mx-auto max-w-3xl px-5 sm:px-6">
             <Link
@@ -202,14 +202,14 @@ function CareerDetailPage() {
           </div>
         </header>
 
-        {/* ── Single-Column Role Description ── */}
+        {/* Role Description */}
         <section className="mx-auto max-w-3xl px-5 py-12 sm:px-6 sm:py-16">
           <div
             className="max-w-none text-base leading-relaxed text-muted-foreground [&_h2]:font-display [&_h2]:text-xl sm:[&_h2]:text-2xl [&_h2]:font-bold [&_h2]:tracking-tight [&_h2]:text-foreground [&_h2]:mt-10 [&_h2]:mb-3 first:[&_h2]:mt-0 [&_h3]:font-display [&_h3]:text-lg [&_h3]:font-bold [&_h3]:text-foreground [&_h3]:mt-8 [&_h3]:mb-2 [&_p]:mb-5 [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:mb-6 [&_ul]:space-y-2 [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:mb-6 [&_ol]:space-y-2 [&_strong]:font-semibold [&_strong]:text-foreground [&_a]:text-primary [&_a]:underline hover:[&_a]:opacity-80"
             dangerouslySetInnerHTML={{ __html: career.descriptionHtml }}
           />
 
-          {/* ── Bottom Apply Strip ── */}
+          {/* Bottom Apply Strip */}
           <div className="mt-14 flex flex-col gap-5 rounded-3xl border border-border bg-secondary/40 px-6 py-6 sm:flex-row sm:items-center sm:justify-between sm:px-8 sm:py-7">
             <div>
               <p className="font-semibold text-foreground">Ready to apply?</p>

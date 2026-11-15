@@ -47,7 +47,7 @@ function NotFoundComponent() {
         <div className="flex justify-center mb-6">
           <BrandLogo />
         </div>
-        <span className="eyebrow">404 — Not Found</span>
+        <span className="eyebrow">404</span>
         <h1 className="mt-4 font-display text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl">
           Page not found
         </h1>
