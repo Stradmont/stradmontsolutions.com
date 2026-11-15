@@ -49,19 +49,31 @@ export const Route = createFileRoute("/products")({
         type: "application/ld+json",
         children: JSON.stringify({
           "@context": "https://schema.org",
-          "@type": "BreadcrumbList",
-          itemListElement: [
+          "@graph": [
             {
-              "@type": "ListItem",
-              position: 1,
-              name: "Home",
-              item: `${SITE_CONFIG.url}/`,
+              "@type": "CollectionPage",
+              "@id": `${SITE_CONFIG.url}/products#webpage`,
+              url: `${SITE_CONFIG.url}/products`,
+              name: `Our Products | ${SITE_CONFIG.name}`,
+              description: defaultProduct.body,
+              isPartOf: { "@id": `${SITE_CONFIG.url}/#website` },
             },
             {
-              "@type": "ListItem",
-              position: 2,
-              name: "Our Products",
-              item: `${SITE_CONFIG.url}/products`,
+              "@type": "BreadcrumbList",
+              itemListElement: [
+                {
+                  "@type": "ListItem",
+                  position: 1,
+                  name: "Home",
+                  item: `${SITE_CONFIG.url}/`,
+                },
+                {
+                  "@type": "ListItem",
+                  position: 2,
+                  name: "Our Products",
+                  item: `${SITE_CONFIG.url}/products`,
+                },
+              ],
             },
           ],
         }),

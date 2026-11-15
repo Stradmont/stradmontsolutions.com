@@ -30,7 +30,11 @@ export const Route = createFileRoute("/careers/$slug")({
         { property: "og:description", content: desc },
         { property: "og:type", content: "website" },
         { property: "og:url", content: `${SITE_CONFIG.url}/careers/${career?.slug}` },
+        { property: "og:image", content: SITE_CONFIG.ogImage },
         { name: "twitter:card", content: "summary_large_image" },
+        { name: "twitter:title", content: title },
+        { name: "twitter:description", content: desc },
+        { name: "twitter:image", content: SITE_CONFIG.ogImage },
       ],
       links: [
         {
@@ -44,22 +48,50 @@ export const Route = createFileRoute("/careers/$slug")({
               type: "application/ld+json",
               children: JSON.stringify({
                 "@context": "https://schema.org",
-                "@type": "JobPosting",
-                title: career.title,
-                description: career.summary,
-                datePosted: career.createdAt,
-                employmentType: career.type,
-                hiringOrganization: {
-                  "@type": "Organization",
-                  name: SITE_CONFIG.name,
-                  sameAs: SITE_CONFIG.url,
-                  logo: `${SITE_CONFIG.url}/favicon.svg`,
-                },
-                jobLocationType: "TELECOMMUTE",
-                applicantLocationRequirements: {
-                  "@type": "Country",
-                  name: "Worldwide",
-                },
+                "@graph": [
+                  {
+                    "@type": "JobPosting",
+                    title: career.title,
+                    description: career.summary,
+                    datePosted: career.createdAt,
+                    employmentType: career.type,
+                    hiringOrganization: {
+                      "@type": "Organization",
+                      "@id": `${SITE_CONFIG.url}/#organization`,
+                      name: SITE_CONFIG.name,
+                      sameAs: SITE_CONFIG.url,
+                      logo: `${SITE_CONFIG.url}/favicon.svg`,
+                    },
+                    jobLocationType: "TELECOMMUTE",
+                    applicantLocationRequirements: {
+                      "@type": "Country",
+                      name: "Worldwide",
+                    },
+                  },
+                  {
+                    "@type": "BreadcrumbList",
+                    itemListElement: [
+                      {
+                        "@type": "ListItem",
+                        position: 1,
+                        name: "Home",
+                        item: `${SITE_CONFIG.url}/`,
+                      },
+                      {
+                        "@type": "ListItem",
+                        position: 2,
+                        name: "Careers",
+                        item: `${SITE_CONFIG.url}/careers`,
+                      },
+                      {
+                        "@type": "ListItem",
+                        position: 3,
+                        name: career.title,
+                        item: `${SITE_CONFIG.url}/careers/${career.slug}`,
+                      },
+                    ],
+                  },
+                ],
               }),
             },
           ]

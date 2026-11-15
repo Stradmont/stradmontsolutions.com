@@ -33,6 +33,7 @@ export function SiteNav() {
 
       <header className="fixed inset-x-0 top-4 z-50 px-4">
         <nav
+          aria-label="Primary navigation"
           className={`mx-auto flex max-w-5xl items-center justify-between rounded-full border border-border/80 bg-background/90 px-6 py-3.5 backdrop-blur-xl transition-all duration-300 ${
             scrolled ? "shadow-soft border-border" : "shadow-xs"
           }`}

@@ -62,10 +62,29 @@ export const Route = createFileRoute("/")({
               "@type": "Organization",
               "@id": `${SITE_CONFIG.url}/#organization`,
               name: SITE_CONFIG.name,
+              alternateName: SITE_CONFIG.shortName,
               url: SITE_CONFIG.url,
-              logo: `${SITE_CONFIG.url}/favicon.svg`,
+              logo: {
+                "@type": "ImageObject",
+                url: `${SITE_CONFIG.url}/favicon.svg`,
+              },
+              image: SITE_CONFIG.ogImage,
+              description:
+                "We build products that solve meaningful problems, simplify complexity, and become an essential part of everyday life.",
               email: SITE_CONFIG.contact.email,
               telephone: SITE_CONFIG.contact.phoneSchema,
+              address: {
+                "@type": "PostalAddress",
+                addressRegion: "ON",
+                addressCountry: "CA",
+              },
+              contactPoint: {
+                "@type": "ContactPoint",
+                telephone: SITE_CONFIG.contact.phoneSchema,
+                email: SITE_CONFIG.contact.email,
+                contactType: "customer support",
+                url: `${SITE_CONFIG.url}/contact`,
+              },
               sameAs: [SITE_CONFIG.socials.linkedin.href, SITE_CONFIG.socials.instagram.href],
             },
             {
@@ -73,9 +92,60 @@ export const Route = createFileRoute("/")({
               "@id": `${SITE_CONFIG.url}/#website`,
               url: SITE_CONFIG.url,
               name: SITE_CONFIG.name,
+              alternateName: SITE_CONFIG.shortName,
+              description: SITE_CONFIG.tagline,
               publisher: {
                 "@id": `${SITE_CONFIG.url}/#organization`,
               },
+              hasPart: [
+                { "@id": `${SITE_CONFIG.url}/products#webpage` },
+                { "@id": `${SITE_CONFIG.url}/letters#webpage` },
+                { "@id": `${SITE_CONFIG.url}/careers#webpage` },
+                { "@id": `${SITE_CONFIG.url}/contact#webpage` },
+              ],
+            },
+            {
+              "@type": "ItemList",
+              "@id": `${SITE_CONFIG.url}/#navigation`,
+              name: `${SITE_CONFIG.name} Site Navigation`,
+              itemListElement: [
+                {
+                  "@type": "SiteNavigationElement",
+                  "@id": `${SITE_CONFIG.url}/products#webpage`,
+                  position: 1,
+                  name: "Our Products",
+                  description:
+                    "Purpose-built platforms and operational software for institutions, including Builders Base.",
+                  url: `${SITE_CONFIG.url}/products`,
+                },
+                {
+                  "@type": "SiteNavigationElement",
+                  "@id": `${SITE_CONFIG.url}/letters#webpage`,
+                  position: 2,
+                  name: "Stradmont Letters",
+                  description:
+                    "Dispatches on architecture, systems engineering, and building software that holds under real-world demand.",
+                  url: `${SITE_CONFIG.url}/letters`,
+                },
+                {
+                  "@type": "SiteNavigationElement",
+                  "@id": `${SITE_CONFIG.url}/careers#webpage`,
+                  position: 3,
+                  name: "Careers",
+                  description:
+                    "Explore open roles at Stradmont Solutions across engineering, product, and systems architecture.",
+                  url: `${SITE_CONFIG.url}/careers`,
+                },
+                {
+                  "@type": "SiteNavigationElement",
+                  "@id": `${SITE_CONFIG.url}/contact#webpage`,
+                  position: 4,
+                  name: "Contact Us",
+                  description:
+                    "Get in touch with Stradmont Solutions about partnerships, products, or investment.",
+                  url: `${SITE_CONFIG.url}/contact`,
+                },
+              ],
             },
           ],
         }),

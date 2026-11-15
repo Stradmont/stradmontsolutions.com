@@ -43,19 +43,31 @@ export const Route = createFileRoute("/contact")({
         type: "application/ld+json",
         children: JSON.stringify({
           "@context": "https://schema.org",
-          "@type": "BreadcrumbList",
-          itemListElement: [
+          "@graph": [
             {
-              "@type": "ListItem",
-              position: 1,
-              name: "Home",
-              item: `${SITE_CONFIG.url}/`,
+              "@type": "ContactPage",
+              "@id": `${SITE_CONFIG.url}/contact#webpage`,
+              url: `${SITE_CONFIG.url}/contact`,
+              name: `Contact Us | ${SITE_CONFIG.name}`,
+              description: `Get in touch with ${SITE_CONFIG.name} about partnerships, products or investment.`,
+              isPartOf: { "@id": `${SITE_CONFIG.url}/#website` },
             },
             {
-              "@type": "ListItem",
-              position: 2,
-              name: "Contact",
-              item: `${SITE_CONFIG.url}/contact`,
+              "@type": "BreadcrumbList",
+              itemListElement: [
+                {
+                  "@type": "ListItem",
+                  position: 1,
+                  name: "Home",
+                  item: `${SITE_CONFIG.url}/`,
+                },
+                {
+                  "@type": "ListItem",
+                  position: 2,
+                  name: "Contact Us",
+                  item: `${SITE_CONFIG.url}/contact`,
+                },
+              ],
             },
           ],
         }),

@@ -48,19 +48,31 @@ export const Route = createFileRoute("/letters/")({
         type: "application/ld+json",
         children: JSON.stringify({
           "@context": "https://schema.org",
-          "@type": "BreadcrumbList",
-          itemListElement: [
+          "@graph": [
             {
-              "@type": "ListItem",
-              position: 1,
-              name: "Home",
-              item: `${SITE_CONFIG.url}/`,
+              "@type": "CollectionPage",
+              "@id": `${SITE_CONFIG.url}/letters#webpage`,
+              url: `${SITE_CONFIG.url}/letters`,
+              name: "Stradmont Letters | Systems Architecture & Dispatches",
+              description: `Dispatches on architecture, systems engineering, and building software that holds under real-world demand from ${SITE_CONFIG.name}.`,
+              isPartOf: { "@id": `${SITE_CONFIG.url}/#website` },
             },
             {
-              "@type": "ListItem",
-              position: 2,
-              name: "Letters",
-              item: `${SITE_CONFIG.url}/letters`,
+              "@type": "BreadcrumbList",
+              itemListElement: [
+                {
+                  "@type": "ListItem",
+                  position: 1,
+                  name: "Home",
+                  item: `${SITE_CONFIG.url}/`,
+                },
+                {
+                  "@type": "ListItem",
+                  position: 2,
+                  name: "Stradmont Letters",
+                  item: `${SITE_CONFIG.url}/letters`,
+                },
+              ],
             },
           ],
         }),

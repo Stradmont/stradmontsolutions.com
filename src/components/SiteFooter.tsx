@@ -42,7 +42,7 @@ export function SiteFooter() {
             {/* Col 2 — Navigation */}
             <div>
               <p className="eyebrow mb-5">Navigation</p>
-              <nav className="flex flex-col gap-3">
+              <nav aria-label="Footer navigation" className="flex flex-col gap-3">
                 {SITE_CONFIG.footerNavLinks.map((l) => (
                   <Link
                     key={l.to}

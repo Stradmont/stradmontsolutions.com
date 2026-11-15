@@ -149,7 +149,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         content: `${SITE_CONFIG.name}: engineering specialised SaaS platforms and workflow software for technology and finance institutions.`,
       },
       { name: "author", content: SITE_CONFIG.name },
+      {
+        name: "robots",
+        content: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      },
       { name: "theme-color", content: "#1e1b4b" },
+      { property: "og:site_name", content: SITE_CONFIG.name },
+      { property: "og:locale", content: "en_CA" },
       { property: "og:title", content: `${SITE_CONFIG.name} | ${SITE_CONFIG.tagline}` },
       {
         property: "og:description",
@@ -168,7 +174,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
     ],
     links: [
-      { rel: "canonical", href: SITE_CONFIG.url },
       {
         rel: "stylesheet",
         href: appCss,

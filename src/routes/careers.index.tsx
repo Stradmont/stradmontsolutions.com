@@ -25,7 +25,7 @@ export const Route = createFileRoute("/careers/")({
       { property: "og:title", content: `Careers | ${SITE_CONFIG.name}` },
       {
         property: "og:description",
-        content: `Explore open roles at ${SITE_CONFIG.name}.`,
+        content: `Explore open roles at ${SITE_CONFIG.name}. Help us build products that solve meaningful problems and move organizations forward.`,
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: `${SITE_CONFIG.url}/careers` },
@@ -34,6 +34,12 @@ export const Route = createFileRoute("/careers/")({
         content: SITE_CONFIG.ogImage,
       },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: `Careers | ${SITE_CONFIG.name}` },
+      {
+        name: "twitter:description",
+        content: `Explore open roles at ${SITE_CONFIG.name}. Help us build products that solve meaningful problems and move organizations forward.`,
+      },
+      { name: "twitter:image", content: SITE_CONFIG.ogImage },
     ],
     links: [{ rel: "canonical", href: `${SITE_CONFIG.url}/careers` }],
     scripts: [
@@ -41,19 +47,31 @@ export const Route = createFileRoute("/careers/")({
         type: "application/ld+json",
         children: JSON.stringify({
           "@context": "https://schema.org",
-          "@type": "BreadcrumbList",
-          itemListElement: [
+          "@graph": [
             {
-              "@type": "ListItem",
-              position: 1,
-              name: "Home",
-              item: `${SITE_CONFIG.url}/`,
+              "@type": "CollectionPage",
+              "@id": `${SITE_CONFIG.url}/careers#webpage`,
+              url: `${SITE_CONFIG.url}/careers`,
+              name: `Careers | ${SITE_CONFIG.name}`,
+              description: `Explore open roles at ${SITE_CONFIG.name} across engineering, product, and systems architecture.`,
+              isPartOf: { "@id": `${SITE_CONFIG.url}/#website` },
             },
             {
-              "@type": "ListItem",
-              position: 2,
-              name: "Careers",
-              item: `${SITE_CONFIG.url}/careers`,
+              "@type": "BreadcrumbList",
+              itemListElement: [
+                {
+                  "@type": "ListItem",
+                  position: 1,
+                  name: "Home",
+                  item: `${SITE_CONFIG.url}/`,
+                },
+                {
+                  "@type": "ListItem",
+                  position: 2,
+                  name: "Careers",
+                  item: `${SITE_CONFIG.url}/careers`,
+                },
+              ],
             },
           ],
         }),
