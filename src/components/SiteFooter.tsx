@@ -79,25 +79,6 @@ export function SiteFooter() {
                     <span className="break-all">{SITE_CONFIG.contact.email}</span>
                   </a>
                 </li>
-                <li>
-                  <a
-                    href={SITE_CONFIG.contact.phoneHref}
-                    className="flex items-center gap-2.5 text-muted-foreground transition-colors hover:text-primary"
-                  >
-                    <svg
-                      className="shrink-0"
-                      width="14"
-                      height="14"
-                      viewBox="0 0 16 16"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="1.6"
-                    >
-                      <path d="M2 2.5A1.5 1.5 0 0 1 3.5 1h1a1.5 1.5 0 0 1 1.5 1.5v.5c0 .6-.3 1.1-.8 1.4L4.5 5a9 9 0 0 0 6.5 6.5l.6-.7c.3-.5.8-.8 1.4-.8h.5A1.5 1.5 0 0 1 15 11.5v1A1.5 1.5 0 0 1 13.5 14C7.1 14 2 8.9 2 2.5z" />
-                    </svg>
-                    {SITE_CONFIG.contact.phone}
-                  </a>
-                </li>
                 <li className="flex items-center gap-2.5 text-muted-foreground">
                   <svg
                     className="shrink-0"
