@@ -143,10 +143,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: `${SITE_CONFIG.name} | ${SITE_CONFIG.tagline}` },
+      { title: `${SITE_CONFIG.name} | SaaS, AI, Cloud & Cybersecurity` },
       {
         name: "description",
-        content: `${SITE_CONFIG.name}: SaaS product engineering, cybersecurity, and resilient operational software for technology and finance organizations.`,
+        content: `${SITE_CONFIG.name}: SaaS platforms, cybersecurity, cloud infrastructure, and applied AI for modern organizations.`,
       },
       { name: "author", content: SITE_CONFIG.name },
       {
@@ -156,11 +156,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "theme-color", content: "#1e1b4b" },
       { property: "og:site_name", content: SITE_CONFIG.name },
       { property: "og:locale", content: "en_CA" },
-      { property: "og:title", content: `${SITE_CONFIG.name} | ${SITE_CONFIG.tagline}` },
+      { property: "og:title", content: `${SITE_CONFIG.name} | SaaS, AI, Cloud & Cybersecurity` },
       {
         property: "og:description",
         content:
-          "SaaS product engineering, cybersecurity, and resilient operational software for technology and finance organizations.",
+          "SaaS platforms, cybersecurity, cloud infrastructure, and applied AI for modern organizations.",
       },
       { property: "og:type", content: "website" },
       {

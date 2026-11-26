@@ -15,20 +15,20 @@ export const Route = createFileRoute("/")({
   },
   head: () => ({
     meta: [
-      { title: `${SITE_CONFIG.name} | SaaS Platforms & Cybersecurity Engineering` },
+      { title: `${SITE_CONFIG.name} | SaaS, AI, Cloud & Cybersecurity` },
       {
         name: "description",
         content:
-          "We build mission-critical SaaS products and engineer cybersecurity systems for modern organizations. From scalable platforms like Builders Base to application security, zero-trust infrastructure, and system defense.",
+          "Stradmont Solutions builds mission-critical SaaS platforms and delivers cybersecurity, cloud infrastructure, data engineering, and applied AI for modern organizations.",
       },
       {
         property: "og:title",
-        content: `${SITE_CONFIG.name} | SaaS Platforms & Cybersecurity Engineering`,
+        content: `${SITE_CONFIG.name} | SaaS, AI, Cloud & Cybersecurity`,
       },
       {
         property: "og:description",
         content:
-          "We build mission-critical SaaS products and engineer cybersecurity systems for modern organizations. Every platform starts with a clear purpose and is secured to perform under real-world demand.",
+          "We build mission-critical SaaS platforms and deliver cybersecurity, cloud infrastructure, data engineering, and applied AI for modern organizations.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: `${SITE_CONFIG.url}/` },
@@ -39,12 +39,12 @@ export const Route = createFileRoute("/")({
       { name: "twitter:card", content: "summary_large_image" },
       {
         name: "twitter:title",
-        content: `${SITE_CONFIG.name} | SaaS Platforms & Cybersecurity Engineering`,
+        content: `${SITE_CONFIG.name} | SaaS, AI, Cloud & Cybersecurity`,
       },
       {
         name: "twitter:description",
         content:
-          "We build mission-critical SaaS products and engineer cybersecurity systems for modern organizations.",
+          "We build mission-critical SaaS platforms and deliver cybersecurity, cloud infrastructure, data engineering, and applied AI for modern organizations.",
       },
       {
         name: "twitter:image",
@@ -70,13 +70,13 @@ export const Route = createFileRoute("/")({
               },
               image: SITE_CONFIG.ogImage,
               description:
-                "Stradmont Solutions builds mission-critical SaaS products and provides cybersecurity, application security, and system engineering for technology and finance organizations.",
+                "Stradmont Solutions builds mission-critical SaaS platforms and delivers cybersecurity, cloud infrastructure, data engineering, and applied AI for technology and finance organizations.",
               knowsAbout: [
                 "SaaS Product Engineering",
-                "Cybersecurity",
-                "Application Security",
+                "Cybersecurity & Application Security",
+                "Cloud Infrastructure & DevOps",
+                "Data Engineering & Applied AI",
                 "Zero-Trust Architecture",
-                "Cloud Infrastructure Security",
                 "Distributed Systems",
               ],
               email: SITE_CONFIG.contact.email,
@@ -132,7 +132,7 @@ export const Route = createFileRoute("/")({
                   position: 2,
                   name: "Stradmont Letters",
                   description:
-                    "Dispatches on cybersecurity, architecture, systems engineering, and building software that holds under real-world demand.",
+                    "Dispatches on cybersecurity, cloud architecture, AI, and building software that holds under real-world demand.",
                   url: `${SITE_CONFIG.url}/letters`,
                 },
                 {
@@ -141,7 +141,7 @@ export const Route = createFileRoute("/")({
                   position: 3,
                   name: "Careers",
                   description:
-                    "Explore open roles at Stradmont Solutions across SaaS engineering, cybersecurity, and systems architecture.",
+                    "Explore open roles at Stradmont Solutions across SaaS engineering, cybersecurity, cloud, and AI.",
                   url: `${SITE_CONFIG.url}/careers`,
                 },
                 {
@@ -150,7 +150,7 @@ export const Route = createFileRoute("/")({
                   position: 4,
                   name: "Contact Us",
                   description:
-                    "Get in touch with Stradmont Solutions about SaaS products, security audits, partnerships, or investment.",
+                    "Get in touch with Stradmont Solutions about SaaS products, cybersecurity, cloud engineering, or partnerships.",
                   url: `${SITE_CONFIG.url}/contact`,
                 },
               ],
@@ -159,11 +159,11 @@ export const Route = createFileRoute("/")({
               "@type": "WebPage",
               "@id": `${SITE_CONFIG.url}/#webpage`,
               url: `${SITE_CONFIG.url}/`,
-              name: `${SITE_CONFIG.name} | SaaS Platforms & Cybersecurity Engineering`,
+              name: `${SITE_CONFIG.name} | SaaS, AI, Cloud & Cybersecurity`,
               isPartOf: { "@id": `${SITE_CONFIG.url}/#website` },
               about: { "@id": `${SITE_CONFIG.url}/#organization` },
               description:
-                "We build mission-critical SaaS products and engineer cybersecurity systems for modern organizations.",
+                "Stradmont Solutions builds mission-critical SaaS platforms and delivers cybersecurity, cloud infrastructure, data engineering, and applied AI.",
             },
             {
               "@type": "FAQPage",
@@ -191,25 +191,41 @@ const pills = [{ label: "SaaS Platforms", style: "left-[7%] top-[15%]", delay: "
 
 const rightPills = [
   { label: "Cybersecurity", style: "right-[5%] top-[56%]", delay: "0.4s" },
-  { label: "Systems", style: "right-[3%] top-[73%]", delay: "1.2s" },
+  { label: "Cloud & AI", style: "right-[3%] top-[73%]", delay: "1.2s" },
 ];
 
 const corePillars = [
   {
     index: "01",
     tag: "SaaS & Product Engineering",
-    title: "Scalable software platforms built for daily institutional demand.",
+    title: "Software built to run your core operations.",
     description:
-      "We design, architect, and ship proprietary SaaS products like Builders Base alongside custom operational platforms that replace fragmented workflows with fast, reliable systems.",
-    highlights: ["Multi-Tenant SaaS", "Distributed Backends", "Applied AI & Automation"],
+      "We design, build, and scale proprietary SaaS platforms like Builders Base alongside custom web and API systems that replace manual bottlenecks with fast, reliable software.",
+    highlights: ["Multi-Tenant SaaS", "Web & API Systems", "Legacy Modernization"],
   },
   {
     index: "02",
     tag: "Cybersecurity & System Defense",
-    title: "Security engineered into the architecture, not bolted on later.",
+    title: "Protection engineered into every layer.",
     description:
-      "We protect critical applications, data pipelines, and cloud infrastructure through proactive threat modeling, application security audits, zero-trust network boundaries, and continuous hardening.",
-    highlights: ["AppSec & Code Audits", "Zero-Trust Cloud", "Threat & Risk Mitigation"],
+      "We secure critical applications, networks, and cloud environments through penetration testing, code and architecture audits, zero-trust access controls, and continuous threat monitoring.",
+    highlights: ["AppSec & Pen-Testing", "Zero-Trust Architecture", "Security & Risk Audits"],
+  },
+  {
+    index: "03",
+    tag: "Data & Applied AI",
+    title: "Intelligent automation grounded in your data.",
+    description:
+      "We turn scattered operational data into clean pipelines, decision-ready analytics, and private AI workflows that automate complex work without exposing sensitive company data.",
+    highlights: ["Private AI & Agents", "Data Pipelines", "Analytics & Governance"],
+  },
+  {
+    index: "04",
+    tag: "Cloud & DevOps Infrastructure",
+    title: "Resilient cloud foundations that scale cleanly.",
+    description:
+      "We architect and manage high-availability cloud environments, containerized deployments, and automated CI/CD pipelines built for speed, uptime, and cost discipline.",
+    highlights: ["Cloud Architecture", "Containers & Kubernetes", "Automated CI/CD"],
   },
 ];
 
