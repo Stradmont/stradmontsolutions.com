@@ -135,96 +135,102 @@ export async function submitContactEnquiry(
 
 /**
  * Fetches published Stradmont Letters from the backend API (`GET /api/v1/public/letters`).
- * Uses editorial content when the backend API URL is not configured.
+ * Falls back to local editorial content when the backend API is not configured or unavailable.
  */
 export async function fetchLetters(): Promise<Letter[]> {
   if (!ENV.API_BASE_URL) {
     return letters;
   }
 
-  const response = await fetch(`${ENV.API_BASE_URL}/public/letters?limit=100`, {
-    headers: { Accept: "application/json" },
-  });
+  try {
+    const response = await fetch(`${ENV.API_BASE_URL}/public/letters?limit=100`, {
+      headers: { Accept: "application/json" },
+    });
 
-  if (!response.ok) {
-    throw new ApiClientError(
-      `Failed to fetch letters from backend: ${response.status} ${response.statusText}`,
-      response.status,
-    );
+    if (!response.ok) {
+      return letters;
+    }
+
+    const json = (await response.json()) as ApiResponse<Letter[]>;
+    if (!Array.isArray(json.data) || json.data.length === 0) {
+      return letters;
+    }
+
+    return json.data;
+  } catch {
+    return letters;
   }
-
-  const json = (await response.json()) as ApiResponse<Letter[]>;
-  if (!Array.isArray(json.data)) {
-    throw new ApiClientError("Invalid response format: expected letters array", response.status);
-  }
-
-  return json.data;
 }
 
 /**
  * Fetches a single Stradmont Letter by slug from the backend API (`GET /api/v1/public/letters/:slug`).
- * Returns undefined if not found (404).
+ * Falls back to local editorial content if the backend API is unavailable, or returns undefined if not found.
  */
 export async function fetchLetterBySlug(slug: string): Promise<Letter | undefined> {
   if (!ENV.API_BASE_URL) {
     return getLetterBySlug(slug);
   }
 
-  const response = await fetch(`${ENV.API_BASE_URL}/public/letters/${encodeURIComponent(slug)}`, {
-    headers: { Accept: "application/json" },
-  });
-
-  if (response.status === 404) {
-    return undefined;
-  }
-
-  if (!response.ok) {
-    throw new ApiClientError(
-      `Failed to fetch letter "${slug}" from backend: ${response.status} ${response.statusText}`,
-      response.status,
+  try {
+    const response = await fetch(
+      `${ENV.API_BASE_URL}/public/letters/${encodeURIComponent(slug)}`,
+      {
+        headers: { Accept: "application/json" },
+      },
     );
-  }
 
-  const json = (await response.json()) as ApiResponse<Letter>;
-  return json.data;
+    if (response.status === 404) {
+      return getLetterBySlug(slug);
+    }
+
+    if (!response.ok) {
+      return getLetterBySlug(slug);
+    }
+
+    const json = (await response.json()) as ApiResponse<Letter>;
+    return json.data ?? getLetterBySlug(slug);
+  } catch {
+    return getLetterBySlug(slug);
+  }
 }
 
 /**
  * Fetches active products from the backend API (`GET /api/v1/public/products`).
- * Uses editorial product configuration when the backend API URL is not configured.
+ * Falls back to editorial product configuration when the backend API is not configured or unavailable.
  */
 export async function fetchProducts(): Promise<ProductRecord[]> {
   if (!ENV.API_BASE_URL) {
     return [SITE_CONFIG.products.buildersBase];
   }
 
-  const response = await fetch(`${ENV.API_BASE_URL}/public/products`, {
-    headers: { Accept: "application/json" },
-  });
+  try {
+    const response = await fetch(`${ENV.API_BASE_URL}/public/products`, {
+      headers: { Accept: "application/json" },
+    });
 
-  if (!response.ok) {
-    throw new ApiClientError(
-      `Failed to fetch products from backend: ${response.status} ${response.statusText}`,
-      response.status,
-    );
+    if (!response.ok) {
+      return [SITE_CONFIG.products.buildersBase];
+    }
+
+    const json = (await response.json()) as ApiResponse<ProductDto[]>;
+    if (!Array.isArray(json.data) || json.data.length === 0) {
+      return [SITE_CONFIG.products.buildersBase];
+    }
+
+    return json.data.map((item) => ({
+      id: item.id,
+      name: item.name,
+      slug: item.slug,
+      tag: item.tag,
+      status: item.status,
+      logo: item.logo,
+      url: item.url,
+      domain: extractDomain(item.url),
+      body: item.body,
+    }));
+  } catch {
+    return [SITE_CONFIG.products.buildersBase];
   }
-
-  const json = (await response.json()) as ApiResponse<ProductDto[]>;
-  if (!Array.isArray(json.data)) {
-    throw new ApiClientError("Invalid response format: expected products array", response.status);
-  }
-
-  return json.data.map((item) => ({
-    id: item.id,
-    name: item.name,
-    slug: item.slug,
-    tag: item.tag,
-    status: item.status,
-    logo: item.logo,
-    url: item.url,
-    domain: extractDomain(item.url),
-    body: item.body,
-  }));
 }
 
 export interface CareerRecord {
