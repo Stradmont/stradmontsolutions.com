@@ -96,8 +96,8 @@ function LettersIndexPage() {
             <span className="eyebrow">Publication</span>
             <h1 className="mt-5 page-title text-foreground">Stradmont Letters.</h1>
             <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-muted-foreground">
-              Dispatches on architecture, systems engineering, and building software that holds
-              under real-world demand.
+              Articles and technical notes on software engineering, security, cloud systems, and
+              building products that last.
             </p>
           </div>
         </section>

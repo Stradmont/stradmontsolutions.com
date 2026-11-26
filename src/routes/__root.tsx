@@ -52,8 +52,7 @@ function NotFoundComponent() {
           Page not found
         </h1>
         <p className="mt-3 text-sm leading-relaxed text-muted-foreground sm:text-base">
-          The requested system node or page could not be located. It may have been relocated or is
-          currently decommissioned.
+          The page you are looking for does not exist or has been moved.
         </p>
         <div className="mt-8 flex flex-wrap justify-center gap-3">
           <Link
@@ -107,13 +106,12 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
         <div className="flex justify-center mb-6">
           <BrandLogo />
         </div>
-        <span className="eyebrow">System Interruption</span>
+        <span className="eyebrow">Error</span>
         <h1 className="mt-4 font-display text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
-          Unexpected Error Encountered
+          Something went wrong
         </h1>
         <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-          An unhandled state occurred while processing this request. Our diagnostics have been
-          notified.
+          We ran into an unexpected error loading this page. Please try again.
         </p>
         <div className="mt-8 flex flex-wrap justify-center gap-3">
           <button

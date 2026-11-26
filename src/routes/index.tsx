@@ -19,7 +19,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Stradmont Solutions builds mission-critical SaaS platforms and delivers cybersecurity, cloud infrastructure, data engineering, and applied AI for modern organizations.",
+          "Stradmont Solutions builds SaaS products and helps organizations with cybersecurity, cloud infrastructure, data systems, and AI.",
       },
       {
         property: "og:title",
@@ -28,7 +28,7 @@ export const Route = createFileRoute("/")({
       {
         property: "og:description",
         content:
-          "We build mission-critical SaaS platforms and deliver cybersecurity, cloud infrastructure, data engineering, and applied AI for modern organizations.",
+          "We build SaaS products and help organizations with cybersecurity, cloud infrastructure, data systems, and AI.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: `${SITE_CONFIG.url}/` },
@@ -44,7 +44,7 @@ export const Route = createFileRoute("/")({
       {
         name: "twitter:description",
         content:
-          "We build mission-critical SaaS platforms and deliver cybersecurity, cloud infrastructure, data engineering, and applied AI for modern organizations.",
+          "We build SaaS products and help organizations with cybersecurity, cloud infrastructure, data systems, and AI.",
       },
       {
         name: "twitter:image",
@@ -70,14 +70,13 @@ export const Route = createFileRoute("/")({
               },
               image: SITE_CONFIG.ogImage,
               description:
-                "Stradmont Solutions builds mission-critical SaaS platforms and delivers cybersecurity, cloud infrastructure, data engineering, and applied AI for technology and finance organizations.",
+                "Stradmont Solutions builds SaaS products and works with organizations on cybersecurity, cloud infrastructure, data systems, and AI.",
               knowsAbout: [
-                "SaaS Product Engineering",
-                "Cybersecurity & Application Security",
-                "Cloud Infrastructure & DevOps",
-                "Data Engineering & Applied AI",
-                "Zero-Trust Architecture",
-                "Distributed Systems",
+                "SaaS Development",
+                "Cybersecurity",
+                "Cloud Infrastructure",
+                "Data & AI",
+                "Web & API Development",
               ],
               email: SITE_CONFIG.contact.email,
               telephone: SITE_CONFIG.contact.phoneSchema,
@@ -123,7 +122,7 @@ export const Route = createFileRoute("/")({
                   position: 1,
                   name: "Our Products",
                   description:
-                    "Purpose-built SaaS platforms and operational software for institutions, including Builders Base.",
+                    "Software products built by Stradmont Solutions, including Builders Base.",
                   url: `${SITE_CONFIG.url}/products`,
                 },
                 {
@@ -132,7 +131,7 @@ export const Route = createFileRoute("/")({
                   position: 2,
                   name: "Stradmont Letters",
                   description:
-                    "Dispatches on cybersecurity, cloud architecture, AI, and building software that holds under real-world demand.",
+                    "Articles and technical notes on software engineering, security, cloud, and data.",
                   url: `${SITE_CONFIG.url}/letters`,
                 },
                 {
@@ -141,7 +140,7 @@ export const Route = createFileRoute("/")({
                   position: 3,
                   name: "Careers",
                   description:
-                    "Explore open roles at Stradmont Solutions across SaaS engineering, cybersecurity, cloud, and AI.",
+                    "Open positions at Stradmont Solutions across software engineering, security, cloud, and AI.",
                   url: `${SITE_CONFIG.url}/careers`,
                 },
                 {
@@ -150,7 +149,7 @@ export const Route = createFileRoute("/")({
                   position: 4,
                   name: "Contact Us",
                   description:
-                    "Get in touch with Stradmont Solutions about SaaS products, cybersecurity, cloud engineering, or partnerships.",
+                    "Get in touch with Stradmont Solutions about products, security, cloud projects, or partnerships.",
                   url: `${SITE_CONFIG.url}/contact`,
                 },
               ],
@@ -163,7 +162,7 @@ export const Route = createFileRoute("/")({
               isPartOf: { "@id": `${SITE_CONFIG.url}/#website` },
               about: { "@id": `${SITE_CONFIG.url}/#organization` },
               description:
-                "Stradmont Solutions builds mission-critical SaaS platforms and delivers cybersecurity, cloud infrastructure, data engineering, and applied AI.",
+                "Stradmont Solutions builds SaaS products and helps organizations with cybersecurity, cloud infrastructure, data systems, and AI.",
             },
             {
               "@type": "FAQPage",
@@ -187,7 +186,7 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const pills = [{ label: "SaaS Platforms", style: "left-[7%] top-[15%]", delay: "0s" }];
+const pills = [{ label: "SaaS", style: "left-[7%] top-[15%]", delay: "0s" }];
 
 const rightPills = [
   { label: "Cybersecurity", style: "right-[5%] top-[56%]", delay: "0.4s" },
@@ -197,58 +196,58 @@ const rightPills = [
 const corePillars = [
   {
     index: "01",
-    tag: "SaaS & Product Engineering",
-    title: "Software built to run your core operations.",
+    tag: "SaaS & Software Development",
+    title: "Practical software built for everyday work.",
     description:
-      "We design, build, and scale proprietary SaaS platforms like Builders Base alongside custom web and API systems that replace manual bottlenecks with fast, reliable software.",
-    highlights: ["Multi-Tenant SaaS", "Web & API Systems", "Legacy Modernization"],
+      "We build our own SaaS products, like Builders Base, and develop custom web applications and APIs that replace slow manual tasks with clean, dependable tools.",
+    highlights: ["SaaS Platforms", "Web & API Development", "System Modernization"],
   },
   {
     index: "02",
-    tag: "Cybersecurity & System Defense",
-    title: "Protection engineered into every layer.",
+    tag: "Cybersecurity",
+    title: "Keeping your applications and data safe.",
     description:
-      "We secure critical applications, networks, and cloud environments through penetration testing, code and architecture audits, zero-trust access controls, and continuous threat monitoring.",
-    highlights: ["AppSec & Pen-Testing", "Zero-Trust Architecture", "Security & Risk Audits"],
+      "We test software for vulnerabilities, review code and cloud setups, tighten access controls, and help teams fix security gaps before they become real problems.",
+    highlights: ["Security Audits", "Penetration Testing", "Cloud & Access Security"],
   },
   {
     index: "03",
-    tag: "Data & Applied AI",
-    title: "Intelligent automation grounded in your data.",
+    tag: "Data & AI",
+    title: "Clear data and useful automation.",
     description:
-      "We turn scattered operational data into clean pipelines, decision-ready analytics, and private AI workflows that automate complex work without exposing sensitive company data.",
-    highlights: ["Private AI & Agents", "Data Pipelines", "Analytics & Governance"],
+      "We bring scattered company data into clean pipelines, straightforward reporting, and private AI tools that help your team get work done faster.",
+    highlights: ["AI Workflows", "Data Pipelines", "Reporting & Analytics"],
   },
   {
     index: "04",
-    tag: "Cloud & DevOps Infrastructure",
-    title: "Resilient cloud foundations that scale cleanly.",
+    tag: "Cloud & DevOps",
+    title: "Reliable cloud infrastructure.",
     description:
-      "We architect and manage high-availability cloud environments, containerized deployments, and automated CI/CD pipelines built for speed, uptime, and cost discipline.",
-    highlights: ["Cloud Architecture", "Containers & Kubernetes", "Automated CI/CD"],
+      "We set up and look after cloud environments, containers, and deployment pipelines so your systems stay fast, stable, and easy to maintain.",
+    highlights: ["Cloud Setup & Migration", "Containers & Kubernetes", "CI/CD Pipelines"],
   },
 ];
 
 const processSteps = [
   {
     step: "Phase 01",
-    title: "Analyze & audit",
-    description: "Map operational workflows, attack surfaces, and system bottlenecks.",
+    title: "Understand the problem",
+    description: "Review your current tools, workflows, and security gaps.",
   },
   {
     step: "Phase 02",
-    title: "Architect & harden",
-    description: "Design scalable data models, zero-trust boundaries, and clean APIs.",
+    title: "Plan the architecture",
+    description: "Design a clear system structure with strong security from day one.",
   },
   {
     step: "Phase 03",
-    title: "Engineer the platform",
-    description: "Build high-throughput SaaS software with strict security guardrails.",
+    title: "Build and test",
+    description: "Develop the software, test thoroughly, and verify every integration.",
   },
   {
     step: "Phase 04",
-    title: "Monitor & defend",
-    description: "Deploy with continuous telemetry, security scanning, and operational care.",
+    title: "Launch and support",
+    description: "Deploy smoothly and keep the system monitored, updated, and secure.",
   },
 ];
 
@@ -259,19 +258,19 @@ const faqCategories = [
     items: [
       {
         q: "What does Stradmont Solutions do?",
-        a: "We operate at the intersection of SaaS product engineering and cybersecurity. We build our own software platforms, such as Builders Base, and partner with organizations to engineer and secure mission-critical applications, data pipelines, and cloud infrastructure.",
+        a: "We build our own SaaS products, like Builders Base, and work directly with companies on software development, cybersecurity, cloud infrastructure, and data systems.",
       },
       {
         q: "Who do you typically work with?",
-        a: "Growth-stage companies and established institutions in technology and financial services that need scalable software platforms and uncompromising security across their systems.",
+        a: "We work with growing companies in technology, finance, and insurance that need reliable software built or want to strengthen the security and infrastructure of their existing systems.",
       },
       {
         q: "Where are you based?",
-        a: "Stradmont Solutions is based in Ontario, Canada, and operates remotely across multiple time zones to serve clients wherever they are.",
+        a: "We are based in Ontario, Canada, and work remotely with teams and clients across different time zones.",
       },
       {
         q: "How do I get started?",
-        a: "Fill in the contact form on our site or write to us directly. We will schedule a short call to understand your product or security requirements before proposing a plan.",
+        a: "Send us a message through the contact form or email us directly. We will set up a short call to talk through what you need.",
       },
     ],
   },
@@ -281,11 +280,11 @@ const faqCategories = [
     items: [
       {
         q: "What is Builders Base?",
-        a: "Builders Base is our flagship SaaS platform that helps insurance distribution organizations develop their people, support their leaders, and grow their organizations securely. Visit thebuildersbase.com to learn more.",
+        a: "Builders Base is our software platform that helps insurance distribution organizations train their people, support their leaders, and grow their teams. Visit thebuildersbase.com to learn more.",
       },
       {
         q: "Is Builders Base available to the public?",
-        a: "Builders Base is currently in active development. Early access is available for select teams. Get in touch to discuss whether your organization qualifies.",
+        a: "Builders Base is currently in development, with early access open to select teams. Reach out if you would like to try it.",
       },
     ],
   },
@@ -294,16 +293,16 @@ const faqCategories = [
     label: "Security & Engineering",
     items: [
       {
-        q: "How do you approach cybersecurity and application security?",
-        a: "We treat security as an engineering discipline rather than a checklist. Our work covers architectural threat modeling, code and vulnerability audits, zero-trust authentication and access controls, encrypted data pipelines, and hardened cloud deployments.",
+        q: "What kind of security work do you do?",
+        a: "We review application code and cloud environments, run penetration tests, fix authentication and access control issues, and help teams set up secure deployment practices.",
       },
       {
-        q: "Can you audit or secure an existing SaaS platform?",
-        a: "Yes. We regularly audit existing applications and cloud environments to uncover vulnerabilities, fix authentication or data-exposure risks, and harden infrastructure without disrupting active users.",
+        q: "Can you review or secure an existing application?",
+        a: "Yes. We regularly audit existing web apps and cloud setups to find security risks, improve performance, and tighten infrastructure without interrupting your users.",
       },
       {
-        q: "Do you work alongside internal engineering teams?",
-        a: "Yes. We collaborate directly with your engineering, product, and security leaders to ship resilient systems, remediate risks, and elevate your team's security and development standards.",
+        q: "Do you work with internal engineering teams?",
+        a: "Yes. We work alongside your developers and operations leads to ship new features, clean up technical bottlenecks, and improve security practices.",
       },
     ],
   },
@@ -421,9 +420,8 @@ function Index() {
               className="animate-rise mt-5 max-w-2xl text-base leading-relaxed text-muted-foreground sm:mt-7 sm:text-lg"
               style={{ animationDelay: "140ms" }}
             >
-              We build products that solve meaningful problems, simplify complexity, and become an
-              essential part of everyday life. Every platform starts with a clear purpose and is
-              engineered with security at its core to make a lasting impact.
+              We build products that solve real problems, simplify daily work, and keep critical
+              systems secure. Every platform starts with a clear purpose and is built to last.
             </p>
 
             <div
@@ -456,20 +454,18 @@ function Index() {
         <section id="overview" className="scroll-mt-28 border-y border-border bg-background">
           <div className="mx-auto grid max-w-6xl gap-8 px-5 py-14 sm:px-6 sm:py-20 md:grid-cols-[1.1fr_1fr] md:items-start">
             <div>
-              <span className="eyebrow">Our philosophy</span>
-              <h2 className="mt-4 section-heading">Purpose-built SaaS. Uncompromising security.</h2>
+              <span className="eyebrow">What we do</span>
+              <h2 className="mt-4 section-heading">Software built and secured properly.</h2>
             </div>
             <div className="space-y-5 text-base leading-relaxed text-muted-foreground">
               <p>
-                Modern organizations need software that moves fast without introducing operational or
-                security risk. We bridge that divide by combining product engineering with deep
-                cybersecurity discipline.
+                As companies grow, their tools often get tangled: disconnected software, manual
+                workarounds, and overlooked security gaps. That is where we step in. We build clean
+                software and secure the infrastructure behind it.
               </p>
               <p>
-                Whether we are building our own SaaS platforms like{" "}
-                <span className="font-semibold text-foreground">Builders Base</span> or hardening
-                critical enterprise infrastructure, every system is architected to hold under
-                real-world pressure.
+                Alongside client systems, we develop and run our own SaaS products, including{" "}
+                <span className="font-semibold text-foreground">Builders Base</span>.
               </p>
             </div>
           </div>
@@ -768,11 +764,11 @@ function Index() {
             <div>
               <span className="eyebrow">Contact us</span>
               <h2 className="mt-5 section-heading">
-                Bring us a system you can't afford to get wrong.
+                Tell us what you are building.
               </h2>
               <p className="mt-5 max-w-md text-base leading-relaxed text-muted-foreground">
-                Whether you're launching an ambitious new product or engineering a mission-critical
-                platform that must perform under pressure, let's build it together.
+                Whether you are launching a new product, modernizing an existing platform, or
+                looking to secure your systems, we would love to talk.
               </p>
             </div>
             <ContactForm />

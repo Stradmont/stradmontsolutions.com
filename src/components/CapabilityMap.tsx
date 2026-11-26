@@ -16,14 +16,14 @@ interface CapabilityNode {
 const coreCapabilities: CapabilityNode[] = [
   {
     id: "saas-engineering",
-    name: "saas & product engineering",
+    name: "saas & product development",
     code: "/01",
     symbol: "square",
     symbolColor: "#dc2626",
     category: "core",
     summary:
-      "End-to-end multi-tenant SaaS platforms, high-throughput backends, and zero-to-one product development built for institutional reliability.",
-    deliverables: ["Multi-Tenant SaaS", "Distributed Systems", "High-Throughput APIs"],
+      "Designing and building SaaS platforms, web applications, and backend APIs that teams rely on every day.",
+    deliverables: ["SaaS Platforms", "Backend APIs", "Web Applications"],
   },
   {
     id: "cybersecurity-appsec",
@@ -33,8 +33,8 @@ const coreCapabilities: CapabilityNode[] = [
     symbolColor: "#7c3aed",
     category: "core",
     summary:
-      "Proactive application security, threat modeling, secure authentication lifecycles, and vulnerability hardening across web and cloud systems.",
-    deliverables: ["Application Security", "Threat Modeling", "Auth & Session Hardening"],
+      "Protecting web applications and company data with secure authentication, access controls, and regular security testing.",
+    deliverables: ["Application Security", "Auth & Access Control", "Vulnerability Fixes"],
   },
   {
     id: "applied-ai",
@@ -44,67 +44,67 @@ const coreCapabilities: CapabilityNode[] = [
     symbolColor: "#2563eb",
     category: "core",
     summary:
-      "Production-grade autonomous agents, semantic vector search, and contextual RAG pipelines engineered with strict data privacy guardrails.",
-    deliverables: ["Agentic Workflows", "Private RAG Pipelines", "AI Safety Guardrails"],
+      "Practical AI tools, document search, and internal automation built around your own data with strict privacy controls.",
+    deliverables: ["AI Workflows", "Internal Knowledge Search", "Model Guardrails"],
   },
   {
     id: "zero-trust-cloud",
-    name: "zero-trust & cloud security",
+    name: "cloud security",
     code: "/04",
     symbol: "triangle",
     symbolColor: "#0284c7",
     category: "core",
     summary:
-      "Hardened cloud perimeters, least-privilege IAM architecture, encrypted data transit, and automated infrastructure compliance.",
-    deliverables: ["Zero-Trust Boundaries", "Cloud Perimeter Defense", "IAM & Secret Custody"],
+      "Locking down cloud accounts, network boundaries, permissions, and secrets so your infrastructure stays protected.",
+    deliverables: ["Network Security", "IAM & Permissions", "Encrypted Storage"],
   },
   {
     id: "platform-data",
-    name: "platform & data",
+    name: "data systems",
     code: "/05",
     symbol: "circle",
     symbolColor: "#059669",
     category: "core",
     summary:
-      "Modern data architectures, event-driven streaming pipelines, and unified data governance built for integrity and audit traceability.",
-    deliverables: ["Data Pipelines", "Event Streaming", "Schema & Audit Governance"],
+      "Clean databases, automated data pipelines, and reliable syncing across the tools your business uses.",
+    deliverables: ["Data Pipelines", "Database Design", "Data Sync & Reporting"],
   },
   {
     id: "security-audits",
-    name: "security audits & pen-testing",
+    name: "security audits & testing",
     code: "/06",
     symbol: "diamond",
     symbolColor: "#ea580c",
     category: "core",
     summary:
-      "Deep architectural security reviews, penetration testing, and code audits to uncover and remediate vulnerabilities before they reach production.",
-    deliverables: ["Penetration Testing", "Code & API Audits", "Vulnerability Remediation"],
+      "Hands-on code reviews, architecture audits, and penetration testing to find and fix security issues early.",
+    deliverables: ["Penetration Testing", "Code & API Reviews", "Security Reports"],
   },
   {
     id: "devops-cloud",
-    name: "devops & infrastructure",
+    name: "cloud & devops",
     code: "/07",
     symbol: "circle",
     symbolColor: "#2563eb",
     category: "core",
     summary:
-      "Immutable cloud infrastructure as code, containerized clusters, and automated CI/CD pipelines ensuring high availability.",
+      "Setting up cloud servers, Docker and Kubernetes containers, and automated deployment pipelines.",
     deliverables: [
-      "Containers & Orchestration",
+      "Containers & Kubernetes",
       "Infrastructure as Code",
-      "Zero-Downtime Deployments",
+      "Automated Deployments",
     ],
   },
   {
     id: "modernisation",
-    name: "architecture & modernisation",
+    name: "system modernisation",
     code: "/08",
     symbol: "square",
     symbolColor: "#7c3aed",
     category: "core",
     summary:
-      "De-risking legacy technical debt by systematically decoupling monolithic codebases into secure, modular cloud-native services.",
-    deliverables: ["Architecture Blueprints", "Legacy Refactoring", "Zero-Downtime Migration"],
+      "Upgrading older software and tangled codebases into clean, maintainable services without interrupting your business.",
+    deliverables: ["System Upgrades", "Code Refactoring", "Safe Migrations"],
   },
 ];
 
@@ -113,29 +113,29 @@ const strategySatellites = [
     id: "ux-design",
     name: "ux design",
     summary:
-      "High-density workflow interfaces and user research crafted for institutional clarity and operational efficiency.",
-    deliverables: ["Interface Prototypes", "Workflow Simplification", "Interaction Models"],
+      "Clear, easy-to-use interfaces designed around how your team and customers actually work.",
+    deliverables: ["Interface Design", "Workflow Simplification", "Prototypes"],
   },
   {
     id: "design-systems",
     name: "design systems",
     summary:
-      "Cohesive tokens, reusable atomic component libraries, and visual guidelines enforcing brand consistency across all platforms.",
-    deliverables: ["Figma Design Tokens", "Component Libraries", "Accessibility Standards"],
+      "Shared UI components and style guides that keep your products consistent and faster to build.",
+    deliverables: ["Design Tokens", "Component Libraries", "UI Guidelines"],
   },
   {
     id: "tech-due-diligence",
-    name: "tech due diligence",
+    name: "technical audits",
     summary:
-      "Exhaustive code quality, security posture, and architectural audit for investors, founders, and technology leaders.",
-    deliverables: ["Architecture Audit", "Technical Debt Scorecard", "Risk Assessment"],
+      "Clear assessments of code quality, security risks, and architecture for founders and leadership teams.",
+    deliverables: ["Architecture Review", "Risk Assessment", "Improvement Roadmap"],
   },
   {
     id: "team-coaching",
     name: "team coaching",
     summary:
-      "Upskilling internal engineering squads in domain-driven design, automated testing, and continuous delivery.",
-    deliverables: ["Pair Programming", "Architecture Workshops", "CI/CD Best Practices"],
+      "Working directly with your developers to improve code reviews, testing, and deployment habits.",
+    deliverables: ["Code Reviews", "Testing Practices", "CI/CD Setup"],
   },
 ];
 
@@ -144,29 +144,29 @@ const growthSatellites = [
     id: "analytics",
     name: "analytics",
     summary:
-      "Real-time operational telemetry, automated event tracking, and decision-ready executive business intelligence dashboards.",
-    deliverables: ["Real-Time Telemetry", "Automated Metrics", "Executive BI Dashboards"],
+      "Clear dashboards and system monitoring so you always know how your product and business are performing.",
+    deliverables: ["System Monitoring", "Event Tracking", "Reporting Dashboards"],
   },
   {
     id: "security-compliance",
-    name: "security & compliance",
+    name: "compliance",
     summary:
-      "Threat modeling, zero-trust network boundaries, automated audit logging, and vulnerability mitigation.",
-    deliverables: ["Zero-Trust Boundaries", "Pen-Test Remediation", "Audit Logging"],
+      "Audit logs, access policies, and security documentation to help your team meet industry requirements.",
+    deliverables: ["Audit Logging", "Access Policies", "Compliance Readiness"],
   },
   {
     id: "accessibility",
     name: "accessibility",
     summary:
-      "Full WCAG 2.1 AA compliance, keyboard navigation parity, and screen reader certification for equitable digital experiences.",
-    deliverables: ["WCAG 2.1 AA Audit", "Screen Reader Parity", "Keyboard Navigation"],
+      "Making sure your web applications work well for everyone, including keyboard and screen-reader users.",
+    deliverables: ["WCAG 2.1 AA Checks", "Screen Reader Support", "Keyboard Navigation"],
   },
   {
     id: "integrations",
     name: "integrations",
     summary:
-      "Resilient bi-directional connectors, robust webhooks, and fault-tolerant bridges across banking, ERP, and SaaS partners.",
-    deliverables: ["Webhook Architecture", "Banking & ERP Bridges", "Failover Systems"],
+      "Connecting your software reliably with payment providers, CRMs, ERPs, and third-party APIs.",
+    deliverables: ["API Integrations", "Webhooks", "Third-Party Connectors"],
   },
 ];
 
@@ -208,13 +208,13 @@ export function CapabilityMap() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Section Sub-heading */}
         <div className="text-center">
-          <span className="eyebrow">What we do best</span>
+          <span className="eyebrow">Capabilities</span>
           <h2 className="mt-3 font-display text-2xl font-bold tracking-tight text-foreground sm:text-3xl md:text-4xl">
-            The Stradmont System Orbit.
+            How we help teams build and secure software.
           </h2>
           <p className="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-muted-foreground sm:text-base">
-            Where SaaS product engineering meets enterprise cybersecurity, built to perform under
-            real-world demand.
+            From product development and cloud infrastructure to security testing and AI, explore
+            the areas we work in.
           </p>
         </div>
 
@@ -453,7 +453,7 @@ export function CapabilityMap() {
         {/* Bottom Direct CTA Strip */}
         <div className="mt-10 flex flex-col items-center justify-between gap-4 rounded-2xl border border-border bg-secondary/30 p-5 sm:flex-row sm:p-6">
           <p className="text-xs text-muted-foreground sm:text-sm">
-            Need a scalable SaaS platform, application security audit, or hardened cloud architecture?
+            Have a software product, cloud migration, or security audit in mind?
           </p>
           <Link
             to="/contact"
