@@ -15,20 +15,20 @@ export const Route = createFileRoute("/")({
   },
   head: () => ({
     meta: [
-      { title: `${SITE_CONFIG.name} | Building Products That Move the World Forward` },
+      { title: `${SITE_CONFIG.name} | SaaS Platforms & Cybersecurity Engineering` },
       {
         name: "description",
         content:
-          "We build products that solve meaningful problems, simplify complexity, and become an essential part of everyday life. Every product starts with a purpose and is built to make a lasting impact.",
+          "We build mission-critical SaaS products and engineer cybersecurity systems for modern organizations. From scalable platforms like Builders Base to application security, zero-trust infrastructure, and system defense.",
       },
       {
         property: "og:title",
-        content: `${SITE_CONFIG.name} | Building Products That Move the World Forward`,
+        content: `${SITE_CONFIG.name} | SaaS Platforms & Cybersecurity Engineering`,
       },
       {
         property: "og:description",
         content:
-          "We build products that solve meaningful problems, simplify complexity, and become an essential part of everyday life. Every product starts with a purpose and is built to make a lasting impact.",
+          "We build mission-critical SaaS products and engineer cybersecurity systems for modern organizations. Every platform starts with a clear purpose and is secured to perform under real-world demand.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: `${SITE_CONFIG.url}/` },
@@ -39,12 +39,12 @@ export const Route = createFileRoute("/")({
       { name: "twitter:card", content: "summary_large_image" },
       {
         name: "twitter:title",
-        content: `${SITE_CONFIG.name} | Building Products That Move the World Forward`,
+        content: `${SITE_CONFIG.name} | SaaS Platforms & Cybersecurity Engineering`,
       },
       {
         name: "twitter:description",
         content:
-          "We build products that solve meaningful problems, simplify complexity, and become an essential part of everyday life. Every product starts with a purpose and is built to make a lasting impact.",
+          "We build mission-critical SaaS products and engineer cybersecurity systems for modern organizations.",
       },
       {
         name: "twitter:image",
@@ -70,7 +70,15 @@ export const Route = createFileRoute("/")({
               },
               image: SITE_CONFIG.ogImage,
               description:
-                "We build products that solve meaningful problems, simplify complexity, and become an essential part of everyday life.",
+                "Stradmont Solutions builds mission-critical SaaS products and provides cybersecurity, application security, and system engineering for technology and finance organizations.",
+              knowsAbout: [
+                "SaaS Product Engineering",
+                "Cybersecurity",
+                "Application Security",
+                "Zero-Trust Architecture",
+                "Cloud Infrastructure Security",
+                "Distributed Systems",
+              ],
               email: SITE_CONFIG.contact.email,
               telephone: SITE_CONFIG.contact.phoneSchema,
               address: {
@@ -115,7 +123,7 @@ export const Route = createFileRoute("/")({
                   position: 1,
                   name: "Our Products",
                   description:
-                    "Purpose-built platforms and operational software for institutions, including Builders Base.",
+                    "Purpose-built SaaS platforms and operational software for institutions, including Builders Base.",
                   url: `${SITE_CONFIG.url}/products`,
                 },
                 {
@@ -124,7 +132,7 @@ export const Route = createFileRoute("/")({
                   position: 2,
                   name: "Stradmont Letters",
                   description:
-                    "Dispatches on architecture, systems engineering, and building software that holds under real-world demand.",
+                    "Dispatches on cybersecurity, architecture, systems engineering, and building software that holds under real-world demand.",
                   url: `${SITE_CONFIG.url}/letters`,
                 },
                 {
@@ -133,7 +141,7 @@ export const Route = createFileRoute("/")({
                   position: 3,
                   name: "Careers",
                   description:
-                    "Explore open roles at Stradmont Solutions across engineering, product, and systems architecture.",
+                    "Explore open roles at Stradmont Solutions across SaaS engineering, cybersecurity, and systems architecture.",
                   url: `${SITE_CONFIG.url}/careers`,
                 },
                 {
@@ -142,7 +150,7 @@ export const Route = createFileRoute("/")({
                   position: 4,
                   name: "Contact Us",
                   description:
-                    "Get in touch with Stradmont Solutions about partnerships, products, or investment.",
+                    "Get in touch with Stradmont Solutions about SaaS products, security audits, partnerships, or investment.",
                   url: `${SITE_CONFIG.url}/contact`,
                 },
               ],
@@ -151,11 +159,11 @@ export const Route = createFileRoute("/")({
               "@type": "WebPage",
               "@id": `${SITE_CONFIG.url}/#webpage`,
               url: `${SITE_CONFIG.url}/`,
-              name: `${SITE_CONFIG.name} | ${SITE_CONFIG.tagline}`,
+              name: `${SITE_CONFIG.name} | SaaS Platforms & Cybersecurity Engineering`,
               isPartOf: { "@id": `${SITE_CONFIG.url}/#website` },
               about: { "@id": `${SITE_CONFIG.url}/#organization` },
               description:
-                "We build products that solve meaningful problems, simplify complexity, and become an essential part of everyday life.",
+                "We build mission-critical SaaS products and engineer cybersecurity systems for modern organizations.",
             },
             {
               "@type": "FAQPage",
@@ -179,33 +187,52 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const pills = [{ label: "Research", style: "left-[8%] top-[14%]", delay: "0s" }];
+const pills = [{ label: "SaaS Platforms", style: "left-[7%] top-[15%]", delay: "0s" }];
 
 const rightPills = [
-  { label: "Systems", style: "right-[6%] top-[58%]", delay: "0.4s" },
-  { label: "Capital", style: "right-[2%] top-[73%]", delay: "1.2s" },
+  { label: "Cybersecurity", style: "right-[5%] top-[56%]", delay: "0.4s" },
+  { label: "Systems", style: "right-[3%] top-[73%]", delay: "1.2s" },
+];
+
+const corePillars = [
+  {
+    index: "01",
+    tag: "SaaS & Product Engineering",
+    title: "Scalable software platforms built for daily institutional demand.",
+    description:
+      "We design, architect, and ship proprietary SaaS products like Builders Base alongside custom operational platforms that replace fragmented workflows with fast, reliable systems.",
+    highlights: ["Multi-Tenant SaaS", "Distributed Backends", "Applied AI & Automation"],
+  },
+  {
+    index: "02",
+    tag: "Cybersecurity & System Defense",
+    title: "Security engineered into the architecture, not bolted on later.",
+    description:
+      "We protect critical applications, data pipelines, and cloud infrastructure through proactive threat modeling, application security audits, zero-trust network boundaries, and continuous hardening.",
+    highlights: ["AppSec & Code Audits", "Zero-Trust Cloud", "Threat & Risk Mitigation"],
+  },
 ];
 
 const processSteps = [
   {
     step: "Phase 01",
-    title: "Analyze the problem",
-    description: "Audit workflows and map operational choke points.",
+    title: "Analyze & audit",
+    description: "Map operational workflows, attack surfaces, and system bottlenecks.",
   },
   {
     step: "Phase 02",
-    title: "Study the cause",
-    description: "Isolate root causes across tooling and data silos.",
+    title: "Architect & harden",
+    description: "Design scalable data models, zero-trust boundaries, and clean APIs.",
   },
   {
     step: "Phase 03",
-    title: "Design the system",
-    description: "Architect resilient foundations and automated pipelines.",
+    title: "Engineer the platform",
+    description: "Build high-throughput SaaS software with strict security guardrails.",
   },
   {
     step: "Phase 04",
-    title: "Keep it running",
-    description: "Deploy with continuous monitoring and operational care.",
+    title: "Monitor & defend",
+    description: "Deploy with continuous telemetry, security scanning, and operational care.",
   },
 ];
 
@@ -216,19 +243,19 @@ const faqCategories = [
     items: [
       {
         q: "What does Stradmont Solutions do?",
-        a: "We solve complex operational challenges inside technology and finance operations. Scattered data, manual work, tools that don't talk to each other. We replace them with clear, scalable systems that hold. We research, architect, and engineer those platforms, then stay to make sure they keep running.",
+        a: "We operate at the intersection of SaaS product engineering and cybersecurity. We build our own software platforms, such as Builders Base, and partner with organizations to engineer and secure mission-critical applications, data pipelines, and cloud infrastructure.",
       },
       {
         q: "Who do you typically work with?",
-        a: "Growth-stage companies in financial services and technology that have outgrown their initial processes. Our clients typically have smart teams but inherited systems that create invisible friction every day.",
+        a: "Growth-stage companies and established institutions in technology and financial services that need scalable software platforms and uncompromising security across their systems.",
       },
       {
         q: "Where are you based?",
-        a: "Stradmont Solutions operates remotely, with a core team present across multiple time zones to serve clients wherever they are.",
+        a: "Stradmont Solutions is based in Ontario, Canada, and operates remotely across multiple time zones to serve clients wherever they are.",
       },
       {
         q: "How do I get started?",
-        a: "Fill in the contact form on our site or write to us directly. We'll schedule a short call to understand your situation before proposing anything.",
+        a: "Fill in the contact form on our site or write to us directly. We will schedule a short call to understand your product or security requirements before proposing a plan.",
       },
     ],
   },
@@ -238,29 +265,29 @@ const faqCategories = [
     items: [
       {
         q: "What is Builders Base?",
-        a: "Builders Base is software that helps insurance distribution organizations develop their people, support their leaders, and grow their organizations. Visit thebuildersbase.com to learn more.",
+        a: "Builders Base is our flagship SaaS platform that helps insurance distribution organizations develop their people, support their leaders, and grow their organizations securely. Visit thebuildersbase.com to learn more.",
       },
       {
         q: "Is Builders Base available to the public?",
-        a: "Builders Base is currently in active development. Early access is available for select teams. Get in touch to discuss whether you qualify.",
+        a: "Builders Base is currently in active development. Early access is available for select teams. Get in touch to discuss whether your organization qualifies.",
       },
     ],
   },
   {
-    id: "working-with-us",
-    label: "Working With Us",
+    id: "security-engineering",
+    label: "Security & Engineering",
     items: [
       {
-        q: "What does an engagement look like?",
-        a: "We begin with a deep audit of your existing operational and technical workflows to identify points of friction. From there, we architect a tailored system, engineer it alongside your team, and ensure smooth handover and ongoing reliability.",
+        q: "How do you approach cybersecurity and application security?",
+        a: "We treat security as an engineering discipline rather than a checklist. Our work covers architectural threat modeling, code and vulnerability audits, zero-trust authentication and access controls, encrypted data pipelines, and hardened cloud deployments.",
       },
       {
-        q: "How quickly can Stradmont begin?",
-        a: "We work with a select number of institutions at a time to maintain focus. Following an initial briefing call, we can usually start the research phase within two weeks.",
+        q: "Can you audit or secure an existing SaaS platform?",
+        a: "Yes. We regularly audit existing applications and cloud environments to uncover vulnerabilities, fix authentication or data-exposure risks, and harden infrastructure without disrupting active users.",
       },
       {
-        q: "Do you replace internal teams?",
-        a: "No. We collaborate directly with your operations, finance, and engineering leaders to eliminate manual bottlenecks, empowering your existing team to operate at scale without burnout.",
+        q: "Do you work alongside internal engineering teams?",
+        a: "Yes. We collaborate directly with your engineering, product, and security leaders to ship resilient systems, remediate risks, and elevate your team's security and development standards.",
       },
     ],
   },
@@ -379,8 +406,8 @@ function Index() {
               style={{ animationDelay: "140ms" }}
             >
               We build products that solve meaningful problems, simplify complexity, and become an
-              essential part of everyday life. Every product starts with a purpose and is built to
-              make a lasting impact.
+              essential part of everyday life. Every platform starts with a clear purpose and is
+              engineered with security at its core to make a lasting impact.
             </p>
 
             <div
@@ -414,20 +441,53 @@ function Index() {
           <div className="mx-auto grid max-w-6xl gap-8 px-5 py-14 sm:px-6 sm:py-20 md:grid-cols-[1.1fr_1fr] md:items-start">
             <div>
               <span className="eyebrow">Our philosophy</span>
-              <h2 className="mt-4 section-heading">Purpose-built systems.</h2>
+              <h2 className="mt-4 section-heading">Purpose-built SaaS. Uncompromising security.</h2>
             </div>
             <div className="space-y-5 text-base leading-relaxed text-muted-foreground">
               <p>
-                Every growing organization reaches a point where existing processes create friction:
-                unconnected tools, manual bottlenecks, and fragmented workflows. That is where we start.
-                We study the problem and build reliable systems designed to run seamlessly.
+                Modern organizations need software that moves fast without introducing operational or
+                security risk. We bridge that divide by combining product engineering with deep
+                cybersecurity discipline.
               </p>
               <p>
-                The platforms we build, including{" "}
-                <span className="font-semibold text-foreground">Builders Base</span>, began as real operational
-                challenges we solved through thoughtful engineering.
+                Whether we are building our own SaaS platforms like{" "}
+                <span className="font-semibold text-foreground">Builders Base</span> or hardening
+                critical enterprise infrastructure, every system is architected to hold under
+                real-world pressure.
               </p>
             </div>
+          </div>
+
+          {/* Dual Pillars: SaaS + Security */}
+          <div className="mx-auto grid max-w-6xl grid-cols-1 gap-px border-t border-border bg-border md:grid-cols-2">
+            {corePillars.map((pillar) => (
+              <div
+                key={pillar.index}
+                className="bg-background p-6 transition-colors hover:bg-secondary/30 sm:p-10"
+              >
+                <div className="flex items-center gap-2.5">
+                  <span className="text-xs font-semibold text-primary">{pillar.index}</span>
+                  <span className="h-1 w-1 rounded-full bg-border" />
+                  <span className="text-xs font-semibold text-primary">{pillar.tag}</span>
+                </div>
+                <h3 className="mt-3 font-display text-lg font-bold text-foreground sm:text-xl">
+                  {pillar.title}
+                </h3>
+                <p className="mt-2.5 text-sm leading-relaxed text-muted-foreground">
+                  {pillar.description}
+                </p>
+                <div className="mt-5 flex flex-wrap gap-2">
+                  {pillar.highlights.map((item) => (
+                    <span
+                      key={item}
+                      className="inline-flex rounded-full border border-border bg-secondary/50 px-3 py-1 text-xs font-medium text-foreground"
+                    >
+                      {item}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ))}
           </div>
 
           <div className="mx-auto grid max-w-6xl grid-cols-2 gap-px border-t border-border bg-border md:grid-cols-4">

@@ -104,7 +104,7 @@ export function SiteFooter() {
           <p>
             © {new Date().getFullYear()} {SITE_CONFIG.name}. All rights reserved.
           </p>
-          <p>Built for technology and finance.</p>
+          <p>SaaS platforms and cybersecurity for modern organizations.</p>
         </div>
       </div>
     </footer>

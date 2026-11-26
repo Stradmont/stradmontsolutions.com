@@ -146,7 +146,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { title: `${SITE_CONFIG.name} | ${SITE_CONFIG.tagline}` },
       {
         name: "description",
-        content: `${SITE_CONFIG.name}: engineering specialised SaaS platforms and workflow software for technology and finance institutions.`,
+        content: `${SITE_CONFIG.name}: SaaS product engineering, cybersecurity, and resilient operational software for technology and finance organizations.`,
       },
       { name: "author", content: SITE_CONFIG.name },
       {
@@ -160,7 +160,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         property: "og:description",
         content:
-          "Engineering specialised SaaS platforms and workflow software for technology and finance institutions.",
+          "SaaS product engineering, cybersecurity, and resilient operational software for technology and finance organizations.",
       },
       { property: "og:type", content: "website" },
       {

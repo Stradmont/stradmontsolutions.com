@@ -15,96 +15,96 @@ interface CapabilityNode {
 
 const coreCapabilities: CapabilityNode[] = [
   {
-    id: "applied-ai",
-    name: "applied ai",
+    id: "saas-engineering",
+    name: "saas & product engineering",
     code: "/01",
-    symbol: "circle",
-    symbolColor: "#2563eb",
-    category: "core",
-    summary:
-      "Production-grade autonomous agents, semantic vector search, and contextual RAG pipelines engineered for mission-critical reliability.",
-    deliverables: ["Agentic Workflows", "Vector Search & RAG", "Custom Model Fine-Tuning"],
-  },
-  {
-    id: "product-engineering",
-    name: "product engineering",
-    code: "/02",
     symbol: "square",
     symbolColor: "#dc2626",
     category: "core",
     summary:
-      "End-to-end distributed system architectures, high-throughput microservices, and zero-to-one product development.",
-    deliverables: ["Distributed Systems", "Domain-Driven Design", "High-Throughput Backends"],
+      "End-to-end multi-tenant SaaS platforms, high-throughput backends, and zero-to-one product development built for institutional reliability.",
+    deliverables: ["Multi-Tenant SaaS", "Distributed Systems", "High-Throughput APIs"],
   },
   {
-    id: "architecture-consulting",
-    name: "consulting & architecture",
-    code: "/03",
+    id: "cybersecurity-appsec",
+    name: "cybersecurity & appsec",
+    code: "/02",
     symbol: "diamond",
     symbolColor: "#7c3aed",
     category: "core",
     summary:
-      "Translating complex business requirements into scalable technical roadmaps, risk audits, and resilient architectural blueprints.",
-    deliverables: ["Architecture Blueprints", "System Audits", "Technology Roadmaps"],
+      "Proactive application security, threat modeling, secure authentication lifecycles, and vulnerability hardening across web and cloud systems.",
+    deliverables: ["Application Security", "Threat Modeling", "Auth & Session Hardening"],
   },
   {
-    id: "platform-data",
-    name: "platform & data",
-    code: "/04",
+    id: "applied-ai",
+    name: "applied ai",
+    code: "/03",
     symbol: "circle",
-    symbolColor: "#059669",
+    symbolColor: "#2563eb",
     category: "core",
     summary:
-      "Modern lakehouse architectures, event-driven streaming pipelines, and unified data governance built for zero data loss at scale.",
-    deliverables: ["Lakehouse Modeling", "Event Streaming", "Schema Governance"],
+      "Production-grade autonomous agents, semantic vector search, and contextual RAG pipelines engineered with strict data privacy guardrails.",
+    deliverables: ["Agentic Workflows", "Private RAG Pipelines", "AI Safety Guardrails"],
   },
   {
-    id: "web-development",
-    name: "web development",
-    code: "/05",
+    id: "zero-trust-cloud",
+    name: "zero-trust & cloud security",
+    code: "/04",
     symbol: "triangle",
     symbolColor: "#0284c7",
     category: "core",
     summary:
-      "Ultra-fast, accessible web applications engineered with modern SSR and edge technologies, strict type safety, and fluid interactions.",
-    deliverables: ["Full-Stack TypeScript", "SSR & Edge Routing", "Sub-Second Latency"],
+      "Hardened cloud perimeters, least-privilege IAM architecture, encrypted data transit, and automated infrastructure compliance.",
+    deliverables: ["Zero-Trust Boundaries", "Cloud Perimeter Defense", "IAM & Secret Custody"],
   },
   {
-    id: "devops-cloud",
-    name: "devops & cloud",
-    code: "/06",
+    id: "platform-data",
+    name: "platform & data",
+    code: "/05",
     symbol: "circle",
+    symbolColor: "#059669",
+    category: "core",
+    summary:
+      "Modern data architectures, event-driven streaming pipelines, and unified data governance built for integrity and audit traceability.",
+    deliverables: ["Data Pipelines", "Event Streaming", "Schema & Audit Governance"],
+  },
+  {
+    id: "security-audits",
+    name: "security audits & pen-testing",
+    code: "/06",
+    symbol: "diamond",
     symbolColor: "#ea580c",
     category: "core",
     summary:
-      "Immutable cloud infrastructure as code, automated Kubernetes clusters, and hardened CI/CD pipelines ensuring high availability.",
+      "Deep architectural security reviews, penetration testing, and code audits to uncover and remediate vulnerabilities before they reach production.",
+    deliverables: ["Penetration Testing", "Code & API Audits", "Vulnerability Remediation"],
+  },
+  {
+    id: "devops-cloud",
+    name: "devops & infrastructure",
+    code: "/07",
+    symbol: "circle",
+    symbolColor: "#2563eb",
+    category: "core",
+    summary:
+      "Immutable cloud infrastructure as code, containerized clusters, and automated CI/CD pipelines ensuring high availability.",
     deliverables: [
-      "Kubernetes & Containers",
+      "Containers & Orchestration",
       "Infrastructure as Code",
       "Zero-Downtime Deployments",
     ],
   },
   {
     id: "modernisation",
-    name: "modernisation",
-    code: "/07",
-    symbol: "square",
-    symbolColor: "#2563eb",
-    category: "core",
-    summary:
-      "De-risking legacy technical debt by systematically decoupling monolithic codebases into modular cloud-native services without downtime.",
-    deliverables: ["Strangler Pattern", "Legacy Refactoring", "Zero-Downtime Migration"],
-  },
-  {
-    id: "evals-modelops",
-    name: "evals & model ops",
+    name: "architecture & modernisation",
     code: "/08",
-    symbol: "diamond",
+    symbol: "square",
     symbolColor: "#7c3aed",
     category: "core",
     summary:
-      "Continuous quality assurance for machine learning models and LLMs through systematic regression benchmarks and safety guardrails.",
-    deliverables: ["Benchmark Suites", "Safety Guardrails", "Drift & Hallucination Telemetry"],
+      "De-risking legacy technical debt by systematically decoupling monolithic codebases into secure, modular cloud-native services.",
+    deliverables: ["Architecture Blueprints", "Legacy Refactoring", "Zero-Downtime Migration"],
   },
 ];
 
@@ -191,7 +191,14 @@ function renderSymbol(type: CapabilityNode["symbol"], color: string) {
 }
 
 export function CapabilityMap() {
-  const [activeId, setActiveId] = useState<string>("applied-ai");
+  const [activeId, setActiveId] = useState<string>("saas-engineering");
+
+  const allNodes = [
+    ...coreCapabilities,
+    ...strategySatellites,
+    ...growthSatellites,
+  ];
+  const activeNode = allNodes.find((n) => n.id === activeId) ?? coreCapabilities[0]!;
 
   return (
     <section
@@ -206,8 +213,8 @@ export function CapabilityMap() {
             The Stradmont System Orbit.
           </h2>
           <p className="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-muted-foreground sm:text-base">
-            Where strategy meets compounding growth, engineered through the Stradmont build core to
-            perform under real-world demand.
+            Where SaaS product engineering meets enterprise cybersecurity, built to perform under
+            real-world demand.
           </p>
         </div>
 
@@ -415,12 +422,38 @@ export function CapabilityMap() {
               ))}
             </div>
           </div>
+
+          {/* Active Capability Detail Panel */}
+          <div className="relative z-10 mt-2 rounded-2xl border border-border bg-secondary/35 p-5 sm:p-6">
+            <div className="flex flex-col justify-between gap-4 md:flex-row md:items-center">
+              <div className="max-w-2xl">
+                <div className="flex items-center gap-2">
+                  <span className="font-mono text-xs font-semibold uppercase tracking-wider text-primary">
+                    {activeNode.name}
+                  </span>
+                </div>
+                <p className="mt-1.5 text-xs sm:text-sm leading-relaxed text-muted-foreground">
+                  {activeNode.summary}
+                </p>
+              </div>
+              <div className="flex flex-wrap gap-2 shrink-0">
+                {activeNode.deliverables.map((d) => (
+                  <span
+                    key={d}
+                    className="inline-flex rounded-full border border-border bg-background px-3 py-1 text-xs font-medium text-foreground"
+                  >
+                    {d}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Bottom Direct CTA Strip */}
         <div className="mt-10 flex flex-col items-center justify-between gap-4 rounded-2xl border border-border bg-secondary/30 p-5 sm:flex-row sm:p-6">
           <p className="text-xs text-muted-foreground sm:text-sm">
-            Need end-to-end architecture, applied AI, or legacy modernization?
+            Need a scalable SaaS platform, application security audit, or hardened cloud architecture?
           </p>
           <Link
             to="/contact"
