@@ -1,11 +1,10 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { useState } from "react";
 
 interface CapabilityNode {
   id: string;
   name: string;
-  code: string;
   symbol: "circle" | "square" | "diamond" | "triangle";
   symbolColor: string;
   category: "core" | "strategy" | "growth";
@@ -16,8 +15,7 @@ interface CapabilityNode {
 const coreCapabilities: CapabilityNode[] = [
   {
     id: "saas-engineering",
-    name: "saas & product development",
-    code: "/01",
+    name: "SaaS & Product Development",
     symbol: "square",
     symbolColor: "#dc2626",
     category: "core",
@@ -27,8 +25,7 @@ const coreCapabilities: CapabilityNode[] = [
   },
   {
     id: "cybersecurity-appsec",
-    name: "cybersecurity & appsec",
-    code: "/02",
+    name: "Cybersecurity & AppSec",
     symbol: "diamond",
     symbolColor: "#7c3aed",
     category: "core",
@@ -38,8 +35,7 @@ const coreCapabilities: CapabilityNode[] = [
   },
   {
     id: "applied-ai",
-    name: "applied ai",
-    code: "/03",
+    name: "Applied AI",
     symbol: "circle",
     symbolColor: "#2563eb",
     category: "core",
@@ -49,8 +45,7 @@ const coreCapabilities: CapabilityNode[] = [
   },
   {
     id: "zero-trust-cloud",
-    name: "cloud security",
-    code: "/04",
+    name: "Cloud Security",
     symbol: "triangle",
     symbolColor: "#0284c7",
     category: "core",
@@ -60,8 +55,7 @@ const coreCapabilities: CapabilityNode[] = [
   },
   {
     id: "platform-data",
-    name: "data systems",
-    code: "/05",
+    name: "Data Systems",
     symbol: "circle",
     symbolColor: "#059669",
     category: "core",
@@ -71,8 +65,7 @@ const coreCapabilities: CapabilityNode[] = [
   },
   {
     id: "security-audits",
-    name: "security audits & testing",
-    code: "/06",
+    name: "Security Audits & Testing",
     symbol: "diamond",
     symbolColor: "#ea580c",
     category: "core",
@@ -82,8 +75,7 @@ const coreCapabilities: CapabilityNode[] = [
   },
   {
     id: "devops-cloud",
-    name: "cloud & devops",
-    code: "/07",
+    name: "Cloud & DevOps",
     symbol: "circle",
     symbolColor: "#2563eb",
     category: "core",
@@ -97,8 +89,7 @@ const coreCapabilities: CapabilityNode[] = [
   },
   {
     id: "modernisation",
-    name: "system modernisation",
-    code: "/08",
+    name: "System Modernisation",
     symbol: "square",
     symbolColor: "#7c3aed",
     category: "core",
@@ -111,28 +102,28 @@ const coreCapabilities: CapabilityNode[] = [
 const strategySatellites = [
   {
     id: "ux-design",
-    name: "ux design",
+    name: "UX Design",
     summary:
       "Clear, easy-to-use interfaces designed around how your team and customers actually work.",
     deliverables: ["Interface Design", "Workflow Simplification", "Prototypes"],
   },
   {
     id: "design-systems",
-    name: "design systems",
+    name: "Design Systems",
     summary:
       "Shared UI components and style guides that keep your products consistent and faster to build.",
     deliverables: ["Design Tokens", "Component Libraries", "UI Guidelines"],
   },
   {
     id: "tech-due-diligence",
-    name: "technical audits",
+    name: "Technical Audits",
     summary:
       "Clear assessments of code quality, security risks, and architecture for founders and leadership teams.",
     deliverables: ["Architecture Review", "Risk Assessment", "Improvement Roadmap"],
   },
   {
     id: "team-coaching",
-    name: "team coaching",
+    name: "Team Coaching",
     summary:
       "Working directly with your developers to improve code reviews, testing, and deployment habits.",
     deliverables: ["Code Reviews", "Testing Practices", "CI/CD Setup"],
@@ -142,28 +133,28 @@ const strategySatellites = [
 const growthSatellites = [
   {
     id: "analytics",
-    name: "analytics",
+    name: "Analytics",
     summary:
       "Clear dashboards and system monitoring so you always know how your product and business are performing.",
     deliverables: ["System Monitoring", "Event Tracking", "Reporting Dashboards"],
   },
   {
     id: "security-compliance",
-    name: "compliance",
+    name: "Compliance",
     summary:
       "Audit logs, access policies, and security documentation to help your team meet industry requirements.",
     deliverables: ["Audit Logging", "Access Policies", "Compliance Readiness"],
   },
   {
     id: "accessibility",
-    name: "accessibility",
+    name: "Accessibility",
     summary:
       "Making sure your web applications work well for everyone, including keyboard and screen-reader users.",
     deliverables: ["WCAG 2.1 AA Checks", "Screen Reader Support", "Keyboard Navigation"],
   },
   {
     id: "integrations",
-    name: "integrations",
+    name: "Integrations",
     summary:
       "Connecting your software reliably with payment providers, CRMs, ERPs, and third-party APIs.",
     deliverables: ["API Integrations", "Webhooks", "Third-Party Connectors"],
@@ -218,17 +209,13 @@ export function CapabilityMap() {
           </p>
         </div>
 
-        {/* ── Main Radar Canvas (Light Architectural Theme) ── */}
+        {/* Main Radar Canvas */}
         <div className="relative mt-10 min-h-[620px] w-full select-none overflow-hidden rounded-3xl border border-border bg-white shadow-soft p-4 sm:p-8 md:min-h-[700px]">
           {/* Subtle Concentric Orbital Background Rings */}
           <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
-            {/* Outer subtle orbital ring */}
             <div className="h-[820px] w-[820px] rounded-full border border-primary/10" />
-            {/* Mid orbital core boundary ring */}
             <div className="absolute h-[540px] w-[540px] rounded-full border border-primary/20 bg-secondary/30 md:h-[600px] md:w-[600px]" />
-            {/* Inner focus ring */}
             <div className="absolute h-[320px] w-[320px] rounded-full border border-primary/20 border-dashed" />
-            {/* Radial ambient violet glow */}
             <div
               className="absolute h-[480px] w-[480px] rounded-full blur-3xl"
               style={{
@@ -239,16 +226,16 @@ export function CapabilityMap() {
 
           {/* Horizontal Strategy-to-Growth Axis Line */}
           <div className="pointer-events-none absolute inset-x-4 top-1/2 -translate-y-1/2 flex items-center justify-between px-2 sm:px-6">
-            <span className="font-mono text-[10px] tracking-widest text-muted-foreground uppercase sm:text-xs">
-              STRATEGY
+            <span className="text-[11px] font-semibold tracking-wider text-muted-foreground uppercase sm:text-xs">
+              Strategy
             </span>
             <div className="mx-3 h-px flex-1 border-t border-dashed border-border sm:mx-8" />
-            <span className="font-mono text-[10px] tracking-widest text-muted-foreground uppercase sm:text-xs">
-              GROWTH
+            <span className="text-[11px] font-semibold tracking-wider text-muted-foreground uppercase sm:text-xs">
+              Growth
             </span>
           </div>
 
-          {/* ── Content Grid with Satellites & Central Core ── */}
+          {/* Content Grid with Satellites & Central Core */}
           <div className="relative z-10 flex min-h-[580px] flex-col items-center justify-center py-6">
             <div className="grid w-full grid-cols-1 items-center gap-6 lg:grid-cols-[1fr_auto_1fr]">
               {/* Left Column: Strategy Satellites (Desktop) */}
@@ -261,7 +248,7 @@ export function CapabilityMap() {
                       type="button"
                       onMouseEnter={() => setActiveId(sat.id)}
                       onClick={() => setActiveId(sat.id)}
-                      className={`group inline-flex items-center rounded-full border px-4 py-2 font-mono text-xs lowercase tracking-wide transition-all duration-300 ${
+                      className={`group inline-flex items-center rounded-full border px-4 py-2 text-xs font-medium transition-all duration-300 ${
                         isSelected
                           ? "border-primary bg-primary/10 text-primary font-semibold shadow-xs scale-[1.03]"
                           : "border-border bg-white text-muted-foreground hover:border-primary/40 hover:text-foreground"
@@ -276,7 +263,7 @@ export function CapabilityMap() {
               {/* Center Column: Core Capabilities Inner Orbit Cluster */}
               <div className="relative flex flex-col items-center justify-center p-2 sm:p-6">
                 <div className="flex flex-col items-center gap-3.5 sm:gap-4">
-                  {/* Top center pill: Applied AI */}
+                  {/* Top center pill */}
                   {coreCapabilities[0] && (
                     <button
                       type="button"
@@ -290,13 +277,10 @@ export function CapabilityMap() {
                     >
                       {renderSymbol(coreCapabilities[0]!.symbol, coreCapabilities[0]!.symbolColor)}
                       <span className="font-semibold">{coreCapabilities[0]!.name}</span>
-                      <span className="font-mono text-xs text-muted-foreground">
-                        {coreCapabilities[0]!.code}
-                      </span>
                     </button>
                   )}
 
-                  {/* Row 2: Product Engineering & Consulting */}
+                  {/* Row 2 */}
                   <div className="flex flex-wrap items-center justify-center gap-3">
                     {coreCapabilities.slice(1, 3).map((item) => (
                       <button
@@ -312,12 +296,11 @@ export function CapabilityMap() {
                       >
                         {renderSymbol(item.symbol, item.symbolColor)}
                         <span className="font-semibold">{item.name}</span>
-                        <span className="font-mono text-xs text-muted-foreground">{item.code}</span>
                       </button>
                     ))}
                   </div>
 
-                  {/* Row 3: Platform & Data + Web Development */}
+                  {/* Row 3 */}
                   <div className="flex flex-wrap items-center justify-center gap-3">
                     {coreCapabilities.slice(3, 5).map((item) => (
                       <button
@@ -333,12 +316,11 @@ export function CapabilityMap() {
                       >
                         {renderSymbol(item.symbol, item.symbolColor)}
                         <span className="font-semibold">{item.name}</span>
-                        <span className="font-mono text-xs text-muted-foreground">{item.code}</span>
                       </button>
                     ))}
                   </div>
 
-                  {/* Row 4: DevOps & Cloud + Modernisation */}
+                  {/* Row 4 */}
                   <div className="flex flex-wrap items-center justify-center gap-3">
                     {coreCapabilities.slice(5, 7).map((item) => (
                       <button
@@ -354,12 +336,11 @@ export function CapabilityMap() {
                       >
                         {renderSymbol(item.symbol, item.symbolColor)}
                         <span className="font-semibold">{item.name}</span>
-                        <span className="font-mono text-xs text-muted-foreground">{item.code}</span>
                       </button>
                     ))}
                   </div>
 
-                  {/* Bottom core pill: Evals & ModelOps */}
+                  {/* Bottom core pill */}
                   {coreCapabilities[7] && (
                     <button
                       type="button"
@@ -373,9 +354,6 @@ export function CapabilityMap() {
                     >
                       {renderSymbol(coreCapabilities[7]!.symbol, coreCapabilities[7]!.symbolColor)}
                       <span className="font-semibold">{coreCapabilities[7]!.name}</span>
-                      <span className="font-mono text-xs text-muted-foreground">
-                        {coreCapabilities[7]!.code}
-                      </span>
                     </button>
                   )}
                 </div>
@@ -391,7 +369,7 @@ export function CapabilityMap() {
                       type="button"
                       onMouseEnter={() => setActiveId(sat.id)}
                       onClick={() => setActiveId(sat.id)}
-                      className={`group inline-flex items-center rounded-full border px-4 py-2 font-mono text-xs lowercase tracking-wide transition-all duration-300 ${
+                      className={`group inline-flex items-center rounded-full border px-4 py-2 text-xs font-medium transition-all duration-300 ${
                         isSelected
                           ? "border-primary bg-primary/10 text-primary font-semibold shadow-xs scale-[1.03]"
                           : "border-border bg-white text-muted-foreground hover:border-primary/40 hover:text-foreground"
@@ -411,7 +389,7 @@ export function CapabilityMap() {
                   key={sat.id}
                   type="button"
                   onClick={() => setActiveId(sat.id)}
-                  className={`rounded-full border px-3 py-1.5 font-mono text-[11px] lowercase transition-colors ${
+                  className={`rounded-full border px-3.5 py-1.5 text-xs font-medium transition-colors ${
                     activeId === sat.id
                       ? "border-primary bg-primary/15 text-primary font-semibold"
                       : "border-border bg-white text-muted-foreground hover:text-foreground"
@@ -428,7 +406,7 @@ export function CapabilityMap() {
             <div className="flex flex-col justify-between gap-4 md:flex-row md:items-center">
               <div className="max-w-2xl">
                 <div className="flex items-center gap-2">
-                  <span className="font-mono text-xs font-semibold uppercase tracking-wider text-primary">
+                  <span className="text-xs font-bold text-primary">
                     {activeNode.name}
                   </span>
                 </div>
